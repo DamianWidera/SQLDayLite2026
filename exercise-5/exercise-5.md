@@ -1,4 +1,4 @@
-# Ćwiczenie 5 - Najnowsze funkcje Fabric
+# Ćwiczenie 5 - Nowości w Fabric i Data Wrangler
 
 > [!NOTE]
 > Czas: 40 minut

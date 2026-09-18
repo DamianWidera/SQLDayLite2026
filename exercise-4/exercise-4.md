@@ -1,4 +1,4 @@
-# Ćwiczenie 4 - Udostępniaj i wykorzystuj dane w Power BI i Data Science 
+# Ćwiczenie 4 - Semantic model i raport Power BI
 
 > [!NOTE]
 > Czas: 60 minut

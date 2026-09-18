@@ -1,4 +1,4 @@
-# Ćwiczenie 3 - Współpracuj w Notebookach i udostępnij Lakehouse. Użyj SQL Endpoint i SSMS
+# Ćwiczenie 3 - SQL analytics endpoint, SSMS, udostępnianie i uprawnienia
 
 > [!NOTE]
 > Czas: 30 minut

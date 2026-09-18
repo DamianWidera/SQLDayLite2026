@@ -1,4 +1,4 @@
-# Ćwiczenie 1 - Ładowanie danych za pomocą Data pipeline i Shortcut
+# Ćwiczenie 1 - Ładowanie danych: Pipeline i Shortcut
 
 > [!NOTE]
 > Czas: 60 minut

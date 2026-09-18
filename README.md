@@ -36,8 +36,8 @@ Warsztat jest dla osób, które zaczynają pracę z Microsoft Fabric albo znają
 - analitycy Power BI,
 - osoby pracujące z SQL,
 - użytkownicy Excela, Power Query i prostych procesów raportowych,
-- BI developerzy,
-- początkujący data engineerowie,
+- deweloperzy BI,
+- początkujący inżynierzy danych,
 - konsultanci, którzy chcą uporządkować podstawy Fabric.
 
 Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury danych. Notebooki do ćwiczeń są gotowe. Uruchamiasz je komórka po komórce, a my tłumaczymy, co się dzieje.

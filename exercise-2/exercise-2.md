@@ -35,7 +35,7 @@ Do końca warsztatu wdrożymy całą architekturę Medallion:
 W tym zadaniu poznasz różne metody pobierania danych z Lakehouse do Notebooka na potrzeby analizy. Poniżej znajdziesz instrukcje krok po kroku, które wykonasz w swoim Notebooku.
 
 ## 2.1.1. Podstawy uruchamiania kodu
-Pamiętaj: żeby uruchomić kod w komórce, naciśnij CTRL + Enter w systemie Windows albo ⌘ + Enter w systemie MacOS. Możesz też kliknąć ikonę `Run` (▶️) obok komórki z kodem.
+Pamiętaj: żeby uruchomić kod w komórce, naciśnij CTRL + Enter w systemie Windows albo ⌘ + Enter w systemie macOS. Możesz też kliknąć ikonę `Run` (▶️) obok komórki z kodem.
 
 ## 2.1.2. Pobieranie danych za pomocą PySpark
 Wpisz poniższy kod PySpark w nowej komórce swojego Notebooka w Fabric. Skrypt pobierze dane ze wskazanej tabeli w Lakehouse. Jeśli twój Lakehouse i twoja tabela nazywają się inaczej, zastąp `bronzerawdata` i green202301 swoimi nazwami.
@@ -191,7 +191,7 @@ Zanim w pełni zajmiemy się pracą z obszaru Data Engineering w Notebooku, zost
 W tym zadaniu postępuj zgodnie z Notebookiem, zawartym w nim kodem i wszystkimi instrukcjami zapisanymi w kodzie. **Uruchom tam wszystkie komórki z kodem i wykonaj wszystkie kroki.** 
 
 > [!IMPORTANT]
-> Fabric Spark ogranicza i kolejkuje Spark joby na podstawie liczby rdzeni. Użytkownicy mogą przesyłać joby w granicach zakupionego SKU Fabric capacity. Kolejka działa według prostej zasady FIFO: sprawdza, czy są wolne miejsca na joby, i automatycznie ponawia je, gdy capacity się zwolni. Może się zdarzyć, że prześlesz job z Notebooka lub Lakehouse, np. Load to Table, gdy capacity jest w pełni wykorzystane, bo równolegle działające joby zajmują wszystkie Spark Vcores dostępne w zakupionym SKU Fabric capacity. Wtedy job zostanie wstrzymany z komunikatem **HTTP Response code 430: Unable to submit this request because all the available capacity is currently being used. The suggested solutions are to cancel a currently running job, increase the available capacity, or try again later.** 
+> Fabric Spark stosuje throttling i kolejkuje Spark joby na podstawie liczby rdzeni. Użytkownicy mogą przesyłać joby w granicach zakupionego SKU Fabric capacity. Kolejka działa według prostej zasady FIFO: sprawdza, czy są wolne miejsca na joby, i automatycznie ponawia je, gdy capacity się zwolni. Może się zdarzyć, że prześlesz job z Notebooka lub Lakehouse, np. Load to Table, gdy capacity jest w pełni wykorzystane, bo równolegle działające joby zajmują wszystkie Spark Vcores dostępne w zakupionym SKU Fabric capacity. Wtedy zadziała throttling i zobaczysz komunikat **HTTP Response code 430: Unable to submit this request because all the available capacity is currently being used. The suggested solutions are to cancel a currently running job, increase the available capacity, or try again later.** 
 
 Zadanie 2.6 w Notebooku zakończysz, gdy dojdziesz do ostatniej komórki z kodem. Odeśle cię ona z powrotem tutaj, do Zadania 2.7. 
 
