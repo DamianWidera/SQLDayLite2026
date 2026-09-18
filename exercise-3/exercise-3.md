@@ -5,7 +5,7 @@
 > [!NOTE]
 > Czas: 30 minut
 > 
-> [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 2](./../exercise-2/exercise-2.md) | [Dalej: Ćwiczenie 4](./../exercise-4/exercise-4.md)
+> [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 2B](./../exercise-2/exercise-2b-dataflow-gen2.md) | [Dalej: Ćwiczenie 4](./../exercise-4/exercise-4.md)
 > #### Lista zadań:
 > * [Zadanie 3.1 Pobierz ciąg połączenia dla SQL analytics endpoint w Lakehouse](#zadanie-31-pobierz-ciąg-połączenia-dla-sql-analytics-endpoint-w-lakehouse)
 > * [Zadanie 3.2 Połącz się z Fabric SQL Endpoint w SQL Server Management Studio (SSMS)](#zadanie-32-połącz-się-z-fabric-sql-endpoint-w-sql-server-management-studio-ssms)

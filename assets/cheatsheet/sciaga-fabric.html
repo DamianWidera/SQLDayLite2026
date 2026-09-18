@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Ściąga Fabric - SQLDay Lite 2026</title>
+<!-- Źródło ściągi na jedną kartkę A4. PDF generuje render.py w tym folderze. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  @page{size:A4;margin:0}
+  :root{--navy:#0d1433;--navy2:#070b1f;--ink:#141a33;--mute:#5b6485;--line:#dfe3f0;--orange:#ff7a1a;--orange2:#ffb347;--paper:#ffffff;--soft:#f5f7fc}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:210mm;height:297mm;background:var(--paper)}
+  body{font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:7.6pt;line-height:1.32}
+  .page{width:210mm;height:297mm;display:flex;flex-direction:column;overflow:hidden}
+  header{background:radial-gradient(120mm 60mm at 92% -20%,rgba(255,122,26,.45),transparent 62%),linear-gradient(160deg,var(--navy),var(--navy2));color:#fff;padding:8mm 10mm 6.5mm;display:flex;justify-content:space-between;align-items:flex-end}
+  .k{font-size:6.8pt;letter-spacing:.22em;text-transform:uppercase;color:var(--orange2);font-weight:700}
+  h1{font-size:19pt;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-top:1.2mm}
+  h1 span{color:var(--orange2)}
+  header .r{text-align:right;font-size:7.4pt;color:#c9d1f2;line-height:1.45}
+  header .r b{color:#fff}
+  main{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:6mm;padding:5.5mm 10mm 0}
+  h2{font-size:9.4pt;font-weight:800;letter-spacing:-.01em;margin:0 0 2mm;display:flex;align-items:center;gap:2mm}
+  h2 i{width:2.2mm;height:2.2mm;border-radius:50%;background:var(--orange);display:inline-block}
+  h2.gap{margin-top:3.6mm}
+  dl{display:grid;grid-template-columns:27mm 1fr;border-top:1px solid var(--line)}
+  dt,dd{padding:1.05mm 0;border-bottom:1px solid var(--line)}
+  dt{font-weight:700;font-size:7.4pt;padding-right:2mm}
+  dd{color:#2a3150}
+  .q{border:1px solid var(--line);border-radius:2.6mm;overflow:hidden;margin-bottom:2.6mm;background:var(--soft)}
+  .q .hd{background:var(--navy);color:#fff;font-weight:700;font-size:8pt;padding:1.5mm 3mm;display:flex;justify-content:space-between;align-items:center}
+  .q .hd small{color:var(--orange2);font-weight:700;font-size:6.6pt;letter-spacing:.04em}
+  .q .row{display:grid;grid-template-columns:1fr 29mm;gap:2mm;padding:1.25mm 3mm;border-top:1px solid var(--line);align-items:center;background:#fff}
+  .q .row:first-of-type{border-top:0}
+  .q .row b{justify-self:end;text-align:right;font-weight:800;color:var(--ink);font-size:7.4pt}
+  .q .row b::before{content:"→ ";color:var(--orange);font-weight:800}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm}
+  .box{border:1px solid var(--line);border-radius:2.6mm;padding:2.2mm 3mm;background:#fff}
+  .box h3{font-size:7.8pt;font-weight:800;margin-bottom:1mm}
+  .box.no h3{color:#0a7a5c} .box.later h3{color:#b35400}
+  .box ul{list-style:none} .box li{padding:.45mm 0 .45mm 3mm;position:relative}
+  .box li::before{content:"";position:absolute;left:0;top:1.9mm;width:1.3mm;height:1.3mm;border-radius:50%;background:var(--orange)}
+  .layers{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6mm;margin-bottom:2.6mm}
+  .ly{border-radius:2.2mm;padding:1.6mm 2.4mm;color:#fff;font-size:7pt;line-height:1.3}
+  .ly b{display:block;font-size:7.6pt;letter-spacing:.12em;text-transform:uppercase}
+  .ly.b{background:linear-gradient(135deg,#8a4b1f,#d07a3c)} .ly.s{background:linear-gradient(135deg,#69748f,#a9b4cb)} .ly.g{background:linear-gradient(135deg,#a87a08,#e8b92e)}
+  .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:6.8pt}
+  footer{margin:3mm 10mm 6mm;padding-top:2.2mm;border-top:1.5px solid var(--navy);display:flex;justify-content:space-between;align-items:center;font-size:7pt;color:var(--mute)}
+  footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div><div class="k">SQLDay Lite 2026 · ściąga na jedną kartkę</div><h1>Kupiłeś Fabric. <span>I co teraz?</span></h1></div>
+    <div class="r"><b>Damian Widera · dr Estera Kot</b><br>Gdańsk, 24 września 2026<br>github.com/DamianWidera/SQLDayLite2026</div>
+  </header>
+  <main>
+    <section>
+      <h2><i></i>Słowniczek: co to znaczy w Fabric</h2>
+      <dl>
+        <dt>tenant</dt><dd>Twoja organizacja w chmurze Microsoft. Jeden tenant ma jeden OneLake.</dd>
+        <dt>capacity</dt><dd>Kupiona pula mocy obliczeniowej. Zużywa ją wszystko, co uruchamiasz.</dd>
+        <dt>SKU F</dt><dd>Rozmiar capacity, np. F2, F64. Jedna capacity unit to dwa Spark VCores.</dd>
+        <dt>workspace</dt><dd>Kontener na elementy projektu. Tu nadajesz role i przypisujesz capacity.</dd>
+        <dt>OneLake</dt><dd>Jeden logiczny data lake całego tenanta. Wszystkie dane Fabric leżą tutaj.</dd>
+        <dt>Lakehouse</dt><dd>Pliki i tabele razem. Zapis przez Spark, Pipeline, Dataflow Gen2. Odczyt także w SQL.</dd>
+        <dt>Files i Tables</dt><dd>Files to dowolne pliki. Tables to tabele Delta, tylko je widzi SQL i Power BI.</dd>
+        <dt>Delta table</dt><dd>Pliki Parquet oraz dziennik transakcji. Domyślny format tabel w Fabric.</dd>
+        <dt>Warehouse</dt><dd>Hurtownia z pełnym T-SQL: INSERT, UPDATE, DELETE. Dane też w OneLake.</dd>
+        <dt>SQL analytics endpoint</dt><dd>Widok T-SQL na tabele Lakehouse. Tylko odczyt. Powstaje automatycznie.</dd>
+        <dt>Shortcut</dt><dd>Wskaźnik na dane leżące gdzie indziej. Widzisz je u siebie bez kopiowania.</dd>
+        <dt>Pipeline</dt><dd>Orkiestracja: kolejność kroków, harmonogram, ponawianie. Sam nie przekształca.</dd>
+        <dt>Copy activity</dt><dd>Krok w Pipeline, który kopiuje dane ze źródła do miejsca docelowego.</dd>
+        <dt>Dataflow Gen2</dt><dd>Transformacje w Power Query, bez kodu. Naturalne dla osób od Power BI i Excela.</dd>
+        <dt>Notebook</dt><dd>Kod w PySpark albo Spark SQL, komórka po komórce. Do dużych danych.</dd>
+        <dt>Spark session</dt><dd>Uruchomione środowisko Spark. Zużywa capacity, wygasa po 20 minutach bez pracy.</dd>
+        <dt>Starter pool</dt><dd>Rozgrzane klastry Spark. Sesja startuje w kilka sekund.</dd>
+        <dt>runtime</dt><dd>Zestaw wersji Spark, Delta Lake i Python. Na warsztacie Runtime 1.3.</dd>
+        <dt>semantic model</dt><dd>Model danych Power BI: tabele, relacje, miary. Dawniej dataset.</dd>
+        <dt>Direct Lake</dt><dd>Power BI czyta pliki Delta prosto z OneLake. Bez importu i bez zapytań do źródła.</dd>
+        <dt>Monitoring hub</dt><dd>Historia uruchomień i błędów. Tu anulujesz zbędne Spark session.</dd>
+        <dt>HTTP 430</dt><dd>Capacity jest zajęta i Fabric odrzuca nowy Spark job. Anuluj zbędne sesje.</dd>
+        <dt>V-Order</dt><dd>Optymalizacja plików Parquet pod odczyt. W nowych workspace domyślnie wyłączona.</dd>
+        <dt>Lineage</dt><dd>Widok zależności: skąd dane przyszły i co z nich korzysta.</dd>
+      </dl>
+    </section>
+    <section>
+      <h2><i></i>Medallion architecture na warsztacie</h2>
+      <div class="layers">
+        <div class="ly b"><b>bronze</b>dane surowe<br><span class="mono">bronzerawdata</span></div>
+        <div class="ly s"><b>silver</b>dane oczyszczone<br><span class="mono">silvercleansed</span></div>
+        <div class="ly g"><b>gold</b>gotowe do raportu<br><span class="mono">goldcurated</span></div>
+      </div>
+
+      <h2><i></i>Drzewka decyzji</h2>
+      <div class="q"><div class="hd">Lakehouse czy Warehouse?<small>ĆW. 1 I 3</small></div>
+        <div class="row"><span>Zespół musi zapisywać dane w T-SQL, potrzebuje procedur</span><b>Warehouse</b></div>
+        <div class="row"><span>Masz pliki, dane półstrukturalne albo transformacje w Spark</span><b>Lakehouse</b></div>
+        <div class="row"><span>Wystarczy odczyt w SQL</span><b>Lakehouse i SQL analytics endpoint</b></div>
+      </div>
+      <div class="q"><div class="hd">Dataflow Gen2 czy Notebook?<small>ĆW. 2 I 2B</small></div>
+        <div class="row"><span>Znasz Power Query, dane małe albo średnie, logikę da się wyklikać</span><b>Dataflow Gen2</b></div>
+        <div class="row"><span>Duże tabele, złożona logika, kod w Git, uczenie maszynowe</span><b>Notebook</b></div>
+      </div>
+      <div class="q"><div class="hd">Jak dostarczyć dane?<small>ĆW. 1 I 2</small></div>
+        <div class="row"><span>Dane mogą zostać u źródła: ADLS Gen2, S3, inny Lakehouse</span><b>Shortcut</b></div>
+        <div class="row"><span>Regularne kopiowanie z bazy albo z magazynu plików</span><b>Pipeline z Copy activity</b></div>
+        <div class="row"><span>Mały plik, jednorazowo</span><b>Upload do Files</b></div>
+        <div class="row"><span>Pobranie połączone z czyszczeniem w Power Query</span><b>Dataflow Gen2</b></div>
+      </div>
+      <div class="q"><div class="hd">Jak uruchamiać proces?<small>ZADANIE 2.7</small></div>
+        <div class="row"><span>Jeden Notebook albo jeden Dataflow Gen2, bez zależności</span><b>własny harmonogram</b></div>
+        <div class="row"><span>Kilka kroków, wiele tabel, ponawianie, jedna historia</span><b>Pipeline</b></div>
+      </div>
+      <div class="q"><div class="hd">Który tryb Power BI?<small>ĆW. 4</small></div>
+        <div class="row"><span>Dane są w Lakehouse albo w Warehouse w Fabric</span><b>Direct Lake</b></div>
+        <div class="row"><span>Źródło poza Fabric albo mały model</span><b>Import mode</b></div>
+        <div class="row"><span>Dane aktualne co do sekundy, a źródło to wytrzyma</span><b>DirectQuery</b></div>
+      </div>
+
+      <div class="two">
+        <div class="box no"><h3>Tego nie odkładaj</h3><ul>
+          <li>konwencja nazw od pierwszego dnia</li><li>warstwy bronze, silver, gold</li><li>wąskie uprawnienia, Share zamiast roli</li><li>kontrola kosztów capacity</li></ul></div>
+        <div class="box later"><h3>To może poczekać</h3><ul>
+          <li>custom Spark pool</li><li>Managed Private Endpoints</li><li>deployment pipelines</li><li>Real-Time Intelligence, modele ML</li></ul></div>
+      </div>
+    </section>
+  </main>
+  <footer><span><b>Zasada na start:</b> wybierz najprostszy element, który rozwiązuje twój problem.</span><span>Pełna wersja: decyzje-projektowe.md i FAQ w README</span></footer>
+</div>
+</body>
+</html>

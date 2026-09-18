@@ -13,15 +13,15 @@
 > * [Zadanie 1.4 Zarządzanie Spark session](#zadanie-14-zarządzanie-spark-session)
 
 # Kontekst
-Zintegrujemy dwa źródła danych NYC Taxi: jedno z okresu od stycznia 2022 do stycznia 2023 roku, drugie ze stycznia 2023 roku. Tabela poniżej pokazuje metafory, których użyjemy przy integracji danych:
-![Przegląd danych](../screenshots/1/data-integration-one.png)
+Zintegrujemy dwa źródła danych NYC Taxi: jedno z okresu od stycznia 2022 do stycznia 2023 roku, drugie ze stycznia 2023 roku. Grafika poniżej pokazuje oba zbiory danych i sposób ich integracji:
+![Dwa zbiory danych i dwa sposoby integracji](../assets/architecture/dane-cw1.png)
 
 Przegląd zadań:
 * Ładowanie danych: zacznij od załadowania danych historycznych z okresu od stycznia 2022 do stycznia 2023 roku. Leżą one w Azure Blob Storage, czyli w usłudze, która kiedyś była szczytowym osiągnięciem wśród rozwiązań do przechowywania danych. Ten krok symuluje przeniesienie starszych danych do nowoczesnego ekosystemu danych.
 * Integracja i analiza danych: teraz zajmij się nowszymi danymi, ze stycznia 2023 roku. W tym czasie standardem przechowywania danych w Azure stało się Azure Data Lake Storage Gen 2 (ADLS Gen2). Zamiast tradycyjnie kopiować dane, użyjesz nowatorskiej funkcji `Shortcuts`, która upraszcza integrację w naszej architekturze Lakehouse.
 
 Do końca warsztatu ukończymy pierwszy etap Medallion architecture, czyli warstwę bronze:
-![Przegląd danych](../screenshots/1/intro.png)
+![Warstwa bronze: strefa lądowania danych surowych](../assets/architecture/bronze-landing.png)
 
 Dla osób, które skończą główne zadania przed czasem, przygotowaliśmy [dodatkowe wyzwania](../exercise-extra/extra.md). Pomogą ci lepiej zrozumieć data engineering i rozwinąć umiejętności w tym obszarze. Znajdziesz je na dole strony. Pytania są mile widziane, a nawet do nich zachęcamy. W trakcie całej sesji możesz zwrócić się do każdego z prowadzących. Współpraca i ciekawość to klucz do sukcesu w tym ćwiczeniu.
 

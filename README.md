@@ -74,8 +74,8 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 | Gdzie właściwie są dane? Czym jest OneLake, Files i Tables? | [Ćwiczenie 1](./exercise-1/exercise-1.md) |
 | Do czego służy Pipeline i gdzie monitorować wykonania i błędy? | [Ćwiczenie 1](./exercise-1/exercise-1.md), [ćwiczenia dodatkowe](./exercise-extra/extra.md) |
 | Jak podzielić dane na surowe, oczyszczone i gotowe do raportowania? | [Konwencja nazw](./exercise-0-setup/naming-convention.md), [Ćwiczenie 2](./exercise-2/exercise-2.md) |
-| Kiedy Notebook, a kiedy Dataflow Gen2? | [Ćwiczenie 2](./exercise-2/exercise-2.md) i dyskusja z prowadzącymi |
-| Kiedy wystarczy Lakehouse, a kiedy myśleć o Warehouse? Jak pracować w T-SQL? | [Ćwiczenie 3](./exercise-3/exercise-3.md) i dyskusja z prowadzącymi |
+| Kiedy Notebook, a kiedy Dataflow Gen2? | [Ćwiczenie 2](./exercise-2/exercise-2.md), [Ćwiczenie 2B](./exercise-2/exercise-2b-dataflow-gen2.md), [Decyzje projektowe](./decyzje-projektowe.md#2-dataflow-gen2-czy-notebook) |
+| Kiedy wystarczy Lakehouse, a kiedy myśleć o Warehouse? Jak pracować w T-SQL? | [Ćwiczenie 3](./exercise-3/exercise-3.md), [Decyzje projektowe](./decyzje-projektowe.md#1-lakehouse-czy-warehouse) |
 | Co z uprawnieniami i udostępnianiem? | [Ćwiczenie 3](./exercise-3/exercise-3.md) |
 | Czy Power BI dalej działa tak samo? Semantic model, Direct Lake, raport. | [Ćwiczenie 4](./exercise-4/exercise-4.md) |
 | Jak zautomatyzować odświeżanie? | [Ćwiczenie 2, zadanie 2.7](./exercise-2/exercise-2.md), [ćwiczenia dodatkowe](./exercise-extra/extra.md) |
@@ -99,7 +99,9 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 >
 > 10:35–10:50 (15 min) - Przerwa kawowa
 >
-> 10:50–12:20 (90 min) - [Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark](./exercise-2/exercise-2.md)
+> 10:50–12:05 (75 min) - [Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark](./exercise-2/exercise-2.md)
+>
+> 12:05–12:20 (15 min) - [Ćwiczenie 2B - Dataflow Gen2: ta sama transformacja bez kodu](./exercise-2/exercise-2b-dataflow-gen2.md)
 >
 > 12:20–13:00 (40 min) - [Ćwiczenie 3 - SQL analytics endpoint, SSMS, udostępnianie i uprawnienia](./exercise-3/exercise-3.md)
 >
@@ -111,11 +113,11 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 >
 > 15:35–16:35 (60 min) - [Ćwiczenie 5 - Nowości w Fabric i Data Wrangler](./exercise-5/exercise-5.md)
 >
-> 16:35–17:30 (55 min) - Najczęstsze błędy początkujących, pytania i odpowiedzi, [ankieta](#twoja-opinia), [ćwiczenia dodatkowe](exercise-extra/extra.md)
+> 16:35–17:30 (55 min) - [Finał: pokaż swój raport](./zakonczenie.md), najczęstsze błędy początkujących, [ankieta](#twoja-opinia), pytania i odpowiedzi
 
 # Najczęstsze błędy początkujących
 
-Ten blok zamyka dzień. Omawiamy błędy, które widzimy w pierwszych projektach Fabric:
+Ten blok zamyka dzień. Omawiamy błędy, które widzimy w pierwszych projektach Fabric. Objawy, skutki i sposoby uniknięcia każdego błędu znajdziesz na stronie [Finał](./zakonczenie.md#3-najczęstsze-błędy-początkujących-20-minut).
 
 - raportowanie na brudnych danych,
 - mieszanie warstw,
@@ -123,6 +125,8 @@ Ten blok zamyka dzień. Omawiamy błędy, które widzimy w pierwszych projektach
 - brak konwencji nazw,
 - zbyt szerokie uprawnienia,
 - brak kontroli kosztów.
+
+Pierwsze decyzje projektowe opisuje osobna strona: [Decyzje projektowe](./decyzje-projektowe.md). Wersja na jedną kartkę to [ściąga PDF](./assets/cheatsheet/sciaga-fabric.pdf).
 
 # Twoja opinia
 
@@ -181,10 +185,10 @@ Lista łączy typowe potrzeby klienta z elementem Fabric i z miejscem w warsztac
 | S01 | Mam pliki CSV albo Excel na dysku. | Prześlij plik do Files w Lakehouse i użyj Load to Tables. Powstanie tabela Delta. | [Zadanie 2.2](./exercise-2/exercise-2.md) |
 | S02 | Dane leżą już w ADLS Gen2, S3 albo w innym Lakehouse. Nie chcę ich kopiować. | Utwórz Shortcut. Dane zostają u źródła, a ty widzisz je jak własne. | [Zadanie 1.3](./exercise-1/exercise-1.md#zadanie-13-utwórz-shortcut) |
 | S03 | Muszę regularnie pobierać dane z bazy albo z Azure Blob Storage. | Zbuduj Pipeline z Copy activity i dodaj harmonogram. | [Zadanie 1.1](./exercise-1/exercise-1.md) |
-| S04 | Znam Power Query, nie znam Pythona. Muszę oczyścić dane. | Użyj Dataflow Gen2 i zapisz wynik do Lakehouse. Alternatywa to Data Wrangler, który wygeneruje kod za ciebie. | Dyskusja z prowadzącymi, [Data Wrangler](./exercise-5/exercise-5.md#zaprzyjaźnij-się-z-data-wrangler) |
+| S04 | Znam Power Query, nie znam Pythona. Muszę oczyścić dane. | Użyj Dataflow Gen2 i zapisz wynik do Lakehouse. Alternatywa to Data Wrangler, który wygeneruje kod za ciebie. | [Ćwiczenie 2B](./exercise-2/exercise-2b-dataflow-gen2.md), [Data Wrangler](./exercise-5/exercise-5.md#zaprzyjaźnij-się-z-data-wrangler) |
 | S05 | Danych jest dużo albo logika jest złożona. | Napisz transformacje w Notebooku na Spark. Wynik zapisz jako tabelę Delta w warstwie silver. | [Ćwiczenie 2](./exercise-2/exercise-2.md) |
 | S06 | Znam SQL i chcę po prostu odpytać dane. | Połącz się z SQL analytics endpoint z SSMS albo z edytora SQL w Fabric. To dostęp tylko do odczytu. | [Zadania 3.1 do 3.3](./exercise-3/exercise-3.md) |
-| S07 | Potrzebuję INSERT, UPDATE i procedur w T-SQL. | Wybierz Warehouse zamiast Lakehouse. SQL analytics endpoint nie pozwala na zapis. | Dyskusja z prowadzącymi |
+| S07 | Potrzebuję INSERT, UPDATE i procedur w T-SQL. | Wybierz Warehouse zamiast Lakehouse. SQL analytics endpoint nie pozwala na zapis. | [Decyzje projektowe](./decyzje-projektowe.md#1-lakehouse-czy-warehouse) |
 | S08 | Chcę raport Power BI na dużych danych, bez długiego odświeżania. | Utwórz semantic model w trybie Direct Lake na tabelach gold. | [Zadanie 4.2](./exercise-4/exercise-4.md) |
 | S09 | Proces ma się uruchamiać sam, np. co noc. | Złóż kroki w Pipeline i ustaw harmonogram. Pojedynczy Notebook też ma własny harmonogram. | [Zadanie 2.7](./exercise-2/exercise-2.md#zadanie-27-automatyzacja), [harmonogram Notebooka](./exercise-extra/extra.md#zaplanuj-uruchamianie-notebooka-kilka-razy-dziennie) |
 | S10 | Coś się nie wykonało. Gdzie szukać przyczyny? | Otwórz Monitoring hub. Znajdziesz tam status, czas trwania i komunikat błędu każdego uruchomienia. | [Monitoring](./exercise-extra/extra.md#monitoruj-uruchomienie-pipeline-i-sprawdź-wynik) |

@@ -1,4 +1,4 @@
-"""Render architektura.html to PNG files (full view plus one focused view per exercise).
+"""Render architektura.html (full view plus one focused view per exercise) and konteksty.html to PNG files.
 
 Usage: python render.py            # needs: pip install playwright && playwright install chromium
 """
@@ -16,5 +16,12 @@ with sync_playwright() as p:
         page.wait_for_load_state("networkidle")
         page.evaluate("document.fonts.ready")
         page.locator(".stage").screenshot(path=str(HERE / name), omit_background=True)
+        print("rendered", name)
+    # context graphics for exercises 1 and 2 (height follows the content)
+    for name, view in {"dane-cw1.png": "dane1", "dane-cw2.png": "dane2", "bronze-landing.png": "bronze"}.items():
+        page.goto((HERE / "konteksty.html").as_uri() + f"?view={view}")
+        page.wait_for_load_state("networkidle")
+        page.evaluate("document.fonts.ready")
+        page.locator(".stage.show").screenshot(path=str(HERE / name), omit_background=True)
         print("rendered", name)
     browser.close()

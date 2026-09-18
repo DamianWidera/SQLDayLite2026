@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Grafiki kontekstowe - SQLDay Lite 2026</title>
+<!-- Źródło grafik do sekcji Kontekst. Widoki: ?view=dane1 (Ćwiczenie 1), ?view=dane2 (Ćwiczenie 2), ?view=bronze (Ćwiczenie 1). PNG generuje render.py. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg0:#070b1f;--bg1:#0d1433;--ink:#f4f6ff;--mute:#9aa6cf;--line:rgba(255,255,255,.13);--glass:rgba(255,255,255,.055);--glass2:rgba(255,255,255,.09);
+    --orange:#ff7a1a;--orange2:#ffb347;--blue:#4da3ff;--teal:#35e0c2;--bronze:#e08a4a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1600px;background:transparent}
+  body{font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .stage{position:relative;width:1600px;border-radius:28px;overflow:hidden;padding:40px 44px 44px;display:none;
+    background:radial-gradient(900px 480px at 90% -10%,rgba(255,122,26,.28),transparent 62%),radial-gradient(760px 480px at 6% 112%,rgba(77,163,255,.20),transparent 60%),linear-gradient(160deg,var(--bg1),var(--bg0) 70%)}
+  .stage.show{display:block}
+  .dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.4px);background-size:26px 26px;pointer-events:none;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.2));mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.2))}
+  .kicker{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange2);font-weight:700;position:relative}
+  h1{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:6px 0 26px;position:relative}
+  h1 span{background:linear-gradient(90deg,#fff 0%,#ffd9b0 55%,var(--orange) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+  .pill{display:inline-block;font-size:12px;font-weight:800;padding:4px 11px;border-radius:999px;color:#1a0d00;background:linear-gradient(90deg,var(--orange2),var(--orange));white-space:nowrap}
+  svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .ico{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+
+  /* table view */
+  .grid{position:relative;display:grid;grid-template-columns:330px 400px 1fr;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:linear-gradient(180deg,var(--glass2),var(--glass))}
+  .grid > div{padding:22px 26px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:flex;align-items:center;gap:16px}
+  .grid > div:nth-child(3n){border-right:0}
+  .grid .h{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--mute);padding:16px 26px;background:rgba(0,0,0,.2)}
+  .grid .last{border-bottom:0}
+  .span2{grid-row:span 2}
+  .t{font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+  .d{font-size:14.5px;color:var(--mute);line-height:1.45;font-weight:500}
+  .name{font-size:17px;font-weight:600;color:#fff}
+  .how{flex-direction:column;align-items:flex-start !important;gap:8px !important}
+  .how b{color:#fff;font-weight:700}
+  body.two .r3{display:none !important} body.two .r2{border-bottom:0 !important}
+
+  /* bronze landing view */
+  .land{position:relative;display:grid;grid-template-columns:400px 330px 1fr;gap:0;align-items:stretch;height:430px}
+  .src{display:flex;flex-direction:column;justify-content:space-around;gap:26px}
+  .card{border-radius:18px;background:linear-gradient(180deg,var(--glass2),var(--glass));border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:10px}
+  .card .row{display:flex;align-items:center;gap:14px}
+  .mid{position:relative}
+  .lab{position:absolute;left:50%;transform:translateX(-50%);text-align:center;width:250px;padding:10px 12px;border-radius:14px;background:#121a3f;border:1px solid rgba(255,179,71,.55);font-size:14px;font-weight:700;color:#ffe2bf;line-height:1.3}
+  .lab em{display:block;font-style:normal;color:var(--orange2);font-size:11.5px;font-weight:800;letter-spacing:.06em;margin-top:3px}
+  .lh{border-radius:22px;border:1.5px solid rgba(224,138,74,.6);background:linear-gradient(180deg,rgba(224,138,74,.12),rgba(224,138,74,.03));padding:22px 26px;display:flex;flex-direction:column}
+  .lh .cap{height:5px;border-radius:5px;background:linear-gradient(90deg,#8a4b1f,var(--bronze));margin-bottom:14px}
+  .lh .layer{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--bronze)}
+  .lh .nm{font-size:22px;font-weight:600;margin:4px 0 2px}
+  .lh .what{font-size:14px;color:var(--mute);font-weight:500;margin-bottom:12px}
+  .sec{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:700;margin:12px 0 8px}
+  .obj{display:flex;gap:12px;align-items:center;padding:11px 14px;border-radius:12px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08);margin-bottom:8px;font-size:15px}
+  .obj small{margin-left:auto;color:var(--mute);font-family:"Inter";font-size:12.5px;font-weight:600}
+  .obj svg{width:17px;height:17px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  svg.wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .w{fill:none;stroke-width:2.6;stroke-linecap:round}
+  .c-blue{color:var(--blue)} .c-teal{color:var(--teal)} .c-orange{color:var(--orange2)}
+</style>
+</head>
+<body>
+
+<!-- ========== DANE ========== -->
+<div class="stage" id="dane">
+  <div class="dots"></div>
+  <div class="kicker">SQLDay Lite 2026 · dane na warsztacie</div>
+  <h1><span id="daneTitle">Trzy zbiory danych, trzy sposoby integracji</span></h1>
+  <div class="grid">
+    <div class="h">Typ danych</div><div class="h">Zbiór danych</div><div class="h">Sposób integracji</div>
+
+    <div class="span2 r2">
+      <div class="ico c-orange"><svg class="i" viewBox="0 0 24 24"><path d="M5 16l1.4-5.2A2 2 0 0 1 8.3 9.3h7.4a2 2 0 0 1 1.9 1.5L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="20.5" r="1.3"/><circle cx="16.5" cy="20.5" r="1.3"/><path d="M10 6h4v3h-4z"/></svg></div>
+      <div><div class="t">NYC Green Taxi</div><div class="d">przejazdy zielonych taksówek,<br>dane TLC, pliki Parquet</div></div>
+    </div>
+    <div><div><div class="name mono">green_202201_202301</div><div class="d">styczeń 2022 do stycznia 2023</div></div></div>
+    <div class="how"><span class="pill">Ćw. 1 · Zadanie 1.1</span><div class="d">Dane leżą w <b>Azure Blob Storage</b>. Kopiujesz je do Fabric: <b>Pipeline</b> z <b>Copy activity</b>.</div></div>
+
+    <div class="r2"><div><div class="name mono">green202301</div><div class="d">styczeń 2023</div></div></div>
+    <div class="how r2"><span class="pill">Ćw. 1 · Zadanie 1.3</span><div class="d">Dane leżą w <b>ADLS Gen2</b>. Nie kopiujesz ich. Tworzysz <b>Shortcut</b>, czyli zero kopiowania.</div></div>
+
+    <div class="r3 last">
+      <div class="ico c-blue"><svg class="i" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 17l6-6"/><circle cx="9.5" cy="11.5" r="1"/><circle cx="14.5" cy="16.5" r="1"/></svg></div>
+      <div><div class="t">Rabaty</div><div class="d">rabat dostawcy na każdy dzień,<br>jeden mały plik CSV</div></div>
+    </div>
+    <div class="r3 last"><div><div class="name mono" style="font-size:15.5px">NYC-Taxi-Discounts-Per-Day.csv</div><div class="d">1 stycznia 2015 do 26 marca 2024</div></div></div>
+    <div class="how r3 last"><span class="pill">Ćw. 2 · Zadanie 2.2 · Ćw. 2B</span><div class="d">Mały plik przesyłasz z dysku: <b>Upload files</b>. Potem robisz unpivot w <b>Notebooku</b> i drugi raz w <b>Dataflow Gen2</b>.</div></div>
+  </div>
+</div>
+
+<!-- ========== BRONZE LANDING ========== -->
+<div class="stage" id="bronze">
+  <div class="dots"></div>
+  <div class="kicker">SQLDay Lite 2026 · Ćwiczenie 1</div>
+  <h1><span>Warstwa bronze: strefa lądowania danych surowych</span></h1>
+  <div class="land">
+    <svg class="wires" id="bw">
+      <defs>
+        <linearGradient id="gw" gradientUnits="userSpaceOnUse" x1="380" y1="0" x2="760" y2="0"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ff7a1a"/></linearGradient>
+        <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#ff7a1a"/></marker>
+      </defs>
+      <path id="w1" class="w" stroke="url(#gw)" marker-end="url(#ah)"/>
+      <path id="w2" class="w" stroke="url(#gw)" marker-end="url(#ah)" stroke-dasharray="8 8"/>
+    </svg>
+    <div class="src">
+      <div class="card" id="s1">
+        <div class="row"><div class="ico c-blue"><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+          <div><div class="t">Azure Blob Storage</div><div class="d">NYC Green Taxi · Parquet</div></div></div>
+        <div class="mono" style="font-size:14px;color:#dfe6ff">2022-01 … 2023-01</div>
+      </div>
+      <div class="card" id="s2">
+        <div class="row"><div class="ico c-teal"><svg class="i" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg></div>
+          <div><div class="t">ADLS Gen2</div><div class="d">NYC Green Taxi · Parquet</div></div></div>
+        <div class="mono" style="font-size:14px;color:#dfe6ff">2023-01 · dane zostają u źródła</div>
+      </div>
+    </div>
+    <div class="mid">
+      <div class="lab" id="l1">Pipeline · Copy activity<em>ŁADUJESZ DANE · ZADANIE 1.1</em></div>
+      <div class="lab" id="l2">Shortcut<em>NIE ŁADUJESZ · ZADANIE 1.3</em></div>
+    </div>
+    <div class="lh">
+      <div class="cap"></div><div class="layer">bronze · Lakehouse</div><div class="nm mono">bronzerawdata</div><div class="what">strefa lądowania danych surowych</div>
+      <div class="sec">Tables</div>
+      <div class="obj c-orange" id="t1"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="mono" style="color:#fff">green_202201_202301</span><small>tabela Delta z Pipeline</small></div>
+      <div class="obj c-teal"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span class="mono" style="color:#fff">green202301</span><small>Load to Tables z folderu 2023</small></div>
+      <div class="sec">Files</div>
+      <div class="obj c-teal" id="t2"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="mono" style="color:#fff">2023/</span><small>Shortcut do ADLS Gen2</small></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const v = new URLSearchParams(location.search).get("view") || "dane2";
+  if (v === "bronze") {
+    document.getElementById("bronze").classList.add("show");
+    // draw connectors from measured positions, so they always meet the cards and rows
+    const land = document.querySelector(".land").getBoundingClientRect();
+    const lh = document.querySelector(".lh").getBoundingClientRect();
+    const wire = (srcId, rowId, pathId, labId) => {
+      const a = document.getElementById(srcId).getBoundingClientRect(), b = document.getElementById(rowId).getBoundingClientRect();
+      const x1 = a.right - land.left, y1 = a.top + a.height / 2 - land.top, x2 = lh.left - land.left - 6, y2 = b.top + b.height / 2 - land.top, mx = (x1 + x2) / 2;
+      document.getElementById(pathId).setAttribute("d", `M${x1} ${y1} C${mx} ${y1} ${mx} ${y2} ${x2} ${y2}`);
+      const lab = document.getElementById(labId); lab.style.top = ((y1 + y2) / 2 - lab.offsetHeight / 2) + "px";
+    };
+    wire("s1", "t1", "w1", "l1"); wire("s2", "t2", "w2", "l2");
+  }
+  else { document.getElementById("dane").classList.add("show");
+    if (v === "dane1") { document.body.classList.add("two"); document.getElementById("daneTitle").textContent = "Dwa zbiory danych, dwa sposoby integracji"; } }
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 > [!NOTE]
 > Czas: 75 minut
 > 
-> [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 1](./../exercise-1/exercise-1.md) | [Dalej: Ćwiczenie 3](./../exercise-3/exercise-3.md)
+> [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 1](./../exercise-1/exercise-1.md) | [Dalej: Ćwiczenie 2B](./exercise-2b-dataflow-gen2.md)
 > #### Lista zadań:
 > * [Zadanie 2.1 Różne sposoby pobierania danych z Lakehouse](#zadanie-21-różne-sposoby-pobierania-danych-z-lakehouse)
 > * [Zadanie 2.2 Side Loading (przesłanie pliku z dysku) i Load to Delta dla pliku CSV](#zadanie-22-side-loading-przesłanie-pliku-z-dysku-i-load-to-delta-dla-pliku-csv)
@@ -84,7 +84,7 @@ Przy dużych zbiorach danych pracę zaczynasz od pobrania danych. To podstawa ko
 # Zadanie 2.2 Side Loading (przesłanie pliku z dysku) i Load to Delta dla pliku CSV
 
 Chcemy rozszerzyć warstwę bronze o dodatkowe dane. Poniższa tabela pokazuje aktualny obraz tego, jakie dane ładujemy do warstwy bronze i jakimi metodami to robimy.
-![Przegląd danych](../screenshots/1/data-integration.png)
+![Trzy zbiory danych i trzy sposoby integracji](../assets/architecture/dane-cw2.png)
 
 
 Ta instrukcja przeprowadzi cię przez pobranie danych zewnętrznych i dołączenie ich do twojego Lakehouse, żeby analiza była pełna.
