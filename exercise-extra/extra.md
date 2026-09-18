@@ -1,149 +1,149 @@
-# Extra exercises
+# Ćwiczenia dodatkowe
 
 > [!NOTE]
 > 
-> Back to [Agenda](./../README.md#agenda) | [Start Steps](../exercise-0-setup/start.md) | [Exercise 1](./../exercise-1/exercise-1.md) | [Exercise 2](./../exercise-2/exercise-2.md) | [Exercise 3](./../exercise-3/exercise-3.md) | [Exercise 4](./../exercise-4/exercise-4.md) | [Exercise 5](./../exercise-5/exercise-5.md)
-> #### List of extra exercises:
-> * [Copilot for notebooks](#copilot-for-notebooks)
+> Powrót do [agendy](./../README.md#agenda) | [Start i konfiguracja](../exercise-0-setup/start.md) | [Ćwiczenie 1](./../exercise-1/exercise-1.md) | [Ćwiczenie 2](./../exercise-2/exercise-2.md) | [Ćwiczenie 3](./../exercise-3/exercise-3.md) | [Ćwiczenie 4](./../exercise-4/exercise-4.md) | [Ćwiczenie 5](./../exercise-5/exercise-5.md)
+> #### Lista ćwiczeń dodatkowych:
+> * [Copilot w Notebooku](#copilot-w-notebooku)
 > * [SQL Analytics Endpoint](#sql-analytics-endpoint)
-> * [Connect to a Fabric SQL Endpoint Using SQL Server Management Studio (SSMS)](#connect-to-a-fabric-sql-endpoint-using-sql-server-management-studio-ssms)
-> * [Execute T-SQL Queries on Lakehouse Delta Tables](#execute-t-sql-queries-on-lakehouse-delta-tables)
-> * [Sharing a Lakehouse](#sharing-a-lakehouse)
-> * [Sharing a Notebook for Collaboration](#sharing-a-notebook-for-collaboration)
-> * [High concurrency mode in Fabric Spark](#high-concurrency-mode-in-fabric-spark)
+> * [Połącz się z Fabric SQL Endpoint za pomocą SQL Server Management Studio (SSMS)](#połącz-się-z-fabric-sql-endpoint-za-pomocą-sql-server-management-studio-ssms)
+> * [Uruchom zapytania T-SQL na tabelach Delta w Lakehouse](#uruchom-zapytania-t-sql-na-tabelach-delta-w-lakehouse)
+> * [Udostępnianie Lakehouse](#udostępnianie-lakehouse)
+> * [Udostępnianie Notebooka do współpracy](#udostępnianie-notebooka-do-współpracy)
+> * [High concurrency mode w Fabric Spark](#high-concurrency-mode-w-fabric-spark)
 > * [Lineage](#lineage)
-> * [Specify the file format and compression type for the sink datasets in Data Factory](#specify-the-file-format-and-compression-type-for-sink-datasets-in-data-factory)
-> *  [Monitor the pipeline run and verify the output](#monitor-the-pipeline-run-and-verify-the-output)
+> * [Wybierz format pliku i typ kompresji docelowych zbiorów danych w Data Factory](#wybierz-format-pliku-i-typ-kompresji-docelowych-zbiorów-danych-w-data-factory)
+> *  [Monitoruj uruchomienie Pipeline i sprawdź wynik](#monitoruj-uruchomienie-pipeline-i-sprawdź-wynik)
 > *  [Medallion architecture](#medallion-architecture)
-> *  [Schedule your notebook](#schedule-your-notebook-for-multiple-daily-runs)
-> *  [Create a new Spark Pool on the Workspace-level settings]()
-> *  [Saved with V-Order?](#verify-v-order)
+> *  [Zaplanuj uruchamianie Notebooka](#zaplanuj-uruchamianie-notebooka-kilka-razy-dziennie)
+> *  [Utwórz nowy Spark pool w ustawieniach na poziomie workspace]()
+> *  [Zapisane z V-Order?](#sprawdź-v-order)
 > *  [Merge](#merge)
 
 ---
 
-# Copilot for notebooks
+# Copilot w Notebooku
 
-With Copilot for Data Science and Data Engineering, you can chat with an AI assistant that can help you handle your data analysis and visualization tasks. You can ask the Copilot questions about lakehouse tables, Power BI Datasets, or Pandas/Spark dataframes inside notebooks. Copilot answers in natural language or code snippets. Copilot can also generate data-specific code for you, depending on the task. For example, Copilot for Data Science and Data Engineering can generate code for:
-* Chart creation 
-* Filtering data 
-* Applying transformations 
-* Machine learning models
+Copilot dla Data Science i Data Engineering to asystent AI, z którym rozmawiasz na czacie. Pomaga analizować i wizualizować dane. Możesz go pytać o tabele w Lakehouse, Power BI Datasets albo obiekty DataFrame Pandas i Spark w Notebooku. Copilot odpowiada zwykłym językiem albo fragmentami kodu. Potrafi też wygenerować kod dopasowany do twoich danych i do zadania. Na przykład Copilot dla Data Science i Data Engineering wygeneruje kod, który:
+* tworzy wykresy 
+* filtruje dane 
+* stosuje transformacje 
+* buduje modele uczenia maszynowego
 
 
-Investigate the `green201501` table within your lakehouse, and seek insights about the dataset. Additionally, inquire how to compute the average trip distance and fare amount by each payment type.
+Przyjrzyj się tabeli `green201501` w swoim Lakehouse i poszukaj wniosków o tym zbiorze danych. Zapytaj też, jak obliczyć średnią długość przejazdu i średnią opłatę dla każdego typu płatności.
 
-## Accessing Copilot
-Open an existing notebook(like ***Just exploration***) in your workspace or create a new notebook. Select the `Copilot` icon found in the notebooks ribbon. This action opens the Copilot chat panel. When you click on `Get started` and it creates a new cell at the top of your notebook. Note: This cell is essential for initializing a Spark session within a Fabric notebook and must be executed for Copilot to function correctly. Future releases may introduce alternative initialization methods and this step might not longer be necessary.
-![Step](../screenshots/extra/CopilotStart.png)
+## Otwórz panel Copilot
+Otwórz istniejący Notebook (np. ***Just exploration***) w swoim workspace albo utwórz nowy Notebook. Kliknij ikonę `Copilot` na wstążce Notebooka. Otworzy się panel czatu Copilot. Gdy klikniesz `Get started`, na górze Notebooka pojawi się nowa komórka. Uwaga: ta komórka inicjuje Spark session w Notebooku Fabric. Musisz ją uruchomić, żeby Copilot działał poprawnie. W przyszłych wersjach mogą pojawić się inne sposoby inicjalizacji i ten krok może przestać być potrzebny.
+![Krok](../screenshots/extra/CopilotStart.png)
 
-## Get Started with Copilot
-When the Copilot panel opens, click `Get Started` to initiate your interaction with the AI assistant.
-![Step](../screenshots/extra/CopilotGetStart.png)
+## Zacznij pracę z asystentem Copilot
+Gdy otworzy się panel Copilot, kliknij `Get Started`, żeby zacząć rozmowę z asystentem AI.
+![Krok](../screenshots/extra/CopilotGetStart.png)
 
-## Library Installation
-Copilot will automatically insert a new cell containing the necessary library installation script. Execute this cell by clicking the `Play` button to install the required libraries for Copilot functionalities.
-![Step](../screenshots/2/3.jpg)
+## Instalacja bibliotek
+Copilot automatycznie wstawi nową komórkę ze skryptem, który instaluje potrzebne biblioteki. Uruchom tę komórkę przyciskiem `Play`, żeby zainstalować biblioteki wymagane przez funkcje Copilot.
+![Krok](../screenshots/2/3.jpg)
 
-## Data Privacy and Security Awareness
-Post-installation, you will be presented with a note on data privacy and security. Please read through this to understand how your data is stored and processed. Additionally, guidelines will be provided on how to effectively communicate with Copilot.
-![Step](../screenshots/extra/CopilotPrivacy.png)
+## Prywatność i bezpieczeństwo danych
+Po instalacji zobaczysz informację o prywatności i bezpieczeństwie danych. Przeczytaj ją, żeby wiedzieć, jak twoje dane są przechowywane i przetwarzane. Znajdziesz tam też wskazówki, jak skutecznie rozmawiać z asystentem Copilot.
+![Krok](../screenshots/extra/CopilotPrivacy.png)
 
-## Interacting with Copilot
-Now, engage with Copilot by exploring various prompts related to your data. Feel free to ask for code snippets, clarification, or paste the generated code into a new notebook cell. This is an opportunity to explore the capabilities and assistance Copilot offers for data science and engineering tasks.
+## Rozmowa z asystentem Copilot
+Teraz wypróbuj różne prompty dotyczące twoich danych. Poproś o fragmenty kodu albo o wyjaśnienia. Wygenerowany kod możesz wkleić do nowej komórki Notebooka. To okazja, żeby sprawdzić, jak Copilot pomaga w zadaniach z obszaru Data Science i Data Engineering.
 
 > [!TIP]
-> Please feel free to ask Copilot any questions to deepen your understanding of the dataset and enhance our workshop experience.
-> Just an example: `Analyze my table named green201501 and provide insights about the data`. 
+> Zadawaj asystentowi Copilot dowolne pytania, żeby lepiej poznać zbiór danych i więcej wynieść z warsztatu.
+> Przykład: `Analyze my table named green201501 and provide insights about the data`. 
 
-![Step](../screenshots/extra/InteractCopilot.png)
+![Krok](../screenshots/extra/InteractCopilot.png)
 
-This quick demonstration aims to highlight the ease of accessing Copilot for insightful data analysis.
+Ta krótka demonstracja pokazuje, jak łatwo sięgnąć po Copilot przy analizie danych.
 
 > [!IMPORTANT]  
-> Copilot is here to support and guide, to "co-pilot", not to control and "pilot". 
-> We'll move forward with our structured activities and that documentation, allowing them to serve as our copilot instead of using Copilot directly.
+> Copilot ma cię wspierać i podpowiadać jako „drugi pilot”, a nie przejmować stery jako „pilot”. 
+> Dalej pracujemy według zaplanowanych ćwiczeń i tej dokumentacji. To one będą naszym drugim pilotem, a nie sam Copilot.
 
 
 # SQL Analytics Endpoint
 
-The **SQL Analytics Endpoint** of a Fabric Lakehouse Offers a SQL-based experience for analyzing data in lakehouse delta tables using T-SQL language, with features like saving functions, generating views, and applying SQL security.
+**SQL Analytics Endpoint** w Fabric Lakehouse pozwala analizować dane w tabelach Delta w Lakehouse za pomocą języka T-SQL. Możesz w nim zapisywać funkcje, tworzyć widoki i stosować zabezpieczenia SQL.
 
-When a lakehouse is shared, users are automatically granted Read permission, which applies to the lakehouse itself, the linked SQL endpoint, and the default semantic model. Beyond this standard access, users may also be granted:
+Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Read. Obejmuje ono sam Lakehouse, powiązany SQL endpoint i domyślny semantic model. Oprócz tego standardowego dostępu możesz nadać użytkownikom:
 
--   **ReadData** permission for the SQL endpoint, enabling data access without the enforcement of SQL policies.
--   **ReadAll** permission for the lakehouse, allowing comprehensive data access via Apache Spark.
--   **Build** permission for the default semantic model, permitting the creation of Power BI reports utilizing this model
+-   uprawnienie **ReadData** do SQL endpoint, które daje dostęp do danych bez wymuszania zasad SQL.
+-   uprawnienie **ReadAll** do Lakehouse, które daje pełny dostęp do danych przez Apache Spark.
+-   uprawnienie **Build** do domyślnego semantic model, które pozwala tworzyć raporty Power BI na tym modelu
 
-The goal of this exercise is to obtain the SQL connection string for your Lakehouse's SQL analytics endpoint, which is crucial for connecting and querying your data through SQL-based tools.
+Cel tego ćwiczenia: zdobyć ciąg połączenia SQL do SQL analytics endpoint twojego Lakehouse. Bez niego nie połączysz się z danymi i nie odpytasz ich z narzędzi opartych na SQL.
 
-1. **Access the Analytics Endpoint**:
-   - Go to your workspace and find the Lakehouse SQL analytics endpoint.
-   - Click on `More options` (usually represented by three dots or an ellipsis icon) associated with the analytics endpoint.
+1. **Przejdź do SQL analytics endpoint**:
+   - Przejdź do swojego workspace i znajdź SQL analytics endpoint swojego Lakehouse.
+   - Kliknij `More options` (zwykle trzy kropki, czyli ikona wielokropka) przy SQL analytics endpoint.
 
-2. **Copy the SQL Connection String**:
-   - From the available options, select `Copy SQL connection string`.
-   - This action copies the connection string to your clipboard, ensuring you have the necessary information to establish a SQL connection.
-     ![Copy Connection String](../screenshots/extra/CopyConnectionString.png)
+2. **Skopiuj ciąg połączenia SQL**:
+   - Z dostępnych opcji wybierz `Copy SQL connection string`.
+   - Ciąg połączenia trafi do schowka. Masz już wszystko, czego potrzebujesz do nawiązania połączenia SQL.
+     ![Kopiowanie ciągu połączenia](../screenshots/extra/CopyConnectionString.png)
 
-3. **Utilize the Connection String**:
-   - With the connection string now on your clipboard, you can use it to connect to your Lakehouse SQL analytics endpoint.
-   - Open a database tool of your choice, such as SQL Server Management Studio (SSMS) or Azure Data Studio.
-   - Start a new connection dialogue, paste the connection string into the appropriate field, and follow the prompts to establish a connection.
+3. **Użyj ciągu połączenia**:
+   - Ciąg połączenia jest w schowku, więc możesz połączyć się z SQL analytics endpoint swojego Lakehouse.
+   - Otwórz wybrane narzędzie bazodanowe, na przykład SQL Server Management Studio (SSMS) albo Azure Data Studio.
+   - Otwórz okno nowego połączenia, wklej ciąg połączenia w odpowiednie pole i postępuj zgodnie z instrukcjami na ekranie, żeby nawiązać połączenie.
 
-Ensure that you handle the connection string securely, as it provides access to your data within the Lakehouse. Avoid sharing it openly or storing it in unsecured locations. If you encounter any issues while copying or using the connection string, review the settings and permissions within your Lakehouse workspace or consult the relevant documentation.
+Przechowuj ciąg połączenia bezpiecznie, bo daje on dostęp do twoich danych w Lakehouse. Nie udostępniaj go publicznie i nie zapisuj w niezabezpieczonych miejscach. Jeśli kopiowanie albo użycie ciągu połączenia sprawia problem, sprawdź ustawienia i uprawnienia w workspace swojego Lakehouse albo zajrzyj do dokumentacji.
 
 ---
 
-# Connect to a Fabric SQL Endpoint Using SQL Server Management Studio (SSMS)
+# Połącz się z Fabric SQL Endpoint za pomocą SQL Server Management Studio (SSMS)
 > [!TIP]
-> If you are interested in lineage and connecting through Azure Data Studio, [proceed to this additional exercise](../exercise-extra/extra.md#lineage).
+> Jeśli interesuje cię Lineage i połączenie przez Azure Data Studio, [przejdź do tego dodatkowego ćwiczenia](../exercise-extra/extra.md#lineage).
  
-The goal of this task is to establish a connection to a Fabric SQL Endpoint using SQL Server Management Studio (SSMS), enabling you to query and manage your data directly from SSMS. [Download the latest generally available (GA) version of SQL Server Management Studio (SSMS) 20.0 (485 MB)](https://aka.ms/ssmsfullsetup)
+Cel tego zadania: połączyć się z Fabric SQL Endpoint z poziomu SQL Server Management Studio (SSMS), żeby odpytywać dane i zarządzać nimi bezpośrednio w SSMS. [Pobierz najnowszą ogólnie dostępną (GA) wersję SQL Server Management Studio (SSMS) 20.0 (485 MB)](https://aka.ms/ssmsfullsetup)
 
-1. **Open SQL Server Management Studio**:
-   - Launch SSMS on your computer. The `Connect to Server` window should automatically appear upon opening the application. If you're already in SSMS but not connected, navigate to Object Explorer, click `Connect`, and then select `Database Engine`.
+1. **Otwórz SQL Server Management Studio**:
+   - Uruchom SSMS na swoim komputerze. Po otwarciu aplikacji okno `Connect to Server` powinno pojawić się automatycznie. Jeśli SSMS jest już otwarty, ale bez połączenia, przejdź do Object Explorer, kliknij `Connect` i wybierz `Database Engine`.
 
-2. **Enter Server Details**:
-   - In the `Server name` field of the connection window, paste the SQL connection string you previously copied. This string should correspond to your Fabric SQL Endpoint.
+2. **Wpisz dane serwera**:
+   - W oknie połączenia wklej w pole `Server name` skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać Twojemu Fabric SQL Endpoint.
 
-3. **Authentication**:
-   - For the authentication method, select `Microsoft Entra Password` from the options. This ensures a secure connection utilizing modern authentication methods.
+3. **Uwierzytelnianie**:
+   - Jako metodę uwierzytelniania wybierz `Microsoft Entra Password`. Dzięki temu połączenie jest bezpieczne i korzysta z nowoczesnych metod uwierzytelniania.
 
-    ![password](../screenshots/3/pwd.jpg)
+    ![hasło](../screenshots/3/pwd.jpg)
 
-4. **Enter User Credentials**:
-   - In the authentication window that appears, enter your workshop user email or your enterprise email ID. Follow the prompts to complete the multifactor authentication process.
+4. **Wpisz dane logowania**:
+   - W oknie uwierzytelniania, które się pojawi, wpisz adres e-mail użytkownika warsztatowego albo swój firmowy adres e-mail. Postępuj zgodnie z instrukcjami na ekranie, żeby przejść uwierzytelnianie MFA.
 
-5. **Explore the Lakehouse**:
-   - Once connected, the Object Explorer panel in SSMS will show the connected Lakehouse. You can expand the server node to view the databases (lakehouses) and navigate through tables, views, and other objects available for querying.
+5. **Przejrzyj Lakehouse**:
+   - Po połączeniu panel Object Explorer w SSMS pokaże podłączony Lakehouse. Rozwiń węzeł serwera, żeby zobaczyć bazy danych (Lakehouse). Możesz przeglądać tabele, widoki i inne obiekty dostępne dla zapytań.
 
 > [!IMPORTANT]
-> Remember to handle sensitive information, such as connection strings and credentials, securely. Ensure that you have the correct permissions to access the data and the SQL endpoint. If you encounter any connection issues, verify your connection string and authentication details. Also, check your network settings and firewall rules that may block the connection to the Fabric SQL Endpoint.
+> Pamiętaj, żeby bezpiecznie obchodzić się z wrażliwymi informacjami, takimi jak ciągi połączenia i dane logowania. Upewnij się, że masz odpowiednie uprawnienia do danych i do SQL endpoint. Jeśli połączenie nie działa, sprawdź ciąg połączenia i dane uwierzytelniania. Sprawdź też ustawienia sieci i reguły zapory, które mogą blokować połączenie z Fabric SQL Endpoint.
 
 ---
 
-# Execute T-SQL Queries on Lakehouse Delta Tables
+# Uruchom zapytania T-SQL na tabelach Delta w Lakehouse
 
-Execute a series of T-SQL queries on the Lakehouse Delta tables, particularly focusing on data analysis of the NYC Taxi table from the `silvercleansed` database. These queries will help you understand data aggregation, view creation, and basic SQL operations within your Lakehouse environment.
+Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skupiamy się na analizie tabeli NYC Taxi z bazy danych `silvercleansed`. Na tych zapytaniach poznasz agregację danych, tworzenie widoków i podstawowe operacje SQL w środowisku Lakehouse.
 
-1. **Count Rows in the NYC Taxi Table**:
-   - Execute the following SQL query to get the total number of rows in the `green201501_cleansed` table:
+1. **Policz wiersze w tabeli NYC Taxi**:
+   - Uruchom poniższe zapytanie SQL, żeby poznać łączną liczbę wierszy w tabeli `green201501_cleansed`:
      ```sql
      SELECT COUNT(*)
      FROM [silvercleansed].[dbo].[green201501_cleansed];
      ```
 
-2. **Calculate Average Fare and Tip Amount**:
-   - Run the below query to calculate the average fare and tip amount from the same table:
+2. **Oblicz średnią opłatę i średni napiwek**:
+   - Uruchom poniższe zapytanie, żeby obliczyć średnią opłatę za przejazd i średni napiwek w tej samej tabeli:
      ```sql
      SELECT ROUND(AVG([fare_amount]),2) AS [Average Fare], 
      ROUND(AVG([tip_amount]),2) AS [Average Tip] 
      FROM [silvercleansed].[dbo].[green201501_cleansed];
      ```
 
-3. **Aggregate Fares by Passenger Count**:
-   - Use the following query to get the total and average fares grouped by the passenger count, ordered by average fares in descending order:
+3. **Zagreguj opłaty według liczby pasażerów**:
+   - Użyj poniższego zapytania, żeby otrzymać sumę i średnią opłat w podziale na liczbę pasażerów, posortowane malejąco według średniej opłaty:
      ```sql
      SELECT DISTINCT [passenger_count], 
      ROUND(SUM([fare_amount]),0) as TotalFares,
@@ -153,8 +153,8 @@ Execute a series of T-SQL queries on the Lakehouse Delta tables, particularly fo
      ORDER BY AvgFares DESC;
      ```
 
-4. **Compare Tipped Versus Not Tipped Trips**:
-   - Execute this query to compare the number of trips where a tip was given versus not:
+4. **Porównaj przejazdy z napiwkiem i bez napiwku**:
+   - Uruchom to zapytanie, żeby porównać liczbę przejazdów, w których dano napiwek, z liczbą przejazdów bez napiwku:
      ```sql
      SELECT tipped, COUNT(*) AS tip_freq FROM (
        SELECT CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped, tip_amount
@@ -163,8 +163,8 @@ Execute a series of T-SQL queries on the Lakehouse Delta tables, particularly fo
      GROUP BY tipped;
      ```
 
-5. **Create a View for Average and Total Fares by Passenger Count**:
-   - Run the following SQL command to create a view based on the SQL used in step 3:
+5. **Utwórz widok ze średnią i sumą opłat według liczby pasażerów**:
+   - Uruchom poniższe polecenie SQL, żeby utworzyć widok na podstawie zapytania z kroku 3:
      ```sql
      CREATE VIEW [dbo].[viGetAverageFares]
      AS 
@@ -175,234 +175,234 @@ Execute a series of T-SQL queries on the Lakehouse Delta tables, particularly fo
      GROUP BY [passenger_count];
      ```
 
-6. **Query the Newly Created View**:
-   - Lastly, retrieve data from your newly created view to ensure it's been set up correctly:
+6. **Odpytaj nowo utworzony widok**:
+   - Na koniec pobierz dane z nowego widoku, żeby sprawdzić, czy został poprawnie utworzony:
      ```sql
      SELECT * FROM [silvercleansed].[dbo].[viGetAverageFares];
      ```
 
 > [!IMPORTANT]
-> Make sure you have the proper permissions to execute these queries and create views within the Lakehouse. Pay close attention to the syntax and database structure to ensure accurate results. Document any interesting findings or anomalies encountered during the analysis for further investigation or discussion.
+> Upewnij się, że masz uprawnienia do uruchamiania tych zapytań i tworzenia widoków w Lakehouse. Zwracaj uwagę na składnię i strukturę bazy danych, żeby wyniki były poprawne. Zapisuj ciekawe obserwacje i anomalie zauważone podczas analizy, żeby wrócić do nich później albo omówić je w grupie.
 
 ---
 
-# Sharing a Lakehouse
+# Udostępnianie Lakehouse
 
-Learn how to share a Lakehouse with team members or stakeholders within your workspace, ensuring they have the appropriate level of access.
+Dowiesz się, jak udostępnić Lakehouse członkom zespołu albo interesariuszom w swoim workspace i nadać im odpowiedni poziom dostępu.
 
-1. **Navigate to Your Lakehouse**:
-   - In your Workspace, locate the Lakehouse you wish to share.
-   - Click the **Share** button located next to the lakehouse name.
-     ![Lakehouse Share](../screenshots/extra/SharingLakehouse01.png)
+1. **Przejdź do swojego Lakehouse**:
+   - W swoim workspace znajdź Lakehouse, który chcesz udostępnić.
+   - Kliknij przycisk **Share** obok nazwy Lakehouse.
+     ![Udostępnianie Lakehouse](../screenshots/extra/SharingLakehouse01.png)
 
-2. **Configure Sharing Settings**:
-   - In the Sharing dialog, enter the name or email address of the individuals you wish to share the Lakehouse with.
-   - Assign the appropriate permissions by checking the relevant boxes. By default, sharing the Lakehouse grants access to the lakehouse, the associated SQL endpoint, and the default semantic model.
+2. **Skonfiguruj udostępnianie**:
+   - W oknie udostępniania wpisz nazwę albo adres e-mail osób, którym chcesz udostępnić Lakehouse.
+   - Nadaj odpowiednie uprawnienia, zaznaczając właściwe pola wyboru. Domyślnie udostępnienie Lakehouse daje dostęp do samego Lakehouse, powiązanego SQL endpoint i domyślnego semantic model.
    
-   ![Lakehouse Sharing Dialog](../screenshots/extra/SharingLakehouse02.png)
+   ![Okno udostępniania Lakehouse](../screenshots/extra/SharingLakehouse02.png)
 
-3. **Notification Settings**:
-   - If you want to notify the recipients via email, check the **`Notify recipients by mail`** option.
-   - Include an optional message to provide context or instructions for the recipients.
+3. **Ustawienia powiadomień**:
+   - Jeśli chcesz powiadomić odbiorców e-mailem, zaznacz opcję **`Notify recipients by mail`**.
+   - Możesz dodać wiadomość z kontekstem albo instrukcjami dla odbiorców.
 
-4. **Finalize Sharing**:
-   - Once you've configured the sharing settings and notification preferences, click **Grant** to finalize sharing the Lakehouse.
+4. **Zakończ udostępnianie**:
+   - Gdy skonfigurujesz udostępnianie i powiadomienia, kliknij **Grant**, żeby udostępnić Lakehouse.
 
 > [!IMPORTANT]
-> Ensure that you only share the Lakehouse with individuals who require access and have the appropriate level of permissions according to their needs and roles. Review and adhere to your organization's data sharing and privacy policies when sharing Lakehouse resources. Keep track of who has access to the Lakehouse for future reference and security compliance.
+> Udostępniaj Lakehouse tylko osobom, które potrzebują dostępu, i nadawaj im uprawnienia odpowiednie do potrzeb i roli. Przy udostępnianiu zasobów Lakehouse stosuj zasady swojej organizacji dotyczące udostępniania danych i prywatności. Zapisuj, kto ma dostęp do Lakehouse. Przyda się to później i ułatwi spełnienie wymagań bezpieczeństwa.
 
 ---
 
-# Sharing a Notebook for Collaboration
+# Udostępnianie Notebooka do współpracy
 
-Learn how to share a notebook with team members within your workspace, allowing for collaboration with specified permissions.
+Dowiesz się, jak udostępnić Notebook członkom zespołu w swoim workspace i współpracować z nimi na wybranych uprawnieniach.
 
-1. **Open the Notebook**:
-   - Navigate to the notebook that you wish to share.
-   - Click on the **Share** button located on the notebook toolbar.
-     ![Share Button](../screenshots/extra/SharingNotebook.png)
+1. **Otwórz Notebook**:
+   - Przejdź do Notebooka, który chcesz udostępnić.
+   - Kliknij przycisk **Share** na pasku narzędzi Notebooka.
+     ![Przycisk Share](../screenshots/extra/SharingNotebook.png)
 
-2. **Set Permissions**:
-   - In the sharing settings, select the category of **people who can view this notebook**.
-   - Assign appropriate permissions by selecting from **Share**, **Edit**, or **Run**. This will determine what recipients can do with the notebook.
-     ![Set Permissions](https://github.com/ekote/Build-Your-First-End-to-End-Lakehouse-Solution/assets/63069887/f6674e9e-791e-4f7b-84b6-43b2140e0e6d)
+2. **Ustaw uprawnienia**:
+   - W ustawieniach udostępniania wybierz kategorię **people who can view this notebook**.
+   - Nadaj odpowiednie uprawnienia: **Share**, **Edit** albo **Run**. Od nich zależy, co odbiorcy będą mogli zrobić z Notebookiem.
+     ![Ustawianie uprawnień](https://github.com/ekote/Build-Your-First-End-to-End-Lakehouse-Solution/assets/63069887/f6674e9e-791e-4f7b-84b6-43b2140e0e6d)
 
-3. **Share the Notebook**:
-   - After setting the permissions, click **Apply**.
-   - You can then choose to send the notebook directly to your team members or copy the link and distribute it manually. Recipients will be able to access the notebook according to the permissions you have set.
-     ![Share Options](https://github.com/ekote/Build-Your-First-End-to-End-Lakehouse-Solution/assets/63069887/0a097d72-0a5e-4617-8920-6fd0439d8cad)
+3. **Udostępnij Notebook**:
+   - Po ustawieniu uprawnień kliknij **Apply**.
+   - Następnie możesz wysłać Notebook bezpośrednio do członków zespołu albo skopiować link i rozesłać go samodzielnie. Odbiorcy otworzą Notebook zgodnie z ustawionymi uprawnieniami.
+     ![Opcje udostępniania](https://github.com/ekote/Build-Your-First-End-to-End-Lakehouse-Solution/assets/63069887/0a097d72-0a5e-4617-8920-6fd0439d8cad)
 
-4. **Manage Notebook Permissions**:
-   - For additional permission settings or to update access, navigate to the Workspace item list.
-   - Click **More options** next to your notebook and select **Manage permissions**. Here, you can modify who has access and what level of access they hold.
-     ![Manage Permissions](https://github.com/ekote/Build-Your-First-End-to-End-Lakehouse-Solution/assets/63069887/b37e8de8-36d8-4a4b-accb-4b67c901f26a)
+4. **Zarządzaj uprawnieniami do Notebooka**:
+   - Żeby ustawić dodatkowe uprawnienia albo zmienić dostęp, przejdź do listy elementów w workspace.
+   - Kliknij **More options** obok swojego Notebooka i wybierz **Manage permissions**. Tutaj zmienisz, kto ma dostęp i na jakim poziomie.
+     ![Zarządzanie uprawnieniami](https://github.com/ekote/Build-Your-First-End-to-End-Lakehouse-Solution/assets/63069887/b37e8de8-36d8-4a4b-accb-4b67c901f26a)
 
 
 > [!NOTE]
-> Be mindful of the data and information contained in the notebook when sharing, ensuring that only the appropriate parties receive access. Review your organization’s policies on data sharing and collaboration to comply with security and privacy standards. Document any issues or challenges encountered during the sharing process for future reference or to seek assistance.
+> Przy udostępnianiu pamiętaj, jakie dane i informacje zawiera Notebook. Dostęp powinny dostać tylko właściwe osoby. Sprawdź zasady swojej organizacji dotyczące udostępniania danych i współpracy, żeby spełnić standardy bezpieczeństwa i prywatności. Zapisuj problemy napotkane podczas udostępniania. Przydadzą się później albo wtedy, gdy poprosisz o pomoc.
 
 ---
 
-# High concurrency mode in Fabric Spark
+# High concurrency mode w Fabric Spark
 
-High concurrency mode allows users to share the same Spark sessions in Fabric Spark for data engineering and data science workloads. An item like a notebook uses a standard Spark session for its execution. In high concurrency mode, the Spark session can support independent execution of multiple items within individual read-eval-print loop (REPL) cores that exist within the Spark application. These REPL cores provide isolation for each item, and prevent local notebook variables from being overwritten by variables with the same name from other notebooks sharing the same session.
+High concurrency mode pozwala użytkownikom współdzielić tę samą Spark session w Fabric Spark przy zadaniach Data Engineering i Data Science. Element taki jak Notebook wykonuje się w standardowej Spark session. W High concurrency mode jedna Spark session obsługuje niezależne wykonywanie wielu elementów. Każdy element działa w osobnym rdzeniu read-eval-print loop (REPL) wewnątrz aplikacji Spark. Rdzenie REPL izolują elementy od siebie. Dzięki temu lokalnych zmiennych Notebooka nie nadpiszą zmienne o tej samej nazwie z innych Notebooków, które współdzielą sesję.
 
 > [!TIP]
-> In the case of custom pools with high concurrency mode, users get 36X faster session start experience compared to a standard Spark session.
+> W custom pools z High concurrency mode sesja startuje 36 razy szybciej niż standardowa Spark session.
 
-To enable HC for your notebook follow the steps:
+Żeby włączyć HC w swoim Notebooku, wykonaj te kroki:
 
-1. Navigate to the Run tab in the menu ribbon and select on the session type dropdown that has Standard selected as the default option. Select New high concurrency session.
+1. Przejdź do karty Run na wstążce menu i rozwiń listę typu sesji, na której domyślnie wybrana jest opcja Standard. Wybierz New high concurrency session.
 
 
 ![HC](../screenshots/extra/new/hc1.jpg)
 
-2. Once the high concurrency session has started, you could now add up to 5 notebooks in the high concurrency session.
+2. Gdy high concurrency session wystartuje, możesz dodać do niej maksymalnie 5 Notebooków.
 
 ![HC](../screenshots/extra/new/hc2.jpg)
 
 
-3. You can start executing the notebook steps instantly.
+3. Kroki Notebooka możesz uruchamiać od razu.
 
-To learn more about high concurenncy session [read more here.](https://learn.microsoft.com/en-us/fabric/data-engineering/configure-high-concurrency-session-notebooks)
+Więcej o high concurrency session [przeczytasz tutaj.](https://learn.microsoft.com/en-us/fabric/data-engineering/configure-high-concurrency-session-notebooks)
 
 
 ---
 
 # Lineage
 
-Understand the relationships and flow of data within your Fabric workspace using the lineage view. Every workspace automatically has a lineage view.
+Poznaj zależności i przepływ danych w swoim workspace Fabric w widoku Lineage. Każdy workspace automatycznie ma widok Lineage.
 
-1. **Access Lineage View**:
-   - Navigate to the workspace toolbar within your Fabric environment.
-   - Open the lineage view to visualize how different items within your workspace are interconnected.
-     ![Lineage View](../screenshots/extra/new/linage1.jpg)
+1. **Otwórz widok Lineage**:
+   - Przejdź do paska narzędzi workspace w swoim środowisku Fabric.
+   - Otwórz widok Lineage, żeby zobaczyć, jak elementy w twoim workspace są ze sobą połączone.
+     ![Widok Lineage](../screenshots/extra/new/linage1.jpg)
 
-2. **Explore Workspace Items and Connections**:
-   - In the lineage view, examine the connections between all the items located in your workspace.
-   - Identify and understand upstream connections that are one level up and external to the workspace. These are marked by the external workspace's name on the item card. 
+2. **Przejrzyj elementy workspace i połączenia**:
+   - W widoku Lineage przejrzyj połączenia między wszystkimi elementami w swoim workspace.
+   - Znajdź połączenia upstream, które są o jeden poziom wyżej i leżą poza workspace. Rozpoznasz je po nazwie zewnętrznego workspace na karcie elementu. 
 
-3. **Highlight Specific Item Lineage**:
-   - To highlight the lineage for a specific item, select the arrow at the bottom right corner of the card.
+3. **Wyróżnij Lineage wybranego elementu**:
+   - Żeby wyróżnić Lineage konkretnego elementu, kliknij strzałkę w prawym dolnym rogu karty.
    
-     ![Specific Item Lineage](../screenshots/extra/new/linage2.jpg)
+     ![Lineage wybranego elementu](../screenshots/extra/new/linage2.jpg)
 
-4. **Understand External Tool Integration**:
-   - Recognize the role of external tools like Azure Visual Studio Code or SQL Server Management Studio (SSMS) in managing and developing databases across different platforms.
+4. **Poznaj integrację z narzędziami zewnętrznymi**:
+   - Zwróć uwagę na rolę narzędzi zewnętrznych, takich jak Azure Visual Studio Code albo SQL Server Management Studio (SSMS), w zarządzaniu bazami danych i w ich rozwijaniu na różnych platformach.
    
-     ![Connecting with Azure Visual Studio Code](../screenshots/extra/new/linage3.jpg)
+     ![Połączenie z Azure Visual Studio Code](../screenshots/extra/new/linage3.jpg)
 
-# Specify the File Format and Compression Type for Sink Datasets in Data Factory
+# Wybierz format pliku i typ kompresji docelowych zbiorów danych w Data Factory
 
-Based on Wikipedia, Snappy (formerly known as Zippy) is a fast data compression and decompression library developed by Google. It prioritizes high speed over maximum compression, offering significant speed benefits: 250 MB/s compression and 500 MB/s decompression using a single core of a circa 2011 2.26 GHz Core i7 processor. However, it provides 20–100% lower compression ratio compared to gzip. For more details, you can refer to the [Snappy article on Wikipedia](https://en.wikipedia.org/wiki/Snappy_(compression)).
+Według Wikipedii Snappy (wcześniej Zippy) to szybka biblioteka do kompresji i dekompresji danych opracowana przez Google. Stawia na szybkość zamiast na maksymalną kompresję. Różnica w szybkości jest duża: 250 MB/s przy kompresji i 500 MB/s przy dekompresji na jednym rdzeniu procesora Core i7 2,26 GHz z okolic 2011 roku. Współczynnik kompresji jest jednak o 20–100% niższy niż w gzip. Więcej szczegółów znajdziesz w [artykule o Snappy w Wikipedii](https://en.wikipedia.org/wiki/Snappy_(compression)).
 
-Given this information, you might question the decision to use gzip instead of Snappy and how you can modify this setting. Here's how to proceed:
+Po tych informacjach możesz się zastanawiać, skąd decyzja o użyciu gzip zamiast Snappy i jak zmienić to ustawienie. Zrób to tak:
 
-1. Navigate to the workspace view and open the first pipeline you have created, which loads raw data into a bronze Lakehouse.
-2. In the pipeline, go to the 'Source' tab and then click 'Settings'.
-3. The next step is to review all the compression types supported for the Parquet format. Deciding on the correct compression type can be challenging; therefore, let's compare the two main types: Snappy and gzip.
+1. Przejdź do widoku workspace i otwórz pierwszy utworzony przez ciebie Pipeline, który ładuje dane surowe do Lakehouse bronze.
+2. W Pipeline przejdź do karty 'Source', a potem kliknij 'Settings'.
+3. Następnie przejrzyj wszystkie typy kompresji obsługiwane dla formatu Parquet. Wybór właściwego typu kompresji bywa trudny, dlatego porównajmy dwa główne: Snappy i gzip.
 
-   - **Snappy**: As noted from Wikipedia, it is designed for high speed rather than maximum compression.
-   - **Gzip**: This compression tool does not specifically consider the data structure within the file, but often results in better overall compression for Parquet files.
+   - **Snappy**: jak podaje Wikipedia, stawia na szybkość, a nie na maksymalną kompresję.
+   - **Gzip**: to narzędzie nie uwzględnia struktury danych w pliku, ale często daje lepszą ogólną kompresję plików Parquet.
 
-Your choice should be guided by what you intend to do with the data being loaded into the bronze layer and how it will be used subsequently, for example, whether it will be moved to the silver or gold layers and how frequently it will be accessed.
+O wyborze powinno decydować to, co planujesz zrobić z danymi ładowanymi do warstwy bronze i jak będą używane później. Na przykład: czy trafią do warstwy silver albo gold i jak często ktoś będzie po nie sięgał.
 
-You can change your compression type in the settings menu of the source tab:
+Typ kompresji zmienisz w menu ustawień na karcie Source:
 
-![Compression Settings](../screenshots/extra/new/1.jpg)
+![Ustawienia kompresji](../screenshots/extra/new/1.jpg)
 
-Based on benchmarks, gzip is more suited for long-term static storage, making it the preferred choice for data in the Gold layer. For data that is accessed more frequently (hot data), Snappy or LZO might be better options:
+Według benchmarków gzip lepiej nadaje się do długoterminowego przechowywania danych statycznych, dlatego jest preferowany dla danych w warstwie gold. Dla danych używanych częściej (hot data) lepszy może być Snappy albo LZO:
 
-![Compression Comparison](https://i.stack.imgur.com/Cq3Jx.png)
+![Porównanie kompresji](https://i.stack.imgur.com/Cq3Jx.png)
 
-Choosing the right compression type depends on your specific needs: data access patterns, storage costs, and performance requirements.
+Wybór typu kompresji zależy od twoich potrzeb: wzorców dostępu do danych, kosztów przechowywania i wymagań wydajnościowych.
 
 
 ---
 
-# Monitor the Pipeline Run and Verify the Output
+# Monitoruj uruchomienie Pipeline i sprawdź wynik
 
-The Microsoft Fabric Monitoring hub allows users to monitor activities from a centralized location. Note that the hub only displays activities for items you have permission to view.
+Monitoring hub w Microsoft Fabric pozwala monitorować aktywności z jednego miejsca. Pamiętaj, że hub pokazuje tylko aktywności elementów, do których masz uprawnienia.
 
-In this exercise, we will check the monitoring application for our pipeline and notebooks.
+W tym ćwiczeniu sprawdzimy w Monitoring hub nasz Pipeline i nasze Notebooki.
 
-1. To open the Monitoring hub, select "Monitoring" from the navigation pane. The hub displays information in a table format, listing Fabric activities by start time, with the latest activities at the top.
+1. Żeby otworzyć Monitoring hub, wybierz "Monitoring" w okienku nawigacji. Hub pokazuje informacje w tabeli. Aktywności Fabric są ułożone według czasu rozpoczęcia, najnowsze na górze.
 
-2. Use the "Filter" button to refine the results in the monitoring hub table as shown in the screenshot. This makes navigation easier.
+2. Przyciskiem "Filter" zawęź wyniki w tabeli Monitoring hub, tak jak na zrzucie ekranu. Ułatwi to nawigację.
    ![Monitoring](../screenshots/extra/new/3.jpg)
 
-3. Based on the filtered results, open the specific pipeline as demonstrated in the following image:
+3. Z przefiltrowanych wyników otwórz konkretny Pipeline, tak jak na poniższym obrazie:
    ![Monitoring](../screenshots/extra/new/4.jpg)
 
-4. Inside the monitoring hub, switch to the "Gantt Tab" to observe the notebook execution times. A successful execution is indicated by the prevalent green color.
+4. W Monitoring hub przełącz się na "Gantt Tab", żeby zobaczyć czasy wykonania Notebooków. O udanym wykonaniu świadczy przewaga koloru zielonego.
    ![Monitoring](../screenshots/extra/new/5.jpg)
 
-5. Click on the name of the notebook you are monitoring.
+5. Kliknij nazwę Notebooka, który monitorujesz.
    ![Monitoring](../screenshots/extra/new/6.jpg)
 
-6. In the notebook's detailed view, focus on two important sections: the Spark monitoring URL and the monitoring snapshot. Click on "Monitoring Snapshot".
+6. W widoku szczegółów Notebooka zwróć uwagę na dwie ważne sekcje: Spark monitoring URL i monitoring snapshot. Kliknij "Monitoring Snapshot".
    ![Monitoring](../screenshots/extra/new/7.jpg)
 
-7. Inside the monitoring snapshot, scroll through to view the executed values within the notebook, ensuring full transparency of the operations carried out.
+7. W monitoring snapshot przewiń zawartość, żeby zobaczyć wartości wykonane w Notebooku. Dzięki temu widzisz dokładnie, jakie operacje zostały wykonane.
    ![Monitoring](../screenshots/extra/new/8.jpg)
 
-8. Note the parameters section, showing how the notebook was parameterized, for instance with the table name "green202301".
+8. Zwróć uwagę na sekcję parametrów. Pokazuje ona, jak Notebook został sparametryzowany, na przykład nazwą tabeli "green202301".
 
-9. Observe the execution details such as the duration, default lake house setting, and queue duration to understand the efficiency and performance of your job.
+9. Przejrzyj szczegóły wykonania, takie jak czas trwania, ustawienie domyślnego Lakehouse i czas oczekiwania w kolejce, żeby ocenić sprawność i wydajność swojego joba.
 
-10. Return to the "Resources" tab to review metrics such as total duration, total idle time, and efficiency. A low efficiency percentage, like 15%, suggests there is significant room for improvement in the pipeline, code, and compute settings.
+10. Wróć do karty "Resources" i przejrzyj metryki, takie jak łączny czas trwania, łączny czas bezczynności i efektywność. Niska efektywność, na przykład 15%, oznacza, że Pipeline, kod i ustawienia mocy obliczeniowej można jeszcze sporo poprawić.
     ![Monitoring](../screenshots/extra/new/9.jpg)
 
-Consider sharing any optimization strategies with the workshop hosts and your colleagues to enhance the overall efficiency of your pipeline.
+Podziel się pomysłami na optymalizację z prowadzącymi warsztat i z innymi uczestnikami, żeby poprawić ogólną wydajność swojego Pipeline.
 
 ---
 
 # Medallion architecture
-A Medallion architecture is a data design pattern used to organize data in a Lakehouse, with the goal of progressively improving the quality and structure of the data as it flows through each layer of the architecture, starting from the Bronze layer, then to the Silver layer, and finally to the Gold layer.
+Medallion architecture to wzorzec projektowania danych, który porządkuje dane w Lakehouse. Jego cel: stopniowo poprawiać jakość i strukturę danych, gdy przepływają przez kolejne warstwy, od warstwy bronze, przez warstwę silver, do warstwy gold.
 
 ![image-alt-text](https://learn.microsoft.com/en-us/fabric/onelake/media/onelake-medallion-lakehouse-architecture/onelake-medallion-lakehouse-architecture-example.png)
 
-This incremental and progressive improvement enables you to maintain data quality and structure while also improving data processing performance. Medallion architectures are sometimes referred to as "multi-hop" architectures because data flows through multiple layers.
+Takie stopniowe ulepszanie pozwala utrzymać jakość i strukturę danych, a przy tym poprawia wydajność przetwarzania. Medallion architecture bywa nazywana architekturą „multi-hop”, bo dane przepływają przez wiele warstw.
 
-One of the main benefits of a Lakehouse architecture is that it provides a simple data model that is easy to understand and implement. Additionally, it enables incremental ETL (extract, transform, load) operations, which means you can add new data to the Lakehouse in a scalable and manageable way.
+Jedna z głównych zalet architektury Lakehouse to prosty model danych, łatwy do zrozumienia i wdrożenia. Umożliwia też przyrostowe operacje ETL (extract, transform, load), więc nowe dane dodajesz do Lakehouse w sposób skalowalny i łatwy w zarządzaniu.
 
-Another benefit of a Lakehouse architecture is that it allows you to recreate your tables from raw data at any time. This is possible because Delta Lake provides ACID transactions and time travel capabilities, allowing you to track changes to your data and easily roll back to previous versions if necessary.
+Kolejna zaleta architektury Lakehouse: w każdej chwili możesz odtworzyć tabele z danych surowych. To możliwe, bo Delta Lake zapewnia transakcje ACID i funkcję time travel. Dzięki nim śledzisz zmiany w danych i w razie potrzeby łatwo wracasz do poprzednich wersji.
 
-## Review the Medallion Architecture in Fabric Lakehouse
+## Przejrzyj Medallion architecture w Fabric Lakehouse
 
-After performing data cleaning and transformation on your Lakehouse data, you can save the resulting data back to another Lakehouse to reflect the "bronze->silver->gold" pattern.
+Po oczyszczeniu i transformacji danych w Lakehouse możesz zapisać wynik do innego Lakehouse, zgodnie ze wzorcem „bronze->silver->gold”.
 
-Here's an example code snippet that shows how you can write data to another Lakehouse:
+Oto przykładowy fragment kodu, który zapisuje dane do innego Lakehouse:
 
 ```python
-# read data from the bronze Lakehouse
+# odczytaj dane z Lakehouse bronze
 bronze_df = spark.read.table("bronze_lakehouse_name.lakehouse_table")
 
-# perform data cleaning and transformation
+# oczyść i przekształć dane
 # ...
 
-# write the transformed data to the silver Lakehouse
+# zapisz przekształcone dane do Lakehouse silver
 transformed_df.write.format("delta").mode("overwrite").saveAsTable("silver_lakehouse_name.lakehouse_table")
 
 ```
-In this example, we first read data from the bronze Lakehouse using the spark.read method. We then perform data cleaning and transformation on the bronze_df DataFrame. Finally, we write the transformed data to the silver Lakehouse using the transformed_df.write method, specifying the path to the silver Lakehouse and setting the save mode to "overwrite" to replace any existing data.
+W tym przykładzie najpierw odczytujemy dane z Lakehouse bronze metodą spark.read. Potem oczyszczamy i przekształcamy dane w DataFrame bronze_df. Na koniec zapisujemy przekształcone dane do Lakehouse silver metodą transformed_df.write. Podajemy ścieżkę do Lakehouse silver i ustawiamy tryb zapisu "overwrite", żeby zastąpić istniejące dane.
 
-Our real case, one more time:
+Nasz rzeczywisty przypadek, jeszcze raz:
 
 ```python
 table_name  = "green201501"
 
-data_collection = table_name[:-6]  # Extracts all characters except the last six (assumes these are non-digits)
-extracted_year = table_name[-6:-2]  # Extracts the four digits representing the year
-extracted_month = table_name[-2:]  # Extracts the last two digits representing the month
+data_collection = table_name[:-6]  # Wyodrębnia wszystkie znaki oprócz ostatnich sześciu (zakłada, że nie są to cyfry)
+extracted_year = table_name[-6:-2]  # Wyodrębnia cztery cyfry oznaczające rok
+extracted_month = table_name[-2:]  # Wyodrębnia dwie ostatnie cyfry oznaczające miesiąc
 
 from pyspark.sql.functions import col, year, month, dayofmonth, avg
 
 # !!!!
-# READING RAW DATA FROM DEFAULT (RAW) LAKEHOUSE
+# ODCZYT DANYCH SUROWYCH Z DOMYŚLNEGO (RAW) LAKEHOUSE
 df = spark.read.table(table_name)
 
-# Calculate average fare amount per month
+# Oblicz średnią opłatę za przejazd w każdym miesiącu
 average_fare_per_month = (
     df
     .groupBy(year("lpep_pickup_datetime").alias("year"), month("lpep_pickup_datetime").alias("month"))
@@ -413,7 +413,7 @@ display(average_fare_per_month)
 
 result_table_name = f"{table_name}_avg_fare_per_month"
 
-# Save the results to a new delta table - SILVERCLEANSED LAKEHOUSE - SILVER LAYER
+# Zapisz wyniki do nowej tabeli Delta - LAKEHOUSE SILVERCLEANSED - WARSTWA SILVER
 average_fare_per_month.write.format("delta").mode("overwrite").saveAsTable(f"silvercleansed.{result_table_name}")
 ```
 
@@ -421,154 +421,154 @@ average_fare_per_month.write.format("delta").mode("overwrite").saveAsTable(f"sil
 
 ## Medallion Architecture Data Design and Lakehouse Patterns | Microsoft Fabric Data Factory
 
-Watch Fabric Espresso episode as Abhishek discuss and demo the Medallion Architecture Data Design and Lakehouse Patterns in Microsoft Fabric Data Factory.  
+Obejrzyj odcinek Fabric Espresso, w którym Abhishek omawia i pokazuje Medallion Architecture Data Design and Lakehouse Patterns w Microsoft Fabric Data Factory.  
 [![FabricEspresso](https://img.youtube.com/vi/706MVIBivOU/0.jpg)](https://www.youtube.com/watch?v=706MVIBivOU)
 
 
 ---
 
 
-# Schedule Your Notebook for Multiple Daily Runs
+# Zaplanuj uruchamianie Notebooka kilka razy dziennie
 
-In this exercise, you'll learn how to schedule a notebook to run multiple times a day using the scheduling feature, a simpler alternative to using pipelines for single notebooks.
+W tym ćwiczeniu nauczysz się planować uruchamianie Notebooka kilka razy dziennie za pomocą funkcji harmonogramu. Dla pojedynczego Notebooka to prostsza alternatywa niż Pipeline.
 
-1. **Access the Notebook**:
-   - Open the notebook from the second exercise. 
-   - Click on the scheduling icon presented in the screenshot to access the scheduling options.
-     ![Scheduling Icon](../screenshots/extra/new/10.jpg)
+1. **Otwórz Notebook**:
+   - Otwórz Notebook z drugiego ćwiczenia. 
+   - Kliknij ikonę harmonogramu pokazaną na zrzucie ekranu, żeby otworzyć opcje planowania.
+     ![Ikona harmonogramu](../screenshots/extra/new/10.jpg)
 
-2. **Configure the Schedule**:
-   - Switch to the "Schedule" tab and click on the `Add Schedule` button
-   ![Schedule Tab](../screenshots/extra/new/11.jpg)
+2. **Skonfiguruj harmonogram**:
+   - Przełącz się na kartę "Schedule" i kliknij przycisk `Add Schedule`
+   ![Karta Schedule](../screenshots/extra/new/11.jpg)
      
-3. **Define the Schedule Details**:
-   - Set the notebook to repeat daily.
-   - Schedule the execution times for your notebook, for example, at 7:00 AM and 10:00 AM. Ensure that these times align with your workflow and data processing needs.
-   - Specify the start and end dates for the scheduled runs, defining how long the notebook should follow this schedule.
-   - Select the appropriate time zone for your schedule, ensuring accuracy in execution times.
-   ![Schedule Tab](../screenshots/extra/new/12.jpg)
+3. **Określ szczegóły harmonogramu**:
+   - Ustaw codzienne powtarzanie Notebooka.
+   - Ustaw godziny uruchomienia Notebooka, na przykład 7:00 AM i 10:00 AM. Dopasuj je do swojego trybu pracy i potrzeb przetwarzania danych.
+   - Podaj datę początkową i końcową zaplanowanych uruchomień, czyli jak długo Notebook ma działać według tego harmonogramu.
+   - Wybierz właściwą strefę czasową, żeby godziny uruchomień były poprawne.
+   ![Karta Schedule](../screenshots/extra/new/12.jpg)
 
-4. **Apply and Confirm Changes**:
-   - After configuring the settings, apply the changes to activate the schedule.
-   - Verify that the schedule has been set correctly and aligns with your requirements.
+4. **Zastosuj i potwierdź zmiany**:
+   - Po skonfigurowaniu ustawień zastosuj zmiany, żeby aktywować harmonogram.
+   - Sprawdź, czy harmonogram jest ustawiony poprawnie i spełnia twoje wymagania.
 
-5. **Monitoring and Historical Analysis**:
-   - Once the schedule is active, monitor the executions through the Monitoring hub. This will allow you to observe the runs and ensure they are occurring as planned.
-   - Use historical analysis within the Monitoring hub to assess the performance and output of your scheduled notebook runs over time.
+5. **Monitorowanie i analiza historyczna**:
+   - Gdy harmonogram jest aktywny, monitoruj uruchomienia w Monitoring hub. Zobaczysz, czy przebiegają zgodnie z planem.
+   - Użyj analizy historycznej w Monitoring hub, żeby ocenić wydajność i wyniki zaplanowanych uruchomień Notebooka w czasie.
 
-Ensure that the scheduling aligns with your data processing goals and operational hours. Scheduling notebooks to run during off-peak hours can help optimize resource usage and reduce costs. Document any challenges or insights gained during this exercise to share with your team or for future reference.
-
-
+Dopasuj harmonogram do celów przetwarzania danych i do godzin pracy. Uruchamianie Notebooków poza godzinami szczytu pomaga lepiej wykorzystać zasoby i obniżyć koszty. Zapisuj problemy i wnioski z tego ćwiczenia, żeby podzielić się nimi z zespołem albo wrócić do nich później.
 
 
-## Create a New Spark Pool with Workspace Settings
 
-In this exercise, you'll be addressing the lack of dynamic job execution capability by creating a new Spark pool within the workspace settings. 
 
-1. **Navigate to Workspace Settings**:
-   - Go to the workspace view in your Microsoft Fabric environment.
-   - Click on the `Workspace settings` button.
+## Utwórz nowy Spark pool w ustawieniach workspace
+
+W tym ćwiczeniu rozwiążesz problem braku dynamicznego wykonywania jobów: utworzysz nowy Spark pool w ustawieniach workspace. 
+
+1. **Przejdź do Workspace settings**:
+   - Przejdź do widoku workspace w swoim środowisku Microsoft Fabric.
+   - Kliknij przycisk `Workspace settings`.
      ![Workspace Settings](../screenshots/extra/new/13.jpg)
 
-2. **Access Data Engineering/Science Settings**:
-   - Click on "Data Engineering/Science" and then select "Spark Settings".
-   - Click on the "Default Pool for Workspace" and expand the selection to view more options.
+2. **Otwórz ustawienia Data Engineering/Science**:
+   - Kliknij "Data Engineering/Science", a potem wybierz "Spark Settings".
+   - Kliknij "Default Pool for Workspace" i rozwiń listę, żeby zobaczyć więcej opcji.
      ![Spark Settings](../screenshots/extra/new/14.jpg)
 
-3. **Create a New Spark Pool**:
-   - Click on the "New Pool" button to start configuring a new Spark pool.
+3. **Utwórz nowy Spark pool**:
+   - Kliknij przycisk "New Pool", żeby zacząć konfigurację nowego Spark pool.
      ![New Pool](../screenshots/extra/new/15.jpg)
 
-4. **Configure the New Spark Pool**:
-   - Assign a meaningful name to your new Spark pool.
-   - Select the node size for your pool. Although GPU machines might be available, for now, select "Memory Optimized" and choose, for example, a "Small" node size.
-   - Enable auto-scaling to allow the pool to adjust based on workload automatically.
-   - Enable "Dynamic Allocation for Executors" to optimize resource utilization during job execution.
-   - Always remember to save your changes after configuring the settings.
-     ![Pool Configuration](../screenshots/extra/new/16.jpg)
+4. **Skonfiguruj nowy Spark pool**:
+   - Nadaj nowemu Spark pool czytelną nazwę.
+   - Wybierz rozmiar węzła dla swojego Spark pool. Maszyny z GPU mogą być dostępne, ale na razie wybierz "Memory Optimized" i na przykład rozmiar węzła "Small".
+   - Włącz autoskalowanie, żeby Spark pool automatycznie dopasowywał się do obciążenia.
+   - Włącz "Dynamic Allocation for Executors", żeby lepiej wykorzystać zasoby podczas wykonywania jobów.
+   - Zawsze pamiętaj, żeby po konfiguracji zapisać zmiany.
+     ![Konfiguracja Spark pool](../screenshots/extra/new/16.jpg)
 
-5. **Finalize and Save Changes**:
-   - After configuring the new Spark pool, Microsoft Fabric will redirect you back to the Spark settings screen.
-   - A message will appear at the top part of the screen indicating that there are unsaved changes. Ensure to review and save these changes.
-     ![Unsaved Changes](../screenshots/extra/new/17.jpg)
+5. **Dokończ i zapisz zmiany**:
+   - Po skonfigurowaniu nowego Spark pool Microsoft Fabric przeniesie cię z powrotem na ekran ustawień Spark.
+   - W górnej części ekranu pojawi się komunikat o niezapisanych zmianach. Przejrzyj te zmiany i zapisz je.
+     ![Niezapisane zmiany](../screenshots/extra/new/17.jpg)
 
 
 > [!IMPORTANT]  
-> If you change the default pool from Starter Pool to a Custom Spark pool you may see longer session start (~3 minutes).
+> Jeśli zmienisz domyślny pool ze Starter Pool na Custom Spark pool, sesja może startować dłużej (ok. 3 minut).
 
-6. **Verification**:
-   - Verify that the new Spark pool is listed in your workspace settings.
-   - Ensure that dynamic job execution is enabled for this new pool.
-
-
-Creating and configuring a new Spark pool with dynamic allocation and auto-scaling features can significantly improve the efficiency and performance of data processing tasks. Pay attention to the job execution times and resource utilization before and after implementing the new pool to measure the improvements.
+6. **Weryfikacja**:
+   - Sprawdź, czy nowy Spark pool jest widoczny w ustawieniach twojego workspace.
+   - Upewnij się, że dla tego nowego Spark pool włączone jest dynamiczne wykonywanie jobów.
 
 
-# Verify V-Order
+Nowy Spark pool z dynamiczną alokacją i autoskalowaniem może znacznie poprawić sprawność i wydajność przetwarzania danych. Porównaj czasy wykonania jobów i wykorzystanie zasobów przed wdrożeniem nowego Spark pool i po nim, żeby zmierzyć poprawę.
 
-V-Order is a write-time optimization for Parquet files that enhances read performance under Microsoft Fabric compute engines like Power BI, SQL, and Spark. It applies sorting, compression, and other optimizations, providing cost efficiency and improved performance.
 
-In this exercise, you will verify whether a table has been saved with or without V-Order optimization. 
+# Sprawdź V-Order
 
-1. **Prepare the Environment**:
-   - Create a new notebook in your workspace.
-   - Load a large table into a DataFrame for testing the effects of V-Order.
+V-Order to optymalizacja plików Parquet stosowana w czasie zapisu. Przyspiesza odczyt w silnikach obliczeniowych Microsoft Fabric, takich jak Power BI, SQL i Spark. Stosuje sortowanie, kompresję i inne optymalizacje, co obniża koszty i poprawia wydajność.
 
-2. **Experiment Setup**:
-   - In the first cell of the notebook, disable V-Order optimization and save the DataFrame as a new table.
-   - In a separate cell, enable V-Order optimization and save the DataFrame as another table.
-   - Execute both cells to create two versions of the table: one with V-Order enabled and one without.
-     ![Notebook Setup](../screenshots/extra/new/18.jpg)
+W tym ćwiczeniu sprawdzisz, czy tabela została zapisana z optymalizacją V-Order, czy bez niej. 
 
-3. **Verify File Properties**:
-   - Navigate to the Lakehouse, then to Lakehouse Explorer.
-   - Locate your tables, click on the three dots next to the table names, and select "View Files".
-   - Enter the `_delta_log` folder and open the JSON files associated with both tables.
+1. **Przygotuj środowisko**:
+   - Utwórz nowy Notebook w swoim workspace.
+   - Załaduj dużą tabelę do DataFrame, żeby przetestować działanie V-Order.
+
+2. **Przygotuj eksperyment**:
+   - W pierwszej komórce Notebooka wyłącz optymalizację V-Order i zapisz DataFrame jako nową tabelę.
+   - W osobnej komórce włącz optymalizację V-Order i zapisz DataFrame jako kolejną tabelę.
+   - Uruchom obie komórki, żeby utworzyć dwie wersje tabeli: jedną z włączonym V-Order i jedną bez V-Order.
+     ![Przygotowanie Notebooka](../screenshots/extra/new/18.jpg)
+
+3. **Sprawdź właściwości plików**:
+   - Przejdź do Lakehouse, a potem do Lakehouse Explorer.
+   - Znajdź swoje tabele, kliknij trzy kropki obok nazwy tabeli i wybierz "View Files".
+   - Wejdź do folderu `_delta_log` i otwórz pliki JSON obu tabel.
      ![Lakehouse Explorer](../screenshots/extra/new/19.jpg)
 
-4. **Compare File Contents**:
-   - Reformat the JSON files for easier comparison.
-   - Check for the presence of V-Order optimization indicators, typically found in the tags section of the JSON log.
-   - Pay attention to the number of output rows and the size of output bytes between the tables saved with and without V-Order.
-     ![File Comparison](../screenshots/extra/new/20.jpg)
+4. **Porównaj zawartość plików**:
+   - Sformatuj pliki JSON, żeby łatwiej je porównać.
+   - Poszukaj oznaczeń optymalizacji V-Order. Zwykle są w sekcji tags w logu JSON.
+   - Porównaj liczbę wierszy wyjściowych i rozmiar danych wyjściowych w bajtach między tabelą zapisaną z V-Order i tabelą zapisaną bez V-Order.
+     ![Porównanie plików](../screenshots/extra/new/20.jpg)
 
 
-Review the [Microsoft documentation on Delta optimization and V-Order](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order?tabs=sparksql) for a deeper understanding and context.  By understanding the impact and functioning of V-Order, you can make informed decisions about its use in your data storage and processing strategies. Remember, the goal is not just to see if V-Order is applied, but also to understand its benefits and implications.
+Przeczytaj [dokumentację Microsoft o optymalizacji Delta i V-Order](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order?tabs=sparksql), żeby lepiej zrozumieć temat i jego kontekst.  Gdy wiesz, jak działa V-Order i na co wpływa, świadomie zdecydujesz, czy używać go w swojej strategii przechowywania i przetwarzania danych. Pamiętaj: celem jest nie tylko sprawdzić, czy V-Order jest zastosowany, ale też zrozumieć jego korzyści i konsekwencje.
 
 # Merge
 
-Delta Lake MERGE command allows users to update a delta table with advanced conditions. It can update data from a source table, view or DataFrame into a target table by using MERGE command. However, the current algorithm isn't fully optimized for handling unmodified rows. The Microsoft Spark Delta team implemented a custom Low Shuffle Merge optimization, unmodified rows are excluded from an expensive shuffling operation that is needed for updating matched rows.
+Polecenie MERGE w Delta Lake pozwala aktualizować tabelę Delta z użyciem zaawansowanych warunków. Poleceniem MERGE zaktualizujesz tabelę docelową danymi z tabeli źródłowej, widoku albo DataFrame. Obecny algorytm nie jest jednak w pełni zoptymalizowany pod kątem wierszy niezmodyfikowanych. Zespół Microsoft Spark Delta wdrożył własną optymalizację Low Shuffle Merge. Wyklucza ona niezmodyfikowane wiersze z kosztownej operacji shuffle, która jest potrzebna do aktualizacji dopasowanych wierszy.
 
-The implementation is controlled by the [spark.microsoft.delta.merge.lowShuffle.enabled](https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/low-shuffle-merge-for-apache-spark) configuration, enabled by default in the runtime. It requires no code changes and is fully compatible with the open-source distribution of Delta Lake. To learn more about Low Shuffle Merge usage scenarios, read the article Low Shuffle Merge optimization on Delta tables.
+Optymalizacją steruje konfiguracja [spark.microsoft.delta.merge.lowShuffle.enabled](https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/low-shuffle-merge-for-apache-spark), domyślnie włączona w runtime. Nie wymaga zmian w kodzie i jest w pełni zgodna z dystrybucją open source Delta Lake. Więcej o scenariuszach użycia Low Shuffle Merge przeczytasz w artykule Low Shuffle Merge optimization on Delta tables.
 
-## Managing NYC Green Taxi Data with Merge Operations
+## Zarządzanie danymi NYC Green Taxi za pomocą operacji Merge
 
-Enhance your understanding of data handling within Fabric Spark by loading, updating, and inserting NYC Green Taxi data. Utilize the Merge statement to manage financial records across different timeframes.
+Przećwicz obsługę danych w Fabric Spark: załaduj, zaktualizuj i wstaw dane NYC Green Taxi. Użyj instrukcji Merge, żeby zarządzać rekordami finansowymi z różnych okresów.
 
-1. **Data Collection**:
-   - Download NYC Green Taxi data for multiple months and years from the original source: [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
-   - Select specific time periods to focus on, such as different months or years.
+1. **Zbierz dane**:
+   - Pobierz dane NYC Green Taxi z kilku miesięcy i lat z oryginalnego źródła: [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+   - Wybierz konkretne okresy, na których się skupisz, na przykład różne miesiące albo lata.
 
-2. **Data Loading to Bronze Layer**:
-   - Choose your preferred method to load the downloaded taxi data into the 'bronze' layer in Fabric Spark.
-   - Create and configure the necessary tables to store the taxi data, ensuring they include financial metrics like income per taxi.
+2. **Załaduj dane do warstwy bronze**:
+   - Wybierz dowolną metodę i załaduj pobrane dane taxi do warstwy „bronze” w Fabric Spark.
+   - Utwórz i skonfiguruj tabele potrzebne do przechowywania danych taxi. Zadbaj, żeby zawierały metryki finansowe, takie jak przychód na taksówkę.
 
-3. **Scenario Preparation**: 
-   - Develop two scenarios:
-     a. **Historical Update**: Prepare a dataset from one of the months with altered financial figures to simulate the need for historical data correction.
-     b. **Conditional Insertion**: Identify conditions for new data (e.g., trips from a new month, changes in fare amounts) that should trigger insertions into a separate table.
+3. **Przygotuj scenariusze**: 
+   - Opracuj dwa scenariusze:
+     a. **Aktualizacja historyczna**: przygotuj zbiór danych z jednego z miesięcy ze zmienionymi kwotami, żeby zasymulować potrzebę korekty danych historycznych.
+     b. **Wstawianie warunkowe**: określ warunki dla nowych danych (np. przejazdy z nowego miesiąca, zmiany opłat), które mają powodować wstawienie rekordów do osobnej tabeli.
 
-4. **Merge Statement Construction**:
-   - For the Historical Update scenario, write a Merge statement that updates existing records in the bronze&silver layer with the corrected data based on unique identifiers.
-   - For the Conditional Insertion scenario, construct a Merge statement that inserts new records into a different table when specific conditions are met, such as new trip entries or updated fares.
+4. **Zbuduj instrukcje Merge**:
+   - W scenariuszu „Aktualizacja historyczna” napisz instrukcję Merge, która aktualizuje istniejące rekordy w warstwie bronze&silver poprawionymi danymi na podstawie unikalnych identyfikatorów.
+   - W scenariuszu „Wstawianie warunkowe” zbuduj instrukcję Merge, która wstawia nowe rekordy do innej tabeli, gdy spełnione są określone warunki, na przykład pojawiły się nowe przejazdy albo zmieniły się opłaty.
 
-5. **Execution and Validation**:
-   - Execute both Merge statements in your Fabric Spark notebooks.
-   - Validate the outcomes by verifying that the bronze and silver layer accurately reflects historical corrections and that the separate table correctly includes new or updated records.
+5. **Uruchom i zweryfikuj**:
+   - Uruchom obie instrukcje Merge w swoich Notebookach Fabric Spark.
+   - Sprawdź wyniki: czy warstwy bronze i silver poprawnie odzwierciedlają korekty historyczne i czy osobna tabela zawiera nowe albo zaktualizowane rekordy.
 
 
 [//]: # ()
-[//]: # (## Use Environment to tailor your runtime)
+[//]: # (## Dostosuj runtime za pomocą Environment)
 
 [//]: # (![Monitoring]&#40;./../media/extra/18.jpg&#41;)
 
@@ -588,27 +588,27 @@ Enhance your understanding of data handling within Fabric Spark by loading, upda
 [//]: # ()
 [//]: # (## DW vs Lakehouse?)
 
-[//]: # (![DW or Lakehouse]&#40;https://microsoft.github.io/fabricnotes/images/notes/04-lakehouse-vs-warehouse.png&#41;)
+[//]: # (![DW czy Lakehouse]&#40;https://microsoft.github.io/fabricnotes/images/notes/04-lakehouse-vs-warehouse.png&#41;)
 
 [//]: # ()
-[//]: # (![Two endpoints]&#40;https://microsoft.github.io/fabricnotes/images/notes/12-sql-endpoints.png&#41;)
+[//]: # (![Dwa endpointy]&#40;https://microsoft.github.io/fabricnotes/images/notes/12-sql-endpoints.png&#41;)
 
 [//]: # ()
 [//]: # (## SaaS vs PaaS)
 
-[//]: # (* ![Fabric Basic]&#40;https://microsoft.github.io/fabricnotes/images/notes/03-fabric-saas-product.png&#41;)
+[//]: # (* ![Podstawy Fabric]&#40;https://microsoft.github.io/fabricnotes/images/notes/03-fabric-saas-product.png&#41;)
 
 [//]: # ()
-[//]: # (## Fabric Licensing)
+[//]: # (## Licencjonowanie Fabric)
 
-[//]: # (* ![Fabric Licensing]&#40;https://microsoft.github.io/fabricnotes/images/notes/13-fabric-licensing.png&#41;)
+[//]: # (* ![Licencjonowanie Fabric]&#40;https://microsoft.github.io/fabricnotes/images/notes/13-fabric-licensing.png&#41;)
 
 [//]: # ()
-[//]: # (## Fabric UI)
+[//]: # (## Interfejs Fabric)
 
-[//]: # (* ![Fabric Basic]&#40;https://microsoft.github.io/fabricnotes/images/notes/02-understand-fabric-ui.png&#41;)
+[//]: # (* ![Podstawy Fabric]&#40;https://microsoft.github.io/fabricnotes/images/notes/02-understand-fabric-ui.png&#41;)
 
 [//]: # ()
 [//]: # (## Fabric Capacities)
 
-[//]: # (* ![Fabric Basic]&#40;https://microsoft.github.io/fabricnotes/images/notes/08-fabric-lingo-part-1.png&#41;)
+[//]: # (* ![Podstawy Fabric]&#40;https://microsoft.github.io/fabricnotes/images/notes/08-fabric-lingo-part-1.png&#41;)

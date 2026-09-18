@@ -1,49 +1,49 @@
-# Exercise 5 - Latest Fabric Features
+# Ćwiczenie 5 - Najnowsze funkcje Fabric
 
 > [!NOTE]
-> Timebox: 40 minutes
+> Czas: 40 minut
 > 
-> [Back to Agenda](./../README.md#agenda) | [Back to Exercise 4](./../exercise-4/exercise-4.md) | [Up next extra exercises](../exercise-extra/extra.md)
-> #### List of exercises:
-> *  [Stay Updated and Bookmark Essentials](#stay-updated-and-bookmark-essentials)
-> *  [Fabric Runtimes and Python User-defined Table Functions (UDTFs)](#fabric-runtimes-and-python-user-defined-table-functions-udtfs)
+> [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 4](./../exercise-4/exercise-4.md) | [Dalej: ćwiczenia dodatkowe](../exercise-extra/extra.md)
+> #### Lista ćwiczeń:
+> *  [Bądź na bieżąco i dodaj do zakładek najważniejsze strony](#bądź-na-bieżąco-i-dodaj-do-zakładek-najważniejsze-strony)
+> *  [Runtime w Fabric i Python User-defined Table Functions (UDTFs)](#runtime-w-fabric-i-python-user-defined-table-functions-udtfs)
 > *  [Managed Private Endpoints](#managed-private-endpoints)
 > *  [Autotune Query Tuning](#autotune-query-tuning)
-> *  [Spark vs Pandas](#spark-vs-pandas)
-> *  [Data Wrangler is my friend](#data-wrangler-is-my-friend)
+> *  [Spark czy Pandas](#spark-czy-pandas)
+> *  [Zaprzyjaźnij się z Data Wrangler](#zaprzyjaźnij-się-z-data-wrangler)
 > *  [VSCode (WEB)](#vscode-web)
 
 
-# Stay Updated and Bookmark Essentials
-Dive into the latest and greatest from Fabric
-* **Monthly Digests**: Don't miss out! Head over to the [Fabric Monthly Updates](https://blog.fabric.microsoft.com/en-us/blog/category/monthly-update) and catch up on the past three months' worth of updates. Discover the latest features and improvements rolled out each week, compiled neatly for your convenience. Bookmark this page to keep your knowledge fresh and up-to-date.
-* **Latest Announcements**: Stay in the loop with the most recent news on [Fabric's Blog](https://blog.fabric.microsoft.com/en-US/blog). Here, major updates, like the management of private endpoint capabilities, are discussed in detail. It's a treasure trove of insights and announcements you won't want to miss.
-* **Pin the Visualizations**: Show some love for the internal Microsoft team's creative endeavor at [Fabric Notes](https://microsoft.github.io/fabricnotes/). They've brilliantly visualized common concepts in Fabric, earning well-deserved kudos. Pin this website for a blend of inspiration and innovation.
-* **Voice Your Ideas**: At Fabric, your voice matters. If there's something you'd like to see improved or introduced, express your ideas on [Fabric Ideas](https://ideas.fabric.microsoft.com/). Tailor your suggestions to specific workloads for clarity. We're all ears and ready to adapt our semester plans to meet your needs. This shift from reactive to proactive engagement empowers you to influence Fabric's future direction. An outstanding instance of this is the introduction of experimental runtimes following your feedback. So, why wait? Share your thoughts and be a part of shaping Fabric's evolution.
+# Bądź na bieżąco i dodaj do zakładek najważniejsze strony
+Poznaj najnowsze funkcje Fabric.
+* **Comiesięczne podsumowania**: Nie przegap nowości. Wejdź na [Fabric Monthly Updates](https://blog.fabric.microsoft.com/en-us/blog/category/monthly-update) i nadrób aktualizacje z ostatnich trzech miesięcy. Znajdziesz tam nowe funkcje i usprawnienia wdrażane co tydzień, zebrane w jednym miejscu. Dodaj tę stronę do zakładek, żeby twoja wiedza była zawsze aktualna.
+* **Najnowsze ogłoszenia**: Śledź najświeższe wiadomości na [Fabric's Blog](https://blog.fabric.microsoft.com/en-US/blog). Znajdziesz tam szczegółowe omówienia dużych zmian, takich jak funkcje Managed Private Endpoints. To bogate źródło wiedzy i ogłoszeń, którego nie warto pomijać.
+* **Przypnij wizualizacje**: Doceń twórczą pracę wewnętrznego zespołu Microsoft na stronie [Fabric Notes](https://microsoft.github.io/fabricnotes/). Zespół świetnie zwizualizował często używane pojęcia Fabric i w pełni zasłużył na uznanie. Przypnij tę stronę, żeby mieć pod ręką źródło inspiracji i nowych pomysłów.
+* **Zgłaszaj swoje pomysły**: W Fabric twój głos się liczy. Jeśli chcesz, żebyśmy coś poprawili albo dodali, opisz swój pomysł na [Fabric Ideas](https://ideas.fabric.microsoft.com/). Przypisz propozycję do konkretnego obciążenia, żeby była jasna. Słuchamy uważnie i jesteśmy gotowi dopasować plany półroczne do twoich potrzeb. Dzięki temu przestajesz tylko reagować na zmiany i zaczynasz wpływać na kierunek rozwoju Fabric. Dobrym przykładem są eksperymentalne wersje runtime, które wprowadziliśmy po opiniach użytkowników. Na co więc czekać? Podziel się swoimi uwagami i współtwórz rozwój Fabric.
 
 > [!IMPORTANT]
-> This is also a great opportunity to remind you to always use the latest GA runtime version. Experiment with the Preview version, but for production-level workloads, use the GA version. Additionally, we will soon publish the lifecycle for runtimes. We aim to introduce a new release every six months, and a natural consequence for Spark is that we will have to run deprecation cycles for outdated, unsupported runtimes. Migrate your production workloads before the deprecation date because once the runtime is deprecated, there will be no way to create new pools, and your jobs will be disabled within 90 days following the deprecation.
+> To także dobra okazja, żeby przypomnieć: zawsze używaj najnowszej wersji runtime ze statusem GA. Eksperymentuj z wersją Preview, ale w obciążeniach produkcyjnych używaj wersji GA. Wkrótce opublikujemy też cykl życia wersji runtime. Chcemy wydawać nową wersję co sześć miesięcy. Naturalną konsekwencją dla Spark jest to, że będziemy musieli wycofywać przestarzałe, nieobsługiwane wersje runtime. Przenieś obciążenia produkcyjne przed datą wycofania. Po wycofaniu wersji runtime nie utworzysz już nowych Spark pool, a twoje Spark job zostaną wyłączone w ciągu 90 dni od wycofania.
 
 ---
 
-# Fabric Runtimes and Python User-defined Table Functions (UDTFs)
+# Runtime w Fabric i Python User-defined Table Functions (UDTFs)
 
-## Understanding Apache Spark Runtimes in Fabric
-Fabric Runtime, an Azure-integrated platform, is built on Apache Spark, facilitating large-scale data engineering and data science tasks. It amalgamates significant components from both proprietary and open-source domains to deliver an extensive data processing environment. Here, we refer to it as Fabric Runtime for simplicity.
+## Jak działają wersje runtime Apache Spark w Fabric
+Fabric Runtime to platforma zintegrowana z Azure i zbudowana na Apache Spark. Umożliwia pracę z zakresu data engineering i data science na dużą skalę. Łączy najważniejsze komponenty własnościowe i open source, dzięki czemu daje rozbudowane środowisko przetwarzania danych. Dla uproszczenia nazywamy ją tutaj Fabric Runtime.
 
-Essential Components of Fabric Runtime:
+Najważniejsze komponenty Fabric Runtime:
 
-- **Apache Spark**: A robust distributed computing system providing a comprehensive platform for large-scale data processing.
-- **Delta Lake**: Adds ACID transactions and reliability features to Apache Spark within Fabric Runtime, enhancing data integrity.
-- **Programming Language Packages**: Supports Java/Scala, Python, and R out-of-the-box for versatile development experiences.
-- Based on a **solid open-source foundation**, ensuring broad compatibility and performance.
+- **Apache Spark**: wydajny system obliczeń rozproszonych, pełna platforma do przetwarzania danych na dużą skalę.
+- **Delta Lake**: dodaje do Apache Spark w Fabric Runtime transakcje ACID i mechanizmy niezawodności, co poprawia integralność danych.
+- **Pakiety języków programowania**: Java/Scala, Python i R są obsługiwane od razu, bez dodatkowej konfiguracji, więc możesz pracować w wybranym języku.
+- Całość opiera się na **solidnych fundamentach open source**, co zapewnia szeroką zgodność i wydajność.
 
-Refer to the following table for a detailed comparison of Apache Spark versions and supported configurations across different runtime versions:
+W tabeli poniżej znajdziesz szczegółowe porównanie wersji Apache Spark i obsługiwanych konfiguracji w poszczególnych wersjach runtime:
 
-| Feature              | Runtime 1.1 | Runtime 1.2 | Runtime 1.3 |
+| Składnik             | Runtime 1.1 | Runtime 1.2 | Runtime 1.3 |
 |----------------------|-----------------------------|--------------------------------|-------------------------------|
 | **Apache Spark**     | 3.3.1                       | 3.4.1                          | 3.5.0                         |
-| **Operating System** | Ubuntu 18.04                | Mariner 2.0                    | Mariner 2.0                   |
+| **System operacyjny** | Ubuntu 18.04                | Mariner 2.0                    | Mariner 2.0                   |
 | **Java**             | 8                           | 11                             | 11                            |
 | **Scala**            | 2.12.15                     | 2.12.17                        | 2.12.17                       |
 | **Python**           | 3.10                        | 3.10                           | 3.10                          |
@@ -51,213 +51,213 @@ Refer to the following table for a detailed comparison of Apache Spark versions 
 | **R**                | 4.2.2                       | 4.2.2                          | 	4.4.1                     |
 
 > [!TIP] 
-> Explore the latest runtime version [Runtime 1.3 Details](https://learn.microsoft.com/en-us/fabric/data-engineering/runtime-1-3).
+> Poznaj najnowszą wersję runtime: [szczegóły Runtime 1.3](https://learn.microsoft.com/en-us/fabric/data-engineering/runtime-1-3).
 
-The objective of this task is to dive into the newest runtime version, specifically to explore and utilize Python User-defined Table Functions (UDTFs) introduced in Spark 3.5. UDTFs are powerful for transforming data, particularly for expanding one row into multiple rows. Learn more about Python UDTFs [here](https://spark.apache.org/docs/latest/api/python/user_guide/sql/python_udtf.html).
+Celem tego zadania jest poznanie najnowszej wersji runtime, a konkretnie użycie Python User-defined Table Functions (UDTFs), które pojawiły się w Spark 3.5. UDTFs świetnie sprawdzają się w transformacji danych, zwłaszcza gdy jeden wiersz trzeba rozwinąć w wiele wierszy. Więcej o Python UDTFs przeczytasz [tutaj](https://spark.apache.org/docs/latest/api/python/user_guide/sql/python_udtf.html).
 
-## 1. Integrating Runtime 1.3
+## 1. Ustaw Runtime 1.3
 
-Confirm you are using Runtime version 1.3 to utilize new features:
+Upewnij się, że używasz Runtime w wersji 1.3, żeby korzystać z nowych funkcji:
 
-1. Navigate to the 'Workspace settings' within your Fabric workspace.
-2. Access the 'Data Engineering/Science' tab and select 'Spark Settings'.
-3. In the 'Environment' section, choose 'Runtime Versions', select '1.3 (Spark 3.5, Delta 3.2)', and confirm your changes. This sets Runtime 1.3 as your default.
+1. Przejdź do 'Workspace settings' w swoim workspace w Fabric.
+2. Otwórz kartę 'Data Engineering/Science' i wybierz 'Spark Settings'.
+3. W sekcji 'Environment' wybierz 'Runtime Versions', zaznacz '1.3 (Spark 3.5, Delta 3.2)' i zatwierdź zmiany. W ten sposób ustawisz Runtime 1.3 jako domyślny.
 
-![Steps](../screenshots/5/new/1.jpg)
+![Kroki](../screenshots/5/new/1.jpg)
 
-## 2. Initiating a New Notebook
-Create and configure a new notebook:
+## 2. Utwórz nowy Notebook
+Utwórz i skonfiguruj nowy Notebook:
 
-1. Start a new notebook session in your workspace.
-2. Verify the Spark version by executing `sc.version` in your notebook to confirm Spark 3.5 is active.
+1. Rozpocznij nową sesję Notebooka w swoim workspace.
+2. Sprawdź wersję Spark: uruchom `sc.version` w Notebooku i potwierdź, że działa Spark 3.5.
 
-## 3. Exploring UDTFs with Fabric
-Explore the unique capabilities of UDTFs for comprehensive data transformations:
-1. Consider the real-world scenario of taxi fares, where the final cost encompasses various elements beyond the base fare, such as taxes, tips, and additional charges.
-2. Utilize UDTFs to calculate and apply these additional costs in one operation, enhancing data analysis and insight extraction from your datasets.
-3. Apply the provided example code to a specific table from either your bronze or silver lakehouse data, focusing on the 'fare_amount' column.
-4. Perform the transformations and observe the outcome on a subset of the data, applying a 5% discount as an example.
+## 3. Poznaj UDTFs w Fabric
+Sprawdź, co UDTFs potrafią w złożonych transformacjach danych:
+1. Weź pod uwagę rzeczywisty scenariusz opłat za taksówkę. Na końcowy koszt składają się, poza opłatą podstawową, także podatki, napiwki i dodatkowe opłaty.
+2. Użyj UDTFs, żeby obliczyć i doliczyć te koszty w jednej operacji. Ułatwi to analizę danych i wyciąganie wniosków z twoich zbiorów danych.
+3. Zastosuj podany przykładowy kod do wybranej tabeli z danych w Lakehouse bronze albo silver. Skup się na kolumnie 'fare_amount'.
+4. Wykonaj transformacje i sprawdź wynik na podzbiorze danych. Jako przykład zastosuj rabat 5%.
 
-![Step](../screenshots/5/new/2.jpg)
+![Krok](../screenshots/5/new/2.jpg)
 
 <details>
 
-<summary>Click <ins>here</ins> to expand the details and check the answer.</summary>
+<summary>Kliknij <ins>tutaj</ins>, żeby rozwinąć szczegóły i sprawdzić odpowiedź.</summary>
 
 ```python
 from pyspark.sql.functions import udtf
 from pyspark.sql.types import Row
 
-# Python User-defined Table Functions (UDTF) for calculating all the micro and hidden costs of driving taxi (per each fare)
+# Python User-defined Table Functions (UDTF) do obliczania wszystkich drobnych i ukrytych kosztów jazdy taksówką (dla każdego kursu)
 @udtf(returnType="fare_amount: float, tip:float, sales_tax:float, climate_tax: float, final_total: float")
 class TaxiFareUDTF:
     def eval(self, row: Row, discount_percentage: float):
         return_row = Row(
-            # Calculate the tip based on the net amount, 20% is the tip required, welcome to WA state!
+            # Oblicz napiwek od kwoty netto, wymagany napiwek to 20%, witamy w stanie WA
             tip=row["fare_amount"] * 0.20,
-            # Calculate taxes
-            sales_tax=row["fare_amount"] * 0.08, # 8% sales tax
-            climate_tax=row["fare_amount"] * 0.03, # 3% climate tax
-            # Calculate the final total amount
+            # Oblicz podatki
+            sales_tax=row["fare_amount"] * 0.08, # 8% podatku od sprzedaży
+            climate_tax=row["fare_amount"] * 0.03, # 3% podatku klimatycznego
+            # Oblicz końcową kwotę łączną
             final_total=row["fare_amount"] + (row["fare_amount"] * 0.20) + (row["fare_amount"] * 0.08) + (row["fare_amount"] * 0.03) - (discount_percentage/100 * row["fare_amount"])
             )
         yield row["fare_amount"], return_row["tip"], return_row["sales_tax"], return_row["climate_tax"], return_row["final_total"]
 
 
-# Python UDTFs can also be registered and used in SQL queries.        
+# Python UDTFs można też zarejestrować i używać ich w zapytaniach SQL.
 spark.udtf.register("calculate_individual_costs", TaxiFareUDTF)
 
-# Python UDTFs can also take a TABLE as input argument, and it can be used in conjunction with scalar input arguments. By default, you are allowed to have only one TABLE argument as input, primarily for performance reasons. If you need to have more than one TABLE input argument, you can enable this by setting the spark.sql.tvf.allowMultipleTableArguments.enabled configuration to true.
+# Python UDTFs mogą też przyjmować TABLE jako argument wejściowy, także razem ze skalarnymi argumentami wejściowymi. Domyślnie dozwolony jest tylko jeden argument wejściowy TABLE, głównie ze względu na wydajność. Jeśli potrzebujesz więcej niż jednego argumentu wejściowego TABLE, ustaw konfigurację spark.sql.tvf.allowMultipleTableArguments.enabled na true.
 spark.sql("SELECT * FROM calculate_individual_costs(TABLE(SELECT fare_amount FROM bronzerawdata.<figure out the table name :) > LIMIT 20), 5)").show()
 ```
 
 </details>
 
-Each new Runtime version introduces an expanded API, new methods, and transformations, enhancing the efficiency and capabilities of data processing. Moreover, the latest GA runtime versions typically outperform their predecessors due to continuous improvements by both the open-source community and the Microsoft product groups.
+Każda nowa wersja Runtime rozszerza API i dodaje nowe metody oraz transformacje, dzięki czemu przetwarzanie danych jest wydajniejsze i daje więcej możliwości. Najnowsze wersje runtime ze statusem GA są też zwykle szybsze od poprzednich, bo stale ulepszają je społeczność open source i zespoły produktowe Microsoft.
 
-Now, apply this knowledge to calculate comprehensive costs beyond the example. 
+Teraz wykorzystaj tę wiedzę i oblicz pełne koszty w szerszym zakresie niż w przykładzie. 
 
 ---
 
 # Managed Private Endpoints
 
-Managed virtual networks are virtual networks that are created and managed by Microsoft Fabric for each Fabric workspace. Managed virtual networks provide network isolation for Fabric Spark workloads, meaning that the compute clusters are deployed in a dedicated network and are no longer part of the shared virtual network. Managed virtual networks also enable network security features such as managed private endpoints, and private link support for Data Engineering and Data Science items in Microsoft Fabric that use Apache Spark.
+Managed virtual networks to sieci wirtualne, które Microsoft Fabric tworzy i którymi zarządza osobno dla każdego workspace w Fabric. Zapewniają izolację sieciową obciążeń Fabric Spark: klastry obliczeniowe są wdrażane w dedykowanej sieci i nie należą już do współdzielonej sieci wirtualnej. Managed virtual networks umożliwiają też korzystanie z funkcji bezpieczeństwa sieci, takich jak Managed Private Endpoints i Private Link, dla elementów Data Engineering i Data Science w Microsoft Fabric, które używają Apache Spark.
 
 > [!IMPORTANT]
-> Managed private endpoints (and Workspace identities) are only available for workspaces assigned to Fabric capacities with SKU's F64 or larger. 
+> Managed Private Endpoints (oraz Workspace identity) są dostępne tylko dla workspace przypisanych do Fabric capacity z SKU F64 lub większym. 
 
 ![MPE-OVERVIEW](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-vnets-fabric-overview/managed-vnets-overview.gif)
 
-Managed private endpoints are added to a workspace. Workspace admins can create and delete managed private endpoint connections from the workspace settings of a Fabric Workspace.
+Managed Private Endpoints dodaje się do workspace. Administratorzy workspace mogą tworzyć i usuwać połączenia Managed Private Endpoints w ustawieniach workspace w Fabric.
 
 ![demo-mpe](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-vnets-fabric-overview/creating-private-endpoint-animation.gif)
 
-Managed private endpoints are connections that workspace admins can create to access data sources that are behind a firewall or that are blocked from accessing from the public internet. Managed private endpoints allow Fabric Spark workloads to securely access data sources without exposing them to the public network or requiring complex network configurations. The private endpoints provide a secure way to connect and access the data from these data sources using items such as notebooks and Spark job definitions.
+Managed Private Endpoints to połączenia, które administratorzy workspace tworzą, żeby uzyskać dostęp do źródeł danych ukrytych za zaporą albo niedostępnych z publicznego internetu. Dzięki nim obciążenia Fabric Spark bezpiecznie korzystają ze źródeł danych bez wystawiania ich do sieci publicznej i bez skomplikowanej konfiguracji sieci. Private endpoints pozwalają bezpiecznie połączyć się z tymi źródłami danych i odczytać z nich dane za pomocą takich elementów jak Notebook i Spark Job Definition.
 
-Microsoft Fabric creates and manages managed private endpoints based on the inputs from the workspace admin. Workspace admins can set up managed private endpoints from the workspace settings by specifying the resource ID of the data source, identifying the target subresource, and providing a justification for the private endpoint request. Managed private endpoints support various data sources, such as Azure Storage, Azure SQL Database and many more.
+Microsoft Fabric tworzy Managed Private Endpoints i zarządza nimi na podstawie danych podanych przez administratora workspace. Administrator konfiguruje je w ustawieniach workspace: podaje identyfikator zasobu źródła danych, wskazuje docelowy zasób podrzędny i uzasadnia żądanie private endpoint. Managed Private Endpoints obsługują różne źródła danych, m.in. Azure Storage i Azure SQL Database.
 
-Follow the GIF which presents e2e demo on how to create manage private endpoint.
+Obejrzyj GIF, który pokazuje pełne demo tworzenia Managed Private Endpoint, i wykonaj te same kroki.
 
 ![mpe](../screenshots/5/managed_private_endpoint_velocity.gif)
 
 
 > [!NOTE]
-> The MPE must be approved on the target resource. 
+> MPE trzeba zatwierdzić po stronie zasobu docelowego. 
 
-Taking SQL server as an example, users can navigate to the Azure portal and search for the "SQL Server" resource.
+Weźmy jako przykład SQL Server. Użytkownik przechodzi do Azure portal i wyszukuje zasób "SQL Server".
 
-1. On the Resource page, select **Networking** from the navigation menu and then select the **Private Access** tab.
+1. Na stronie zasobu wybierz **Networking** w menu nawigacji, a następnie kartę **Private Access**.
 
-   ![Screenshot showing the Private access tab on the Networking page of a resource in the Azure portal](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/networking-private-access-tab.png)
+   ![Zrzut ekranu z kartą Private access na stronie Networking zasobu w Azure portal](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/networking-private-access-tab.png)
 
-1. Data source administrators should be able to view the active private endpoint connections and new connection requests.
+1. Administratorzy źródła danych powinni widzieć aktywne połączenia private endpoint i nowe żądania połączenia.
 
-    ![Screenshot showing pending requests on the Private access tab](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/new-connection-requests.png)
+    ![Zrzut ekranu z oczekującymi żądaniami na karcie Private access](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/new-connection-requests.png)
 
-1. Admins can either *Approve* or *Reject* by providing a business justification.
+1. Administratorzy mogą wybrać *Approve* albo *Reject* i podać uzasadnienie biznesowe.
 
-    ![Screenshot showing the approval form.](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/approve-reject-request.png)
+    ![Zrzut ekranu z formularzem zatwierdzania.](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/approve-reject-request.png)
 
-1. Once the request has been approved or rejected by the data source admin, the status is updated in the Fabric workspace settings page upon refresh.
+1. Gdy administrator źródła danych zatwierdzi albo odrzuci żądanie, status zaktualizuje się na stronie ustawień workspace w Fabric po jej odświeżeniu.
 
-    ![Screenshot showing the managed private endpoint in the approved state.](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/endpoint-request-approved-state.png)
+    ![Zrzut ekranu z Managed Private Endpoint w stanie approved.](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-private-endpoints-create/endpoint-request-approved-state.png)
 
-1. When the status has changed to *approved*, the endpoint can be used in notebooks or Spark job definitions to access the data stored in the data source from Fabric workspace.
+1. Gdy status zmieni się na *approved*, możesz używać tego private endpoint w Notebooku albo Spark Job Definition, żeby z workspace w Fabric sięgać do danych zapisanych w źródle danych.
 
-Click [here](https://learn.microsoft.com/en-us/fabric/security/security-managed-private-endpoints-create#supported-data-sources) to review the list of supported data sources.
+Kliknij [tutaj](https://learn.microsoft.com/en-us/fabric/security/security-managed-private-endpoints-create#supported-data-sources), żeby zobaczyć listę obsługiwanych źródeł danych.
 
 
 ---
 
 # Autotune Query Tuning
-When discussing Spark runtimes, we inevitably address the crucial topic of performance, which concerns us all. In response to this, we have developed 'Autotune', a feature designed to optimize Spark settings for your jobs, enhancing efficiency and effectiveness.
+Gdy mówimy o wersjach runtime Spark, zawsze dochodzimy do wydajności, czyli tematu ważnego dla nas wszystkich. Dlatego opracowaliśmy Autotune. Ta funkcja optymalizuje ustawienia Spark dla twoich Spark job, żeby działały wydajniej i skuteczniej.
 
-Autotune can be activated through the Spark configuration setting within the environment. To enable autotune, either create a new environment or, for the existing environment, set the Spark property 'spark.ms.autotune.enabled = true'.
+Autotune włączysz w konfiguracji Spark w Environment. Utwórz nowe Environment albo w istniejącym Environment ustaw właściwość Spark 'spark.ms.autotune.enabled = true'.
 
-* [Watch the exclusive demo](https://1drv.ms/v/s!ApCaji7rcQaQ3rNv8g7pBnLdrwQBfQ?e=R7GiEq)
+* [Obejrzyj ekskluzywne demo](https://1drv.ms/v/s!ApCaji7rcQaQ3rNv8g7pBnLdrwQBfQ?e=R7GiEq)
 
-* For more information on Autotune, please review the documentation available at [Autotune in Fabric Data Engineering](https://learn.microsoft.com/en-us/fabric/data-engineering/autotune?tabs=sparksql).
+* Więcej informacji o Autotune znajdziesz w dokumentacji: [Autotune w Fabric Data Engineering](https://learn.microsoft.com/en-us/fabric/data-engineering/autotune?tabs=sparksql).
 
 > [!TIP]
-> Autotune query tuning examines individual queries and builds a distinct ML model for each query. It specifically targets:
-> - Repetitive queries
-> - Long-running queries (those with more than 15 seconds of execution)
-> - Spark SQL queries (excluding those written in the RDD API, which are very rare)
+> Autotune query tuning analizuje pojedyncze zapytania i dla każdego z nich buduje osobny model ML. Skupia się na:
+> - zapytaniach powtarzalnych
+> - zapytaniach długotrwałych (wykonywanych dłużej niż 15 sekund)
+> - zapytaniach Spark SQL (z wyjątkiem pisanych w RDD API, które są bardzo rzadkie)
 >
-> This feature is compatible with notebooks, Spark Job Definitions, and pipelines.
+> Ta funkcja działa z Notebook, Spark Job Definition i Pipeline.
 
 ---
 
-# Spark vs Pandas
-Your mission, in that task, involves guiding new team members through the labyrinth of big data processing, particularly in leveraging Apache Spark over Pandas for substantial datasets. This advice is pivotal not only within the Fabric ecosystem but universally in the big data domain.
+# Spark czy Pandas
+W tym zadaniu twoją misją jest przeprowadzić nowych członków zespołu przez labirynt przetwarzania big data. Pokaż im przede wszystkim, kiedy przy dużych zbiorach danych wybrać Apache Spark zamiast Pandas. Ta rada jest kluczowa w ekosystemie Fabric i w całym świecie big data.
 
-## Understanding Pandas
-Pandas shines due to its simplicity and intuitive design, making it a favorite among data engineers, scientists, and analysts. However, its primary limitation lies in its inability to natively harness parallel architectures and computations. Pandas operates within the confines of single-node, in-memory computations, restricting its scalability and efficiency in processing vast datasets typical in big data scenarios.
+## Jak działa Pandas
+Pandas wyróżnia się prostotą i intuicyjną konstrukcją, dlatego lubią go inżynierzy danych, badacze danych i analitycy. Ma jednak jedno główne ograniczenie: nie potrafi natywnie korzystać z architektur i obliczeń równoległych. Pandas wykonuje obliczenia w pamięci jednego węzła. To ogranicza skalowalność i wydajność przy ogromnych zbiorach danych, typowych dla big data.
 
-## Transition to Spark and its core concepts
-Apache Spark transcends these limitations by adopting a distributed computing approach. Key distinctions include:
-- **Spark DataFrames**: These are distributed across clusters, enabling parallel data processing far beyond the capacities of a single machine.
-- **Lazy Evaluation**: Spark employs lazy evaluation for DataFrames, constructing a Directed Acyclic Graph (DAG) of transformations that are optimized and executed only when an action is required, enhancing overall execution efficiency.
-- **Advanced Optimizations**: Features like Adaptive Query Execution (AQE) and Dynamic Partition Pruning (DPP) automatically optimize query plans and data partitioning, respectively, something far beyond the reach of Pandas.
+## Przejście na Spark i jego podstawowe pojęcia
+Apache Spark pokonuje te ograniczenia dzięki obliczeniom rozproszonym. Najważniejsze różnice:
+- **Spark DataFrames**: są rozproszone w klastrze, więc dane przetwarzasz równolegle, daleko poza możliwościami jednej maszyny.
+- **Lazy Evaluation**: Spark stosuje lazy evaluation dla DataFrame. Buduje Directed Acyclic Graph (DAG) transformacji, optymalizuje go i wykonuje dopiero wtedy, gdy potrzebna jest akcja. To poprawia ogólną wydajność wykonania.
+- **Zaawansowane optymalizacje**: Adaptive Query Execution (AQE) automatycznie optymalizuje plany zapytań, a Dynamic Partition Pruning (DPP) robi to samo z podziałem danych na partition. Pandas tego nie potrafi.
 
-## General rule of thumb
-- Utilize Pandas for datasets that comfortably fit into the memory of a single machine and when the data processing doesn't demand extensive parallelization.
-- Opt for Spark when dealing with massive datasets that exceed single machine capacity, or when tasks benefit significantly from parallelization, despite any existing familiarity with Pandas due to Spark's scalability and optimization features.
+## Ogólna zasada
+- Używaj Pandas do zbiorów danych, które swobodnie mieszczą się w pamięci jednej maszyny, i wtedy, gdy przetwarzanie nie wymaga intensywnej równoległości.
+- Wybierz Spark, gdy pracujesz z ogromnymi zbiorami danych, które przekraczają możliwości jednej maszyny, albo gdy przetwarzanie wyraźnie zyskuje na równoległości. Zrób tak nawet wtedy, gdy dobrze znasz Pandas, bo Spark daje skalowalność i optymalizacje.
 
-## Bridging the gap with Koalas
-Introduced in Spark 3.2, Koalas marries the simplicity of the Pandas API with Spark’s distributed computing prowess. By importing `pandas` API through PySpark:
+## Koalas łączy oba światy
+Koalas, wprowadzony w Spark 3.2, łączy prostotę API Pandas z mocą obliczeń rozproszonych Spark. Wystarczy zaimportować API `pandas` przez PySpark:
 
 ```python
 from pyspark import pandas as pd
 ```
 
-This integration enables data practitioners to apply familiar Pandas-like operations while leveraging Spark's distributed architecture, achieving the best of both worlds.
+Dzięki tej integracji możesz stosować znane operacje w stylu Pandas i jednocześnie korzystać z rozproszonej architektury Spark. Masz to, co najlepsze z obu światów.
 
-## Practical application in Fabric:
-In Fabric, data loading practices vary between Pandas and Spark. Below is an example demonstrating how to load a CSV file into both frameworks. This comparison not only highlights syntax differences but also emphasizes when to employ each framework based on dataset size and computational needs.
+## Praktyczne zastosowanie w Fabric:
+W Fabric dane ładuje się inaczej w Pandas, a inaczej w Spark. Poniżej znajdziesz przykład, który pokazuje, jak załadować plik CSV w obu frameworkach. To porównanie pokazuje różnice w składni i podpowiada, kiedy wybrać który framework, zależnie od rozmiaru zbioru danych i potrzeb obliczeniowych.
 
-Chech [How to read and write data with Pandas in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-science/read-write-pandas).
+Sprawdź [Jak odczytywać i zapisywać dane za pomocą Pandas w Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-science/read-write-pandas).
 
 ---
 
-# Data Wrangler is my friend
-Immerse yourself in the world of efficient data analysis with Fabric's Data Wrangler. This task is designed to help you leverage Data Wrangler's capabilities to explore and transform Pandas DataFrames effectively. Data Wrangler blends a user-friendly grid-like interface with dynamic data analysis tools, making exploratory data analysis both intuitive and robust.
+# Zaprzyjaźnij się z Data Wrangler
+Poznaj wydajną analizę danych z Data Wrangler w Fabric. To zadanie pomoże ci użyć Data Wrangler do skutecznej eksploracji i transformacji Pandas DataFrame. Data Wrangler łączy przyjazny interfejs w formie siatki z dynamicznymi narzędziami analizy danych, dzięki czemu eksploracyjna analiza danych jest intuicyjna i solidna.
 
-Dive deep into the functionalities of Data Wrangler within Fabric, focusing specifically on Pandas DataFrames. Your task will be segmented into actionable steps, guiding you through the process of data exploration, visualization, and transformation within this powerful tool.
+Poznaj dokładnie funkcje Data Wrangler w Fabric, ze szczególnym naciskiem na Pandas DataFrame. Zadanie jest podzielone na konkretne kroki, które przeprowadzą cię przez eksplorację, wizualizację i transformację danych w tym narzędziu.
 
 
-## Initial Setup
-Open your Fabric environment and navigate to the Data Wrangler tool within your notebook.
-Load a Pandas DataFrame that you wish to analyze. If you don't have a specific dataset in mind, utilize a sample dataset provided within the platform.
+## Konfiguracja początkowa
+Otwórz swoje środowisko Fabric i przejdź do narzędzia Data Wrangler w Notebooku.
+Załaduj Pandas DataFrame, który chcesz przeanalizować. Jeśli nie masz na myśli konkretnego zbioru danych, użyj przykładowego zbioru dostępnego na platformie.
 
-![Step](../screenshots/5/new/dw1.jpg)
-![Step](../screenshots/5/new/dw2.jpg)
-![Step](../screenshots/5/new/dw3.jpg)
+![Krok](../screenshots/5/new/dw1.jpg)
+![Krok](../screenshots/5/new/dw2.jpg)
+![Krok](../screenshots/5/new/dw3.jpg)
 
-## Exploratory Data Analysis
+## Eksploracyjna analiza danych
 
-Utilize the grid-like data display to review your dataset. Pay attention to the distribution of data, missing values, and data types.
-Generate dynamic summary statistics to gain quick insights into the mean, median, mode, min, and max of your data columns.
-Leverage built-in visualizations to understand data distributions, correlations, and outliers. Experiment with different chart types to best represent your data.
+Przejrzyj zbiór danych w widoku siatki. Zwróć uwagę na rozkład danych, brakujące wartości i typy danych.
+Wygeneruj dynamiczne statystyki podsumowujące, żeby szybko poznać średnią, medianę, dominantę, minimum i maksimum w kolumnach.
+Użyj wbudowanych wizualizacji, żeby zrozumieć rozkłady danych, korelacje i wartości odstające. Wypróbuj różne typy wykresów i wybierz ten, który najlepiej pokazuje twoje dane.
 
-![Step](../screenshots/5/new/dw4.jpg)
-![Step](../screenshots/5/new/dw5.jpg)
-![Step](../screenshots/5/new/dw6.jpg)
+![Krok](../screenshots/5/new/dw4.jpg)
+![Krok](../screenshots/5/new/dw5.jpg)
+![Krok](../screenshots/5/new/dw6.jpg)
 
-## Data Cleaning Operations
+## Operacje czyszczenia danych
 
-Identify any inconsistencies, missing values, or outliers within your dataset.
-Apply common data-cleaning operations available in Data Wrangler, such as filling missing values, filtering rows, or correcting data types. Observe how each operation updates the data display in real time.
-Evaluate the impact of your data transformations on the summary statistics and visualizations to ensure they align with your analysis goals.
+Znajdź w zbiorze danych niespójności, brakujące wartości i wartości odstające.
+Zastosuj typowe operacje czyszczenia danych dostępne w Data Wrangler, np. uzupełnianie brakujących wartości, filtrowanie wierszy albo poprawianie typów danych. Obserwuj, jak każda operacja na bieżąco aktualizuje widok danych.
+Oceń, jak twoje transformacje wpłynęły na statystyki podsumowujące i wizualizacje, i upewnij się, że są zgodne z celami analizy.
 
-## Code Generation and Reusability
+## Generowanie kodu i ponowne użycie
 
-As you apply transformations within Data Wrangler, observe the automatic generation of corresponding code in either Pandas or PySpark.
-Save the generated code back to your notebook as a reusable function. This practice not only enhances your understanding of data transformations but also builds a library of custom functions for future analysis.
+Gdy stosujesz transformacje w Data Wrangler, obserwuj, jak automatycznie powstaje odpowiadający im kod w Pandas albo PySpark.
+Zapisz wygenerowany kod w Notebooku jako funkcję do ponownego użycia. W ten sposób lepiej zrozumiesz transformacje danych i zbudujesz bibliotekę własnych funkcji do przyszłych analiz.
 
-![Step](../screenshots/5/new/dw7.jpg)
+![Krok](../screenshots/5/new/dw7.jpg)
 
-## To learn more, I encourage you to watch the Fabric Espresso episode about Data Wrangler.
+## Chcesz dowiedzieć się więcej? Zachęcamy do obejrzenia odcinka Fabric Espresso o Data Wrangler.
 [![FabricEspresso](https://img.youtube.com/vi/-g6KveKQXu4/0.jpg)](https://www.youtube.com/watch?v=-g6KveKQXu4)
 
 
@@ -265,30 +265,30 @@ Save the generated code back to your notebook as a reusable function. This pract
 
 # VSCode (WEB)
 
-Visual Studio Code for the Web provides a free, zero-install Microsoft Visual Studio Code experience running entirely in your browser, allowing you to quickly and safely browse source code repositories and make lightweight code changes. 
+Visual Studio Code for the Web to darmowy Microsoft Visual Studio Code, który nie wymaga instalacji i działa w całości w przeglądarce. Pozwala szybko i bezpiecznie przeglądać repozytoria kodu źródłowego i wprowadzać drobne zmiany w kodzie. 
 
-## Open a notebook (e.g., notebook-2) with the Fabric Data Engineering - Remote VS Code extension for the Web
+## Otwórz Notebook (np. notebook-2) za pomocą rozszerzenia Fabric Data Engineering - Remote VS Code for the Web
 
-You can open a notebook in the VS Code for the Web experience by clicking the **Open in VS Code(Web)** button on the notebook authoring page in the Fabric portal. After you select the button, a separate browser tab is opened with the VS Code for the web experience. If you haven't already installed the extension, it is automatically installed, and activated, and the notebook is opened.
+Notebook otworzysz w VS Code for the Web przyciskiem **Open in VS Code(Web)** na stronie edycji Notebooka w portalu Fabric. Po kliknięciu przycisku otworzy się osobna karta przeglądarki z VS Code for the Web. Jeśli nie masz jeszcze rozszerzenia, zainstaluje się ono i aktywuje automatycznie, a Notebook zostanie otwarty.
 ![VSCODE](../screenshots/5/new/vs1.jpg)
 ![VSCODE](../screenshots/5/new/vs2.jpg)
 
-## Install Jupyter extension
-To select a Python kernel, install the Jupyter extension by following the steps shown in the screenshot. After the extension installs, refresh the page.
+## Zainstaluj rozszerzenie Jupyter
+Żeby wybrać kernel Python, zainstaluj rozszerzenie Jupyter. Wykonaj kroki pokazane na zrzucie ekranu. Po instalacji rozszerzenia odśwież stronę.
 
 ![VSCODE](../screenshots/5/new/vs3.jpg)
 
 
-## Run notebooks in the VS Code for the Web experience
+## Uruchom Notebook w VS Code for the Web
 
-You can run a notebook in the VS Code for the web experience by selecting the **Run** button in the notebook editor. Before you run the notebook, make sure to select the **Microsoft Fabric Runtime** as the kernel. The kernel is selected in the top right corner of the notebook editor.
+Notebook uruchomisz w VS Code for the Web przyciskiem **Run** w edytorze Notebooka. Zanim uruchomisz Notebook, wybierz **Microsoft Fabric Runtime** jako kernel. Kernel wybierasz w prawym górnym rogu edytora Notebooka.
 
 ![VSCODE](../screenshots/5/new/vs4.jpg)
 ![VSCODE](../screenshots/5/new/vs5.jpg)
 ![VSCODE](../screenshots/5/new/vs6.jpg)
 
 
-## To learn more, I encourage you to watch the Fabric Espresso episode about VSCode.
+## Chcesz dowiedzieć się więcej? Zachęcamy do obejrzenia odcinka Fabric Espresso o VSCode.
 
 [![FabricEspresso](https://img.youtube.com/vi/A9SjAyZ_JSc/0.jpg)](https://www.youtube.com/watch?v=A9SjAyZ_JSc)
 
@@ -296,4 +296,4 @@ You can run a notebook in the VS Code for the web experience by selecting the **
 
 ---
 > [!IMPORTANT]
-> Once completed, go to [Agenda](./../README.md#agenda). If time permits before the next exercise begins, consider continuing with [extra steps](../exercise-extra/extra.md).
+> Po zakończeniu przejdź do [agendy](./../README.md#agenda). Jeśli przed kolejnym ćwiczeniem zostanie czas, wykonaj [dodatkowe kroki](../exercise-extra/extra.md).

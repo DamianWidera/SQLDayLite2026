@@ -1,30 +1,30 @@
-# Naming convention
+# Konwencja nazw
 
 > [!TIP]
-> Please review the naming conventions as that is crucial for all the exercises to run smoothly. **No action needed, just review and ack the naming convention**.
+> Zapoznaj się z konwencją nazw, bo od niej zależy, czy wszystkie ćwiczenia przebiegną bez problemów. **Nie musisz nic robić, wystarczy, że przeczytasz konwencję nazw i przyjmiesz ją do wiadomości**.
 
-## Workspace name
-Assign a name: `urban-innovation-deNNN`, where NNN represents the number assigned to you. For example, `urban-innovation-de001` (Estera’s workspace).
+## Nazwa workspace
+Nadaj nazwę: `urban-innovation-deNNN`, gdzie NNN to przydzielony ci numer. Na przykład `urban-innovation-de001` (workspace Estery).
 
-## Table names
-* Task 1.1.18 - `green_202201_202301`
-* Task 1.3.7 - `green202301`
+## Nazwy tabel
+* Zadanie 1.1.18 - `green_202201_202301`
+* Zadanie 1.3.7 - `green202301`
 
 
               "green_202201_202301",
                     "green_from_202302"
 
-## Bronze Layer (Raw Data Management)
-Lakehouse Name: `bronzerawdata`
+## Warstwa bronze (zarządzanie danymi surowymi)
+Nazwa Lakehouse: `bronzerawdata`
 
-This is the foundational layer where raw data is ingested directly from various sources, including yellow and green taxi trip records, FHV trip records, and potentially other urban mobility datasets. The data is stored in its original, unmodified form. In the context of your workshop, this involves landing raw TLC Trip Record Data into this layer, ensuring that all raw data remains immutable and traceable for lineage purposes.
+To warstwa podstawowa. Trafiają do niej dane surowe prosto z różnych źródeł: dane o przejazdach żółtych i zielonych taksówek, dane o przejazdach FHV, a potencjalnie także inne zbiory danych o mobilności miejskiej. Dane są przechowywane w oryginalnej, niezmienionej postaci. Na tym warsztacie ładujesz do tej warstwy surowe dane TLC Trip Record Data. Wszystkie dane surowe pozostają niezmienne i możliwe do prześledzenia na potrzeby lineage.
 
-## Silver Layer (Refined Data Management)
-Lakehouse Name: `silvercleansed`
+## Warstwa silver (zarządzanie danymi oczyszczonymi)
+Nazwa Lakehouse: `silvercleansed`
 
-In this intermediate layer, data is cleansed, standardized, and enriched to resolve inconsistencies and prepare for more detailed analysis. This includes resolving issues with data quality, standardizing formats, and enriching taxi and FHV data with additional contextual information, such as weather conditions or traffic data. The goal here is to create a reliable, query-optimized dataset that supports more efficient analysis and reporting.
+W tej warstwie pośredniej dane są czyszczone, standaryzowane i wzbogacane. Usuwa to niespójności i przygotowuje dane do bardziej szczegółowej analizy. Obejmuje to rozwiązywanie problemów z jakością danych, ujednolicanie formatów oraz wzbogacanie danych o taksówkach i FHV o dodatkowy kontekst, na przykład warunki pogodowe lub dane o ruchu drogowym. Celem jest wiarygodny zbiór danych zoptymalizowany pod zapytania, który usprawnia analizę i raportowanie.
 
-## Gold Layer (Curated Data Management)
-Lakehouse Name: `goldcurated`
+## Warstwa gold (zarządzanie danymi gotowymi do raportowania)
+Nazwa Lakehouse: `goldcurated`
 
-The highest level of the lakehouse, where data is further transformed, modeled, and summarized to support advanced analytics and business intelligence. This layer focuses on driving actionable insights and supporting high-level decision-making. It could involve aggregating data into meaningful metrics, developing KPIs for urban transportation efficiency, or building machine learning models to predict future trends based on historical patterns.
+To najwyższa warstwa Lakehouse. Dane są tu dalej transformowane, modelowane i podsumowywane, aby wspierać zaawansowaną analitykę i business intelligence. Ta warstwa ma dostarczać wnioski, na podstawie których można działać, i wspierać decyzje na wysokim szczeblu. Może to oznaczać agregowanie danych w użyteczne metryki, opracowanie KPI dla efektywności transportu miejskiego albo budowanie modeli uczenia maszynowego, które na podstawie wzorców historycznych przewidują przyszłe trendy.

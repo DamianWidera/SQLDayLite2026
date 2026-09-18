@@ -1,146 +1,146 @@
-# Exercise 4 - Serve and consume data using Power BI and Data Science 
+# Ćwiczenie 4 - Udostępniaj i wykorzystuj dane w Power BI i Data Science 
 
 > [!NOTE]
-> Timebox: 60 minutes
+> Czas: 60 minut
 > 
-> [Back to Agenda](./../README.md#agenda) | [Back to Exercise 3](./../exercise-3/exercise-3.md) | [Up next Exercise 5](./../exercise-5/exercise-5.md)
-> #### List of exercises:
-> * [Task 4.1 Predict Trip Duration Using Data Science in Fabric Lakehouse](#task-41-predict-trip-duration-using-data-science-in-fabric-lakehouse)
-> * [Task 4.2 Explore and Visualize Taxi Trip Data Using Power BI and Direct Lake](#task-42-explore-and-visualize-taxi-trip-data-using-power-bi-and-direct-lake)
-> * [Task 4.3 Publish and Share the Power BI Report](#task-43-publish-and-share-the-power-bi-report)
+> [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 3](./../exercise-3/exercise-3.md) | [Dalej: Ćwiczenie 5](./../exercise-5/exercise-5.md)
+> #### Lista zadań:
+> * [Zadanie 4.1 Przewidź czas przejazdu za pomocą Data Science w Fabric Lakehouse](#zadanie-41-przewidź-czas-przejazdu-za-pomocą-data-science-w-fabric-lakehouse)
+> * [Zadanie 4.2 Zbadaj i zwizualizuj dane o przejazdach taksówek w Power BI i Direct Lake](#zadanie-42-zbadaj-i-zwizualizuj-dane-o-przejazdach-taksówek-w-power-bi-i-direct-lake)
+> * [Zadanie 4.3 Opublikuj i udostępnij raport Power BI](#zadanie-43-opublikuj-i-udostępnij-raport-power-bi)
 
-# Context
+# Kontekst
 
-The data in your lakehouse tables is included in a dataset that defines a relational model for your data. You can edit this dataset, defining custom measures, hierarchies, aggregations, and other elements of a data model. You can then use the dataset as the source for a Power BI report that enables you to visualize and analyze the data.
+Dane z tabel w twoim Lakehouse wchodzą w skład zestawu danych, który definiuje relacyjny model tych danych. Możesz edytować ten zestaw danych: definiować własne miary, hierarchie, agregacje i inne elementy modelu danych. Potem możesz użyć zestawu danych jako źródła raportu Power BI, w którym zwizualizujesz i przeanalizujesz dane.
 
-You can leverage the **DirectLake** feature to create Power BI datasets directly on top of your data stored in the Lakehouse. DirectLake enhances query performance when dealing with large data volumes and seamlessly integrates with Lakehouse workloads that read and write Parquet files. By combining the data visualization capabilities of Power BI with the centralized storage and tabular schema of a data lakehouse, you can implement an end-to-end analytics solution on a single platform.
+Dzięki funkcji **Direct Lake** utworzysz zestawy danych Power BI bezpośrednio na danych przechowywanych w Lakehouse. Direct Lake przyspiesza zapytania na dużych wolumenach danych i dobrze współpracuje z obciążeniami Lakehouse, które odczytują i zapisują pliki Parquet. Gdy połączysz wizualizację danych w Power BI z centralnym magazynem danych i tabelarycznym schema, które daje Lakehouse, zbudujesz kompletne rozwiązanie analityczne na jednej platformie.
 
-**Fabric enables you to visualize** the results of a single query or your entire data warehouse, **without leaving the data warehouse experience**. Exploring data while you work to ensure you have all the necessary data and transformations for your analysis is particularly useful.
+**Fabric pozwala zwizualizować** wyniki pojedynczego zapytania albo cały Data Warehouse **bez opuszczania Data Warehouse**. Przydaje się to szczególnie wtedy, gdy eksplorujesz dane w trakcie pracy i chcesz sprawdzić, czy masz wszystkie dane i transformacje potrzebne do analizy.
 
-Use the **Visualize button** to create a new Power BI report from the results of your query. Creating a new report with the results of your query will open a Power BI window.
+Użyj **przycisku Visualize**, aby utworzyć nowy raport Power BI z wyników zapytania. Otworzy się wtedy okno Power BI.
 
-You can also use the **New report button** to create a new Power BI report from the contents of your entire data warehouse. Using the New report button opens the Power BI service experience where you can build and save your report for use by the business.
-
----
-
-# DirectLake vs DirectQuery in Power BI
-
-Power BI is natively integrated in the whole Fabric experience. This native integration brings a unique mode, called DirectLake, of accessing the data from the lakehouse to provide the most performant query and reporting experience. DirectLake mode is a groundbreaking new engine capability to analyze very large datasets in Power BI. The technology is based on the idea of loading parquet-formatted files directly from a data lake without having to query a data warehouse or lakehouse endpoint, and without having to import or duplicate data into a Power BI dataset. DirectLake is a fast path to load the data from the data lake straight into the Power BI engine, ready for analysis.
-
-![Direct Lake Super Power](https://microsoft.github.io/fabricnotes/images/notes/14-direct-lake.png)
-
-In traditional DirectQuery mode, the Power BI engine queries the data directly from the data source every time it's queried and hence query performance depends on the speed data can be retrieved from the data source. This method avoids having to copy the data; any changes at the source are immediately reflected in the query results while in the import mode. And yet performance is better because the data is readily available in memory without having to query the data source each time. However, the Power BI engine must first copy the data into the dataset at refresh time. Any changes at the source are only picked up during the next data refresh.
-
-DirectLake mode now eliminates this import requirement by loading the data files directly into memory. Because there's no explicit import process, it's possible to pick up any changes at the source as they occur, thus combining the advantages of DirectQuery and import mode while avoiding their disadvantages. DirectLake mode is therefore the ideal choice for analyzing very large datasets and datasets with frequent updates at the source.
+Możesz też użyć **przycisku New report**, aby utworzyć nowy raport Power BI z zawartości całego Data Warehouse. Przycisk New report otwiera usługę Power BI, w której zbudujesz i zapiszesz raport do użytku biznesowego.
 
 ---
 
-# Task 4.1 Predict Trip Duration Using Data Science in Fabric Lakehouse
+# Direct Lake a DirectQuery w Power BI
 
-In this exercise, you will take on the role of a data scientist tasked with exploring, cleaning, and transforming a dataset containing taxi trip data. You will build a machine learning model to predict the duration of taxi trips using the New York taxi greencab dataset containing data from 2015, which includes information like pickup and drop-off times, locations, fares, and passenger counts. You will then apply the machine learning model to generate predictions on greencab from the year 2023 and save them to lakehouse.
+Power BI jest natywnie zintegrowany z całym Fabric. Ta integracja daje unikalny tryb dostępu do danych z Lakehouse, nazwany Direct Lake, który zapewnia najwyższą wydajność zapytań i raportów. Tryb Direct Lake to przełomowa funkcja silnika, która pozwala analizować bardzo duże zestawy danych w Power BI. Technologia opiera się na ładowaniu plików w formacie Parquet bezpośrednio z data lake. Nie trzeba odpytywać Data Warehouse ani punktu końcowego Lakehouse, nie trzeba też importować ani duplikować danych w zestawie danych Power BI. Direct Lake to szybka ścieżka, którą dane trafiają z data lake prosto do silnika Power BI, gotowe do analizy.
 
-1. **Download the Exercise Notebook**:
-   - Download the provided Jupyter notebook, [Exercise 4 - Consume Data using Data Science](Exercise%204%20-%20Consume%20Data%20using%20Data%20Science.ipynb), to your local computer. This notebook contains the steps you will follow to complete the task. [This screenshot presents the steps to do it](../screenshots/extra/new/download-notebook-2.jpg).
+![Supermoc Direct Lake](https://microsoft.github.io/fabricnotes/images/notes/14-direct-lake.png)
 
-2. **Import the Notebook into Fabric Workspace**:
-   - Navigate to your Fabric workspace, either in the Data Engineering or Data Science section.
-   - Import the downloaded notebook by following the instructions provided in [Exercise 2 - Importing Notebooks](../exercise-2/exercise-2.md#1-importing-the-notebook). This involves selecting the option to import existing notebooks and choosing the downloaded .ipynb file from your local computer.
+W tradycyjnym trybie DirectQuery silnik Power BI przy każdym zapytaniu pobiera dane bezpośrednio ze źródła danych, więc wydajność zapytań zależy od tego, jak szybko źródło zwraca dane. Ta metoda nie wymaga kopiowania danych, a każda zmiana w źródle jest od razu widoczna w wynikach zapytań. W Import mode wydajność jest lepsza, ponieważ dane są od razu dostępne w pamięci i nie trzeba za każdym razem odpytywać źródła danych. Silnik Power BI musi jednak najpierw skopiować dane do zestawu danych podczas odświeżania. Zmiany w źródle są widoczne dopiero po kolejnym odświeżeniu danych.
 
-3. **Follow Notebook Instructions**:
-   - Once the notebook is imported into your Fabric workspace, open it.
-   - Follow the detailed steps outlined within the notebook. These will guide you through:
-     - Data exploration and cleaning: Understand the dataset's structure, clean any inconsistencies, and prepare the data for modeling.
-     - Feature engineering: Create new features from the existing data to help improve the predictive power of your machine learning model.
-     - Model training: Select and train a machine learning model using the prepared dataset.
-     - Evaluation: Assess the performance of your model based on standard metrics.
-
-4. **Complete the Exercise**:
-   - Work through each step in the notebook, executing code cells and noting any insights or observations.
-   - Make sure to save your progress as you work through the notebook.
+Tryb Direct Lake usuwa konieczność importu, bo ładuje pliki danych bezpośrednio do pamięci. Nie ma tu jawnego procesu importu, więc zmiany w źródle można wychwytywać na bieżąco. Tryb łączy w ten sposób zalety DirectQuery i Import mode, a omija ich wady. Dlatego Direct Lake to najlepszy wybór do analizy bardzo dużych zestawów danych i zestawów danych, które często zmieniają się w źródle.
 
 ---
 
-# Task 4.2 Explore and Visualize Taxi Trip Data Using Power BI and Direct Lake
+# Zadanie 4.1 Przewidź czas przejazdu za pomocą Data Science w Fabric Lakehouse
 
-In this exercise, you will explore and visualize taxi trip data, including the predicted trip durations from the machine learning model you developed in Task 4.1. You will use Microsoft Fabric's Direct Lake feature for direct connectivity and create a Power BI report to analyze the data.
+W tym ćwiczeniu wcielisz się w rolę data scientist, który ma zbadać, oczyścić i przekształcić zbiór danych o przejazdach taksówek. Zbudujesz model uczenia maszynowego, który przewiduje czas trwania przejazdów taksówek. Użyjesz zbioru danych greencab o nowojorskich taksówkach z 2015 roku, który zawiera m.in. czas rozpoczęcia i zakończenia przejazdu, lokalizacje, opłaty i liczbę pasażerów. Potem zastosujesz model, aby wygenerować predykcje dla danych greencab z 2023 roku, i zapiszesz je w Lakehouse.
 
-### Steps to Follow
+1. **Pobierz Notebook z ćwiczeniem**:
+   - Pobierz na swój komputer przygotowany Notebook Jupyter, [Exercise 4 - Consume Data using Data Science](Exercise%204%20-%20Consume%20Data%20using%20Data%20Science.ipynb). Ten Notebook zawiera kroki, które wykonasz w tym zadaniu. [Na tym zrzucie ekranu widać, jak to zrobić](../screenshots/extra/new/download-notebook-2.jpg).
 
-1. **Access the Lakehouse Artifact**:
-   - Navigate to the "goldcurated" lakehouse artifact within your workspace, used in previous exercises.
-   - Open the lakehouse UI to begin working with the data.
+2. **Zaimportuj Notebook do workspace w Fabric**:
+   - Przejdź do swojego workspace w Fabric, w sekcji Data Engineering albo Data Science.
+   - Zaimportuj pobrany Notebook zgodnie z instrukcją w [Ćwiczenie 2 - import Notebooków](../exercise-2/exercise-2.md#231-zaimportuj-notebook). W tym celu wybierz opcję importu istniejących Notebooków i wskaż pobrany plik .ipynb na swoim komputerze.
 
-2. **Create a New Semantic Model**:
-   - Click the "New semantic model" button on the top ribbon.
-   - In the dialog, name the semantic model (e.g., NYCTaxiTrips) and select **greentaxi_predicted** as the data source. Confirm to create the semantic model linked to your predictive data.
-     ![New Semantic Model](../screenshots/4/new/NewSemanticModel.png)
+3. **Wykonaj instrukcje z Notebooka**:
+   - Po zaimportowaniu Notebooka do workspace w Fabric otwórz go.
+   - Wykonaj szczegółowe kroki opisane w Notebooku. Przeprowadzą cię przez:
+     - Eksplorację i czyszczenie danych: poznaj strukturę zbioru danych, usuń niespójności i przygotuj dane do modelowania.
+     - Inżynierię cech: utwórz nowe cechy z istniejących danych, aby poprawić moc predykcyjną modelu uczenia maszynowego.
+     - Trenowanie modelu: wybierz model uczenia maszynowego i wytrenuj go na przygotowanym zbiorze danych.
+     - Ocenę: oceń jakość modelu na podstawie standardowych metryk.
 
-3. **Generate a New Power BI Report**:
-   - In the semantic model UI, click the ***New report*** button on the top ribbon. This will open the Power BI report authoring page in a new browser tab.
+4. **Ukończ ćwiczenie**:
+   - Przejdź przez każdy krok w Notebooku, uruchamiaj komórki z kodem i notuj wnioski oraz obserwacje.
+   - Pamiętaj, aby zapisywać postępy w trakcie pracy z Notebookiem.
+
+---
+
+# Zadanie 4.2 Zbadaj i zwizualizuj dane o przejazdach taksówek w Power BI i Direct Lake
+
+W tym ćwiczeniu zbadasz i zwizualizujesz dane o przejazdach taksówek razem z przewidywanym czasem przejazdu z modelu uczenia maszynowego, który powstał w Zadaniu 4.1. Użyjesz funkcji Direct Lake w Microsoft Fabric do bezpośredniego połączenia z danymi i utworzysz raport Power BI do analizy danych.
+
+### Kroki do wykonania
+
+1. **Otwórz artefakt Lakehouse**:
+   - Przejdź do artefaktu Lakehouse "goldcurated" w swoim workspace, którego używasz od poprzednich ćwiczeń.
+   - Otwórz interfejs Lakehouse, aby zacząć pracę z danymi.
+
+2. **Utwórz nowy semantic model**:
+   - Kliknij przycisk "New semantic model" na górnej wstążce.
+   - W oknie dialogowym nazwij semantic model (np. NYCTaxiTrips) i wybierz **greentaxi_predicted** jako źródło danych. Potwierdź, aby utworzyć semantic model połączony z danymi predykcji.
+     ![Nowy semantic model](../screenshots/4/new/NewSemanticModel.png)
+
+3. **Wygeneruj nowy raport Power BI**:
+   - W interfejsie semantic model kliknij przycisk ***New report*** na górnej wstążce. W nowej karcie przeglądarki otworzy się strona tworzenia raportu Power BI.
    
-     ![New Report from Semantic Model](../screenshots/4/new/NewReportfromSemanticModel.png)
+     ![Nowy raport z semantic model](../screenshots/4/new/NewReportfromSemanticModel.png)
 
 
 > [!IMPORTANT]  
-> You can now create various visuals as per your requirement to generate insights from the prediction dataset or follow the steps outlined below.
+> Teraz możesz tworzyć dowolne wizualizacje według własnych potrzeb i szukać wniosków w zbiorze danych z predykcjami albo wykonać kroki opisane poniżej.
 
-#### Sample Visuals to analyze predictedTripDuration.
+#### Przykładowe wizualizacje do analizy predictedTripDuration.
 
-1. Create a Slicer visualization for pickupDate.
-    - Select the slicer option from the visualizations pane and select ***pickupDate*** from the data pane and drop it on the created slicer visualization field of the date slider visual.
+1. Utwórz wizualizację Slicer dla pickupDate.
+    - Wybierz opcję slicer w panelu Visualizations, zaznacz ***pickupDate*** w panelu Data i upuść je na pole utworzonej wizualizacji slicer, czyli suwaka dat.
 
-2. Visualize Average tripDuration and predictedTripDuration by timeBins using a clustered column chart.
-    - Add a clustered column chart, add ***timeBins*** to X-axis, ***trip_duration*** and ***predictedtrip_duration* **to Y-axis and change the aggregation method to Average.
+2. Zwizualizuj średnie tripDuration i predictedTripDuration według timeBins na clustered column chart.
+    - Dodaj clustered column chart, dodaj ***timeBins*** do X-axis, ***trip_duration*** i ***predictedtrip_duration* **do Y-axis i zmień metodę agregacji na Average.
 
-3. Visualize Average tripDuration and predictedTripDuration by weekDayName.
-    - Add an area chart visual and add ***weekDayName* **onto X-axis, ***trip_duration*** to Y-axis and ***predictedTripDuration*** to secondary Y-axis. Switch aggregation method to Average for both Y-axes.
+3. Zwizualizuj średnie tripDuration i predictedTripDuration według weekDayName.
+    - Dodaj wizualizację area chart, dodaj ***weekDayName* **do X-axis, ***trip_duration*** do Y-axis i ***predictedTripDuration*** do secondary Y-axis. Przełącz metodę agregacji na Average dla obu osi Y.
 
-4. Visualize Average tripDuration and predictedTripDuration by pickupDate using line chart.
-    - Add a line chart visual and add ***pickupDate*** onto X-axis, ***tripDuration*** and ***predictedTripDuration*** to Y-axis and switch aggregation method to Average for both fields.
+4. Zwizualizuj średnie tripDuration i predictedTripDuration według pickupDate na line chart.
+    - Dodaj wizualizację line chart, dodaj ***pickupDate*** do X-axis, ***tripDuration*** i ***predictedTripDuration*** do Y-axis i przełącz metodę agregacji na Average dla obu pól.
 
-5. Create Card Visuals for single view of key metrics.
-   - Add a Card visual and drag ***tip_amount*** to fields and switch aggregation method to median.
-   - Add 2nd Card visual and drag ***fare_amount*** to fields and switch aggregation method to average.
-   - Add 3rd Card visual and drag ***predictedtrip_duration*** to fields and switch aggregation method to average. 
-   - Add 4th Card visual and drag ***trip_duration*** to fields and switch aggregation method to average.
+5. Utwórz wizualizacje Card, aby zobaczyć kluczowe metryki w jednym miejscu.
+   - Dodaj wizualizację Card, przeciągnij ***tip_amount*** do fields i przełącz metodę agregacji na median.
+   - Dodaj drugą wizualizację Card, przeciągnij ***fare_amount*** do fields i przełącz metodę agregacji na average.
+   - Dodaj trzecią wizualizację Card, przeciągnij ***predictedtrip_duration*** do fields i przełącz metodę agregacji na average. 
+   - Dodaj czwartą wizualizację Card, przeciągnij ***trip_duration*** do fields i przełącz metodę agregacji na average.
 
-  You can now rearrange the layout and modify the aesthetics of the visuals as per your requirement and the report is ready to be published.
+  Teraz możesz zmienić układ i wygląd wizualizacji według własnych potrzeb. Raport jest gotowy do publikacji.
 
-  ![Final report](../screenshots/4/new/Report.png)
+  ![Gotowy raport](../screenshots/4/new/Report.png)
 
 
 > [!TIP]
-> Remember to save and publish your report, making it accessible to stakeholders for review and decision-making.
+> Pamiętaj, aby zapisać i opublikować raport. Dzięki temu interesariusze będą mogli go przejrzeć i podejmować na jego podstawie decyzje.
 
 
 ---
 
 
-# Task 4.3 Publish and Share the Power BI Report
+# Zadanie 4.3 Opublikuj i udostępnij raport Power BI
 
-In this task, you will publish the Power BI report created in the previous task to your Power BI workspace and share it with other users within your organization.
+W tym zadaniu opublikujesz raport Power BI z poprzedniego zadania w swoim workspace Power BI i udostępnisz go innym użytkownikom w twojej organizacji.
 
-1. **Save and Name the Report**:
-   - In the Power BI report editor, navigate to the File menu and select the Save or Save As option to open the report save dialog box.
-   - Enter a name for your report, for example, *NYC Taxi Trip Analysis*.
-   - Choose a target workspace within Power BI where you want the report to be published and click Save.
-     ![Save Report](../screenshots/4/new/SaveReport.png)
+1. **Zapisz raport i nadaj mu nazwę**:
+   - W edytorze raportów Power BI przejdź do menu File i wybierz opcję Save albo Save As, aby otworzyć okno zapisu raportu.
+   - Wpisz nazwę raportu, na przykład *NYC Taxi Trip Analysis*.
+   - Wybierz docelowy workspace w Power BI, w którym chcesz opublikować raport, i kliknij Save.
+     ![Zapis raportu](../screenshots/4/new/SaveReport.png)
 
-2. **Publish the Report**:
-   - Once saved, your Power BI report will be available as an artifact in the chosen workspace, ready for sharing and consumption.
-     ![Published Report in Workspace](../screenshots/4/new/PublishedreportWS.png)
+2. **Opublikuj raport**:
+   - Po zapisaniu raport Power BI będzie dostępny jako artefakt w wybranym workspace, gotowy do udostępniania i używania.
+     ![Opublikowany raport w workspace](../screenshots/4/new/PublishedreportWS.png)
 
-3. **Share the Report**:
-   - Open the published report from your workspace.
-   - Click on ‘Share’ from the top navigation bar to open the sharing options.
-   - In the ‘Send link’ dialog, choose whether to copy the sharing link or share it directly via Outlook, PowerPoint, and Teams to people in your organization.
-   - Set the appropriate permissions for the report. Typically, you can allow recipients to view and interact with the report without granting editing permissions.
+3. **Udostępnij raport**:
+   - Otwórz opublikowany raport ze swojego workspace.
+   - Kliknij ‘Share’ na górnym pasku nawigacji, aby otworzyć opcje udostępniania.
+   - W oknie ‘Send link’ wybierz, czy chcesz skopiować link do udostępniania, czy udostępnić go bezpośrednio przez Outlook, PowerPoint i Teams osobom w twojej organizacji.
+   - Ustaw odpowiednie uprawnienia do raportu. Zwykle pozwalasz odbiorcom przeglądać raport i korzystać z niego interaktywnie, bez uprawnień do edycji.
 
 
 > [!TIP]
-> Ensure that the report is correctly formatted and contains all relevant insights before sharing. Also, be mindful of data privacy and security when sharing reports, especially if they contain sensitive information. Review the [Sharing and Collaboration](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-share-dashboards) guide from Microsoft for more details on sharing options and best practices. This task will help you understand how to effectively disseminate information and insights gained from your data analysis within your organization.
+> Przed udostępnieniem sprawdź, czy raport jest poprawnie sformatowany i zawiera wszystkie istotne wnioski. Gdy udostępniasz raporty, pamiętaj też o prywatności i bezpieczeństwie danych, zwłaszcza jeśli zawierają informacje wrażliwe. Więcej o opcjach udostępniania i dobrych praktykach znajdziesz w przewodniku Microsoft [Udostępnianie i współpraca](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-share-dashboards). To zadanie pokaże ci, jak skutecznie rozpowszechniać w organizacji informacje i wnioski z analizy danych.
 
 ---
 
 > [!IMPORTANT]
-> Once completed, go to [next exercise (Exercise 5)](./../exercise-5/exercise-5.md). If time permits before the next exercise begins, consider continuing with [extra steps](../exercise-extra/extra.md).
+> Po zakończeniu przejdź do [następnego ćwiczenia (Ćwiczenie 5)](./../exercise-5/exercise-5.md). Jeśli przed kolejnym ćwiczeniem zostanie ci czas, możesz wykonać [dodatkowe kroki](../exercise-extra/extra.md).

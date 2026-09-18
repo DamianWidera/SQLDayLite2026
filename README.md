@@ -7,10 +7,10 @@ Witamy na warsztacie [SQLDay Lite 2026](https://sqlday.pl/lite/). Warsztat odbyw
 
 Microsoft Fabric wygląda prosto, dopóki nie trzeba zbudować pierwszego sensownego rozwiązania. Wtedy pojawiają się pytania. Lakehouse czy Warehouse? Dataflow czy Notebook? Pipeline czy ręczne odświeżanie? Gdzie właściwie są dane? Czy Power BI dalej działa tak samo? Co z uprawnieniami, odświeżaniem, kosztami i wersjonowaniem?
 
-Na tym warsztacie zbudujesz od zera małe, kompletne rozwiązanie analityczne. Pobierzesz dane, zapiszesz je w OneLake, oczyścisz, zamodelujesz i pokażesz w raporcie Power BI. Po drodze wyjaśnimy, które elementy Fabric są potrzebne na początku, a które można zostawić na później.
+Na tym warsztacie zbudujesz od zera małe, kompletne rozwiązanie analityczne. Załadujesz dane, zapiszesz je w OneLake, oczyścisz, zamodelujesz i pokażesz w raporcie Power BI. Po drodze wyjaśnimy, które elementy Fabric są potrzebne na początku, a które można zostawić na później.
 
 > [!IMPORTANT]
-> Instrukcje do ćwiczeń i zrzuty ekranu są po angielsku, tak jak interfejs Fabric. Prowadzący tłumaczą każdy krok po polsku.
+> Instrukcje do ćwiczeń są po polsku. Nazwy funkcji Fabric, przycisków i opcji zostawiamy po angielsku, tak jak na zrzutach ekranu i w interfejsie. Dzięki temu na ekranie znajdziesz dokładnie to, co widzisz w instrukcji.
 
 > [!IMPORTANT]
 > Grupa uczestników do pytań i linków: ⟦TBC link do grupy⟧
@@ -18,14 +18,14 @@ Na tym warsztacie zbudujesz od zera małe, kompletne rozwiązanie analityczne. P
 ---
 
 **Cele warsztatu**
-- Zbudować kompletny przepływ danych w Microsoft Fabric: pobranie, przygotowanie, udostępnienie.
+- Zbudować kompletny przepływ danych w Microsoft Fabric: ładowanie, przygotowanie, udostępnienie.
 - Zrozumieć, gdzie w Fabric trafiają dane i jak widzą je różne narzędzia.
 - Nauczyć się podejmować pierwsze decyzje projektowe i nie zbudować bałaganu już pierwszego dnia.
 
 **Scenariusz: dane o przejazdach taksówek w Nowym Jorku**
 - Pracujemy na publicznych danych NYC Taxi. To duży, prawdziwy zbiór, który dobrze pokazuje różnicę między plikiem w Excelu a tabelą w Lakehouse.
 - Dane układamy w trzech warstwach: surowe (bronze), oczyszczone (silver) i gotowe do raportowania (gold).
-- Na końcu powstaje model semantyczny i raport Power BI w trybie Direct Lake.
+- Na końcu powstaje semantic model i raport Power BI w trybie Direct Lake.
 
 ![Architektura rozwiązania budowanego na warsztacie](screenshots/start/diagram.png)
 
@@ -44,7 +44,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 
 # Co przygotować
 
-- Laptop z aktualną przeglądarką. Polecamy tryb incognito, żeby przeglądarka nie logowała Cię do firmowego tenanta.
+- Laptop z aktualną przeglądarką. Polecamy tryb incognito, żeby przeglądarka nie logowała cię do firmowego tenanta.
 - Konto do Fabric dostaniesz od nas na miejscu. Nie potrzebujesz własnej licencji ani własnej capacity.
 - Opcjonalnie: SQL Server Management Studio (SSMS) do ćwiczenia 3 oraz Power BI Desktop.
 
@@ -58,7 +58,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 | Kiedy Notebook, a kiedy Dataflow Gen2? | [Ćwiczenie 2](./exercise-2/exercise-2.md) i dyskusja z prowadzącymi |
 | Kiedy wystarczy Lakehouse, a kiedy myśleć o Warehouse? Jak pracować w T-SQL? | [Ćwiczenie 3](./exercise-3/exercise-3.md) i dyskusja z prowadzącymi |
 | Co z uprawnieniami i udostępnianiem? | [Ćwiczenie 3](./exercise-3/exercise-3.md) |
-| Czy Power BI dalej działa tak samo? Model semantyczny, Direct Lake, raport. | [Ćwiczenie 4](./exercise-4/exercise-4.md) |
+| Czy Power BI dalej działa tak samo? Semantic model, Direct Lake, raport. | [Ćwiczenie 4](./exercise-4/exercise-4.md) |
 | Jak zautomatyzować odświeżanie? | [Ćwiczenie 2, zadanie 2.7](./exercise-2/exercise-2.md), [ćwiczenia dodatkowe](./exercise-extra/extra.md) |
 | Co z kosztami i wydajnością? | [Ćwiczenie 5](./exercise-5/exercise-5.md) |
 
@@ -73,20 +73,20 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 > 08:30 – 09:15 (45 min) - Wprowadzenie, konfiguracja i przegląd platformy Fabric
 >
 > 1. Login i hasło do Fabric: ⟦TBC lista loginów dla uczestników⟧
-> 2. [Start & Setup](exercise-0-setup/start.md)
+> 2. [Start i konfiguracja](exercise-0-setup/start.md)
 > 3. Otwórz i miej pod ręką [konwencję nazw](/exercise-0-setup/naming-convention.md).
 >
-> 09:15 – 10:35 (80 min) - [Ćwiczenie 1 - Pobieranie danych: pipeline i shortcuty](./exercise-1/exercise-1.md)
+> 09:15 – 10:35 (80 min) - [Ćwiczenie 1 - Ładowanie danych: Pipeline i Shortcut](./exercise-1/exercise-1.md)
 >
 > 10:35 – 10:50 (15 min) - Przerwa kawowa
 >
-> 10:50 – 12:20 (90 min) - [Ćwiczenie 2 - Transformacje danych w Notebooku](./exercise-2/exercise-2.md)
+> 10:50 – 12:20 (90 min) - [Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark](./exercise-2/exercise-2.md)
 >
 > 12:20 – 13:00 (40 min) - [Ćwiczenie 3 - SQL analytics endpoint, SSMS, udostępnianie i uprawnienia](./exercise-3/exercise-3.md)
 >
 > 13:00 – 14:00 (60 min) - Lunch
 >
-> 14:00 – 15:20 (80 min) - [Ćwiczenie 4 - Model semantyczny i raport Power BI](./exercise-4/exercise-4.md)
+> 14:00 – 15:20 (80 min) - [Ćwiczenie 4 - Semantic model i raport Power BI](./exercise-4/exercise-4.md)
 >
 > 15:20 – 15:35 (15 min) - Przerwa
 >
