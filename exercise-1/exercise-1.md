@@ -170,7 +170,7 @@ W sekcji `Tables` znajdź nową tabelę i otwórz podgląd jej danych.
 > [!TIP]
 > Gratulacje, pierwsze i najważniejsze zadanie (Zadanie 1.1) Ćwiczenia 1 za tobą. 
 >
-> **Sprawdź teraz czas. Jeśli minęła już połowa czasu przeznaczonego na całe Ćwiczenie 1, rozważ pominięcie Zadania 1.2 i przejdź od razu do [1.3 Utwórz Shortcut](#zadanie-13-utwórz-shortcut)**, bo Zadanie 1.3 jest wymagane w  `Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark`.
+> **Sprawdź teraz czas. Jeśli minęła już połowa czasu przeznaczonego na całe Ćwiczenie 1, rozważ pominięcie Zadania 1.2 i przejdź od razu do [1.3 Utwórz Shortcut](#zadanie-13-utwórz-shortcut)**, bo Zadania 1.3 wymaga `Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark`.
 > 
 > Pamiętaj, że do tego ćwiczenia zawsze możesz wrócić później.
 
@@ -179,7 +179,7 @@ W sekcji `Tables` znajdź nową tabelę i otwórz podgląd jej danych.
 <summary>Kliknij <ins>tutaj</ins>, aby rozwinąć Zadanie 1.2 Poznaj Lakehouse </summary>
 
 Lakehouse w Microsoft Fabric daje inżynierom danych i analitykom zalety zarówno magazynu data lake, jak i relacyjnej hurtowni danych. Apache Spark to kluczowa technologia analityki big data. Dzięki obsłudze Spark w Microsoft Fabric możesz płynnie łączyć przetwarzanie big data w Spark z innymi narzędziami do analizy i wizualizacji danych dostępnymi na platformie. 
-Lakehouse pozwala zbudować kompletne rozwiązanie analityczne, które obejmuje ładowanie danych, transformację, modelowanie i wizualizację. Lakehouse to jednolita i skalowalna platforma do przechowywania danych i zarządzania nimi. Ułatwia dostęp do danych ustrukturyzowanych i nieustrukturyzowanych oraz ich analizę. Wbudowane funkcje bezpieczeństwa i zgodności pomagają utrzymać dane bezpieczne i zgodne ze standardami branżowymi.
+Lakehouse pozwala zbudować kompletne rozwiązanie analityczne, które obejmuje ładowanie danych, transformację, modelowanie i wizualizację. Lakehouse to jednolita i skalowalna platforma do przechowywania danych i zarządzania nimi. Ułatwia dostęp do danych ustrukturyzowanych i nieustrukturyzowanych oraz ich analizę. Wbudowane funkcje bezpieczeństwa i zgodności pomagają dbać o bezpieczeństwo danych i ich zgodność ze standardami branżowymi.
 
 
 **Fundamentem Microsoft Fabric jest Lakehouse**, zbudowany na skalowalnej warstwie przechowywania **OneLake**. Do przetwarzania big data używa silników obliczeniowych **Apache Spark** i **SQL**. Lakehouse to jednolita platforma, która łączy:
@@ -328,7 +328,7 @@ Utwórz zapytanie: przeciągnij nazwę tabeli i upuść ją w treści Notebooka.
 ![Krok](../screenshots/1/new/49.jpg)
 
 ## 1.3.12. Wykonaj zapytanie
-Aby uruchomić zapytanie, kliknij przycisk odtwarzania po lewej stronie komórki. Zapytanie powinno zakończyć się w kilka sekund. Tak działa płynna integracja i łatwość obsługi Fabric jako prawdziwego rozwiązania SaaS. Przejrzyj wyniki w tabeli.
+Aby uruchomić zapytanie, kliknij przycisk odtwarzania po lewej stronie komórki. Zapytanie powinno zakończyć się w kilka sekund. Widać tu płynną integrację i łatwość obsługi Fabric jako prawdziwego rozwiązania SaaS. Przejrzyj wyniki w tabeli.
 
 > [!IMPORTANT]
 > Fabric Spark stosuje throttling i kolejkowanie oparte na liczbie rdzeni. Użytkownicy mogą przesyłać Spark job w ramach zakupionego SKU Fabric capacity. Kolejka działa w prostym modelu FIFO: sprawdza dostępne sloty i automatycznie ponawia Spark job, gdy capacity się zwolni. Jeśli prześlesz Spark job z Notebooka lub Lakehouse, np. Load to Table, gdy capacity jest maksymalnie obciążone, bo równolegle działające Spark job zajmują wszystkie Spark Vcores dostępne w zakupionym SKU Fabric capacity, zobaczysz komunikat **HTTP Response code 430: Unable to submit this request because all the available capacity is currently being used. The suggested solutions are to cancel a currently running job, increase the available capacity, or try again later.**.
@@ -356,7 +356,7 @@ Domyślny czas wygaśnięcia Spark session dla Starter pool i Spark pool to 20 
 
 ### Kroki demo, czas wygaśnięcia Spark session:
 
-1.  Na zrzucie ekranu pokazujemy (tylko na zrzutach ekranu, nie ma demo na żywo ani gif), jak załadować dane Parquet do Delta table za pomocą funkcji 'Load to Table'.
+1.  Na zrzucie ekranu pokazujemy (tylko na zrzutach ekranu, nie ma demo na żywo ani GIF-a), jak załadować dane Parquet do Delta table za pomocą funkcji 'Load to Table'.
    
      ![Ładowanie danych](../screenshots/extra/new/mh1.jpg)
 2. Tabela została utworzona, co potwierdza powiadomienie na ekranie. Przechodzimy do Monitoring hub, aby pokazać bieżącą aktywność.

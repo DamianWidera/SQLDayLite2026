@@ -67,7 +67,7 @@ Gratulacje, twój nowy workspace jest gotowy! W tej przestrzeni będziesz dziś 
 
 ## 13. Ustaw maksymalnie 2 węzły w domyślnym Spark pool
 
-Dziś odbywa się równolegle kilka warsztatów. Aby wszystkie działały płynnie, zmień domyślną konfigurację klastra obliczeniowego w swoim workspace Fabric i zmniejsz maksymalną liczbę węzłów do 2.
+Dziś odbywa się równolegle kilka warsztatów. Aby wszystkie przebiegały płynnie, zmień domyślną konfigurację klastra obliczeniowego w swoim workspace Fabric i zmniejsz maksymalną liczbę węzłów do 2.
 
 > [!NOTE]  
 >  To zadanie jest kluczowe, bo pozwala rozsądnie gospodarować zasobami i zapewnia płynny przebieg warsztatów wszystkim uczestnikom. Gdy zmniejszasz maksymalną liczbę węzłów do 2, pomagasz ograniczyć obciążenie systemu i poprawiasz komfort pracy wszystkich.

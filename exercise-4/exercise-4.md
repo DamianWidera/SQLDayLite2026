@@ -44,7 +44,7 @@ W tym ćwiczeniu wcielisz się w rolę data scientist, który ma zbadać, oczyś
 
 2. **Zaimportuj Notebook do workspace w Fabric**:
    - Przejdź do swojego workspace w Fabric, w sekcji Data Engineering albo Data Science.
-   - Zaimportuj pobrany Notebook zgodnie z instrukcją w [Ćwiczenie 2 - import Notebooków](../exercise-2/exercise-2.md#231-zaimportuj-notebook). W tym celu wybierz opcję importu istniejących Notebooków i wskaż pobrany plik .ipynb na swoim komputerze.
+   - Zaimportuj pobrany Notebook zgodnie z instrukcją w [Ćwiczeniu 2 - import Notebooków](../exercise-2/exercise-2.md#231-zaimportuj-notebook). W tym celu wybierz opcję importu istniejących Notebooków i wskaż pobrany plik .ipynb na swoim komputerze.
 
 3. **Wykonaj instrukcje z Notebooka**:
    - Po zaimportowaniu Notebooka do workspace w Fabric otwórz go.
@@ -118,7 +118,7 @@ W tym ćwiczeniu zbadasz i zwizualizujesz dane o przejazdach taksówek razem z p
 
 # Zadanie 4.3 Opublikuj i udostępnij raport Power BI
 
-W tym zadaniu opublikujesz raport Power BI z poprzedniego zadania w swoim workspace Power BI i udostępnisz go innym użytkownikom w twojej organizacji.
+W tym zadaniu opublikujesz raport Power BI z poprzedniego zadania w swoim workspace Power BI i udostępnisz go innym użytkownikom w swojej organizacji.
 
 1. **Zapisz raport i nadaj mu nazwę**:
    - W edytorze raportów Power BI przejdź do menu File i wybierz opcję Save albo Save As, aby otworzyć okno zapisu raportu.
@@ -133,7 +133,7 @@ W tym zadaniu opublikujesz raport Power BI z poprzedniego zadania w swoim worksp
 3. **Udostępnij raport**:
    - Otwórz opublikowany raport ze swojego workspace.
    - Kliknij ‘Share’ na górnym pasku nawigacji, aby otworzyć opcje udostępniania.
-   - W oknie ‘Send link’ wybierz, czy chcesz skopiować link do udostępniania, czy udostępnić go bezpośrednio przez Outlook, PowerPoint i Teams osobom w twojej organizacji.
+   - W oknie ‘Send link’ wybierz, czy chcesz skopiować link do udostępniania, czy udostępnić go bezpośrednio przez Outlook, PowerPoint i Teams osobom w swojej organizacji.
    - Ustaw odpowiednie uprawnienia do raportu. Zwykle pozwalasz odbiorcom przeglądać raport i korzystać z niego interaktywnie, bez uprawnień do edycji.
 
 

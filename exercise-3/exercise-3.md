@@ -55,7 +55,7 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint w SQL Server Management
    - Uruchom SSMS na swoim komputerze. Po otwarciu aplikacji powinno automatycznie pojawić się okno `Connect to Server`. Jeśli SSMS jest już otwarty, ale nie masz połączenia, przejdź do Object Explorer, kliknij `Connect`, a potem wybierz `Database Engine`.
 
 2. **Wpisz dane serwera**:
-   - W polu `Server name` w oknie połączenia wklej skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać Twojemu Fabric SQL Endpoint.
+   - W polu `Server name` w oknie połączenia wklej skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać twojemu Fabric SQL Endpoint.
 
 3. **Uwierzytelnianie**:
    - Jako metodę uwierzytelniania wybierz z listy `Microsoft Entra Password`. Zapewnia to bezpieczne połączenie oparte na nowoczesnych metodach uwierzytelniania.

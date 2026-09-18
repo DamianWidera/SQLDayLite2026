@@ -70,29 +70,29 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 **Godziny dopasujemy do tempa grupy i do harmonogramu organizatora.** ⟦TBC godziny startu, przerw i lunchu po publikacji harmonogramu SQLDay Lite⟧
 
 > [!IMPORTANT]
-> 08:30 – 09:15 (45 min) - Wprowadzenie, konfiguracja i przegląd platformy Fabric
+> 08:30–09:15 (45 min) - Wprowadzenie, konfiguracja i przegląd platformy Fabric
 >
 > 1. Login i hasło do Fabric: ⟦TBC lista loginów dla uczestników⟧
 > 2. [Start i konfiguracja](exercise-0-setup/start.md)
-> 3. Otwórz i miej pod ręką [konwencję nazw](/exercise-0-setup/naming-convention.md).
+> 3. Otwórz i miej pod ręką [konwencję nazw](./exercise-0-setup/naming-convention.md).
 >
-> 09:15 – 10:35 (80 min) - [Ćwiczenie 1 - Ładowanie danych: Pipeline i Shortcut](./exercise-1/exercise-1.md)
+> 09:15–10:35 (80 min) - [Ćwiczenie 1 - Ładowanie danych: Pipeline i Shortcut](./exercise-1/exercise-1.md)
 >
-> 10:35 – 10:50 (15 min) - Przerwa kawowa
+> 10:35–10:50 (15 min) - Przerwa kawowa
 >
-> 10:50 – 12:20 (90 min) - [Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark](./exercise-2/exercise-2.md)
+> 10:50–12:20 (90 min) - [Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark](./exercise-2/exercise-2.md)
 >
-> 12:20 – 13:00 (40 min) - [Ćwiczenie 3 - SQL analytics endpoint, SSMS, udostępnianie i uprawnienia](./exercise-3/exercise-3.md)
+> 12:20–13:00 (40 min) - [Ćwiczenie 3 - SQL analytics endpoint, SSMS, udostępnianie i uprawnienia](./exercise-3/exercise-3.md)
 >
-> 13:00 – 14:00 (60 min) - Lunch
+> 13:00–14:00 (60 min) - Lunch
 >
-> 14:00 – 15:20 (80 min) - [Ćwiczenie 4 - Semantic model i raport Power BI](./exercise-4/exercise-4.md)
+> 14:00–15:20 (80 min) - [Ćwiczenie 4 - Semantic model i raport Power BI](./exercise-4/exercise-4.md)
 >
-> 15:20 – 15:35 (15 min) - Przerwa
+> 15:20–15:35 (15 min) - Przerwa
 >
-> 15:35 – 16:35 (60 min) - [Ćwiczenie 5 - Nowości w Fabric i Data Wrangler](./exercise-5/exercise-5.md)
+> 15:35–16:35 (60 min) - [Ćwiczenie 5 - Nowości w Fabric i Data Wrangler](./exercise-5/exercise-5.md)
 >
-> 16:35 – 17:30 (55 min) - Najczęstsze błędy początkujących, pytania i odpowiedzi, [ćwiczenia dodatkowe](exercise-extra/extra.md)
+> 16:35–17:30 (55 min) - Najczęstsze błędy początkujących, pytania i odpowiedzi, [ćwiczenia dodatkowe](exercise-extra/extra.md)
 
 # Najczęstsze błędy początkujących
 

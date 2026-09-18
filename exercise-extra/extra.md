@@ -31,7 +31,7 @@ Copilot dla Data Science i Data Engineering to asystent AI, z którym rozmawiasz
 * buduje modele uczenia maszynowego
 
 
-Przyjrzyj się tabeli `green201501` w swoim Lakehouse i poszukaj wniosków o tym zbiorze danych. Zapytaj też, jak obliczyć średnią długość przejazdu i średnią opłatę dla każdego typu płatności.
+Przyjrzyj się tabeli `green201501` w swoim Lakehouse i poszukaj ciekawych obserwacji na temat tego zbioru danych. Zapytaj też, jak obliczyć średnią długość przejazdu i średnią opłatę dla każdego typu płatności.
 
 ## Otwórz panel Copilot
 Otwórz istniejący Notebook (np. ***Just exploration***) w swoim workspace albo utwórz nowy Notebook. Kliknij ikonę `Copilot` na wstążce Notebooka. Otworzy się panel czatu Copilot. Gdy klikniesz `Get started`, na górze Notebooka pojawi się nowa komórka. Uwaga: ta komórka inicjuje Spark session w Notebooku Fabric. Musisz ją uruchomić, żeby Copilot działał poprawnie. W przyszłych wersjach mogą pojawić się inne sposoby inicjalizacji i ten krok może przestać być potrzebny.
@@ -73,7 +73,7 @@ Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Rea
 
 -   uprawnienie **ReadData** do SQL endpoint, które daje dostęp do danych bez wymuszania zasad SQL.
 -   uprawnienie **ReadAll** do Lakehouse, które daje pełny dostęp do danych przez Apache Spark.
--   uprawnienie **Build** do domyślnego semantic model, które pozwala tworzyć raporty Power BI na tym modelu
+-   uprawnienie **Build** do domyślnego semantic model, które pozwala tworzyć raporty Power BI na tym modelu.
 
 Cel tego ćwiczenia: zdobyć ciąg połączenia SQL do SQL analytics endpoint twojego Lakehouse. Bez niego nie połączysz się z danymi i nie odpytasz ich z narzędzi opartych na SQL.
 
@@ -105,7 +105,7 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint z poziomu SQL Server Ma
    - Uruchom SSMS na swoim komputerze. Po otwarciu aplikacji okno `Connect to Server` powinno pojawić się automatycznie. Jeśli SSMS jest już otwarty, ale bez połączenia, przejdź do Object Explorer, kliknij `Connect` i wybierz `Database Engine`.
 
 2. **Wpisz dane serwera**:
-   - W oknie połączenia wklej w pole `Server name` skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać Twojemu Fabric SQL Endpoint.
+   - W oknie połączenia wklej w pole `Server name` skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać twojemu Fabric SQL Endpoint.
 
 3. **Uwierzytelnianie**:
    - Jako metodę uwierzytelniania wybierz `Microsoft Entra Password`. Dzięki temu połączenie jest bezpieczne i korzysta z nowoczesnych metod uwierzytelniania.
@@ -239,7 +239,7 @@ Dowiesz się, jak udostępnić Notebook członkom zespołu w swoim workspace i w
 
 
 > [!NOTE]
-> Przy udostępnianiu pamiętaj, jakie dane i informacje zawiera Notebook. Dostęp powinny dostać tylko właściwe osoby. Sprawdź zasady swojej organizacji dotyczące udostępniania danych i współpracy, żeby spełnić standardy bezpieczeństwa i prywatności. Zapisuj problemy napotkane podczas udostępniania. Przydadzą się później albo wtedy, gdy poprosisz o pomoc.
+> Przy udostępnianiu pamiętaj, jakie dane i informacje zawiera Notebook. Dostęp powinny dostać tylko właściwe osoby. Sprawdź zasady swojej organizacji dotyczące udostępniania danych i współpracy, żeby spełnić standardy bezpieczeństwa i prywatności. Zapisuj problemy napotkane podczas udostępniania. Takie notatki przydadzą się później albo wtedy, gdy poprosisz o pomoc.
 
 ---
 
@@ -294,7 +294,7 @@ Poznaj zależności i przepływ danych w swoim workspace Fabric w widoku Lineage
 
 # Wybierz format pliku i typ kompresji docelowych zbiorów danych w Data Factory
 
-Według Wikipedii Snappy (wcześniej Zippy) to szybka biblioteka do kompresji i dekompresji danych opracowana przez Google. Stawia na szybkość zamiast na maksymalną kompresję. Różnica w szybkości jest duża: 250 MB/s przy kompresji i 500 MB/s przy dekompresji na jednym rdzeniu procesora Core i7 2,26 GHz z okolic 2011 roku. Współczynnik kompresji jest jednak o 20–100% niższy niż w gzip. Więcej szczegółów znajdziesz w [artykule o Snappy w Wikipedii](https://en.wikipedia.org/wiki/Snappy_(compression)).
+Według Wikipedii Snappy (wcześniej Zippy) to szybka biblioteka do kompresji i dekompresji danych opracowana przez Google. Stawia na szybkość zamiast na maksymalną kompresję. Zysk na szybkości jest duży: 250 MB/s przy kompresji i 500 MB/s przy dekompresji na jednym rdzeniu procesora Core i7 2,26 GHz z okolic 2011 roku. Współczynnik kompresji jest jednak o 20–100% niższy niż w gzip. Więcej szczegółów znajdziesz w [artykule o Snappy w Wikipedii](https://en.wikipedia.org/wiki/Snappy_(compression)).
 
 Po tych informacjach możesz się zastanawiać, skąd decyzja o użyciu gzip zamiast Snappy i jak zmienić to ustawienie. Zrób to tak:
 
@@ -430,7 +430,7 @@ Obejrzyj odcinek Fabric Espresso, w którym Abhishek omawia i pokazuje Medallion
 
 # Zaplanuj uruchamianie Notebooka kilka razy dziennie
 
-W tym ćwiczeniu nauczysz się planować uruchamianie Notebooka kilka razy dziennie za pomocą funkcji harmonogramu. Dla pojedynczego Notebooka to prostsza alternatywa niż Pipeline.
+W tym ćwiczeniu nauczysz się planować uruchamianie Notebooka kilka razy dziennie za pomocą funkcji harmonogramu. Dla pojedynczego Notebooka to prostsze rozwiązanie niż Pipeline.
 
 1. **Otwórz Notebook**:
    - Otwórz Notebook z drugiego ćwiczenia. 
@@ -438,7 +438,7 @@ W tym ćwiczeniu nauczysz się planować uruchamianie Notebooka kilka razy dzien
      ![Ikona harmonogramu](../screenshots/extra/new/10.jpg)
 
 2. **Skonfiguruj harmonogram**:
-   - Przełącz się na kartę "Schedule" i kliknij przycisk `Add Schedule`
+   - Przełącz się na kartę "Schedule" i kliknij przycisk `Add Schedule`.
    ![Karta Schedule](../screenshots/extra/new/11.jpg)
      
 3. **Określ szczegóły harmonogramu**:
@@ -529,11 +529,11 @@ W tym ćwiczeniu sprawdzisz, czy tabela została zapisana z optymalizacją V-Ord
 4. **Porównaj zawartość plików**:
    - Sformatuj pliki JSON, żeby łatwiej je porównać.
    - Poszukaj oznaczeń optymalizacji V-Order. Zwykle są w sekcji tags w logu JSON.
-   - Porównaj liczbę wierszy wyjściowych i rozmiar danych wyjściowych w bajtach między tabelą zapisaną z V-Order i tabelą zapisaną bez V-Order.
+   - Porównaj liczbę wierszy wyjściowych i rozmiar danych wyjściowych w bajtach między tabelą zapisaną z V-Order a tabelą zapisaną bez V-Order.
      ![Porównanie plików](../screenshots/extra/new/20.jpg)
 
 
-Przeczytaj [dokumentację Microsoft o optymalizacji Delta i V-Order](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order?tabs=sparksql), żeby lepiej zrozumieć temat i jego kontekst.  Gdy wiesz, jak działa V-Order i na co wpływa, świadomie zdecydujesz, czy używać go w swojej strategii przechowywania i przetwarzania danych. Pamiętaj: celem jest nie tylko sprawdzić, czy V-Order jest zastosowany, ale też zrozumieć jego korzyści i konsekwencje.
+Przeczytaj [dokumentację Microsoft o optymalizacji Delta i V-Order](https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order?tabs=sparksql), żeby lepiej zrozumieć temat i jego kontekst. Gdy wiesz, jak działa V-Order i na co wpływa, świadomie zdecydujesz, czy używać go w swojej strategii przechowywania i przetwarzania danych. Pamiętaj: celem jest nie tylko sprawdzić, czy V-Order jest zastosowany, ale też zrozumieć jego korzyści i konsekwencje.
 
 # Merge
 

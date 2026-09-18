@@ -4,7 +4,7 @@
 > Czas: 40 minut
 > 
 > [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 4](./../exercise-4/exercise-4.md) | [Dalej: ćwiczenia dodatkowe](../exercise-extra/extra.md)
-> #### Lista ćwiczeń:
+> #### Lista zadań:
 > *  [Bądź na bieżąco i dodaj do zakładek najważniejsze strony](#bądź-na-bieżąco-i-dodaj-do-zakładek-najważniejsze-strony)
 > *  [Runtime w Fabric i Python User-defined Table Functions (UDTFs)](#runtime-w-fabric-i-python-user-defined-table-functions-udtfs)
 > *  [Managed Private Endpoints](#managed-private-endpoints)
@@ -16,7 +16,7 @@
 
 # Bądź na bieżąco i dodaj do zakładek najważniejsze strony
 Poznaj najnowsze funkcje Fabric.
-* **Comiesięczne podsumowania**: Nie przegap nowości. Wejdź na [Fabric Monthly Updates](https://blog.fabric.microsoft.com/en-us/blog/category/monthly-update) i nadrób aktualizacje z ostatnich trzech miesięcy. Znajdziesz tam nowe funkcje i usprawnienia wdrażane co tydzień, zebrane w jednym miejscu. Dodaj tę stronę do zakładek, żeby twoja wiedza była zawsze aktualna.
+* **Comiesięczne podsumowania**: Nie przegap nowości. Wejdź na [Fabric Monthly Updates](https://blog.fabric.microsoft.com/en-us/blog/category/monthly-update) i nadrób zaległości z ostatnich trzech miesięcy. Znajdziesz tam nowe funkcje i usprawnienia wdrażane co tydzień, zebrane w jednym miejscu. Dodaj tę stronę do zakładek, żeby twoja wiedza była zawsze aktualna.
 * **Najnowsze ogłoszenia**: Śledź najświeższe wiadomości na [Fabric's Blog](https://blog.fabric.microsoft.com/en-US/blog). Znajdziesz tam szczegółowe omówienia dużych zmian, takich jak funkcje Managed Private Endpoints. To bogate źródło wiedzy i ogłoszeń, którego nie warto pomijać.
 * **Przypnij wizualizacje**: Doceń twórczą pracę wewnętrznego zespołu Microsoft na stronie [Fabric Notes](https://microsoft.github.io/fabricnotes/). Zespół świetnie zwizualizował często używane pojęcia Fabric i w pełni zasłużył na uznanie. Przypnij tę stronę, żeby mieć pod ręką źródło inspiracji i nowych pomysłów.
 * **Zgłaszaj swoje pomysły**: W Fabric twój głos się liczy. Jeśli chcesz, żebyśmy coś poprawili albo dodali, opisz swój pomysł na [Fabric Ideas](https://ideas.fabric.microsoft.com/). Przypisz propozycję do konkretnego obciążenia, żeby była jasna. Słuchamy uważnie i jesteśmy gotowi dopasować plany półroczne do twoich potrzeb. Dzięki temu przestajesz tylko reagować na zmiany i zaczynasz wpływać na kierunek rozwoju Fabric. Dobrym przykładem są eksperymentalne wersje runtime, które wprowadziliśmy po opiniach użytkowników. Na co więc czekać? Podziel się swoimi uwagami i współtwórz rozwój Fabric.
@@ -228,7 +228,7 @@ Poznaj dokładnie funkcje Data Wrangler w Fabric, ze szczególnym naciskiem na P
 
 ## Konfiguracja początkowa
 Otwórz swoje środowisko Fabric i przejdź do narzędzia Data Wrangler w Notebooku.
-Załaduj Pandas DataFrame, który chcesz przeanalizować. Jeśli nie masz na myśli konkretnego zbioru danych, użyj przykładowego zbioru dostępnego na platformie.
+Załaduj Pandas DataFrame, który chcesz przeanalizować. Jeśli nie masz pod ręką konkretnego zbioru danych, użyj przykładowego zbioru dostępnego na platformie.
 
 ![Krok](../screenshots/5/new/dw1.jpg)
 ![Krok](../screenshots/5/new/dw2.jpg)

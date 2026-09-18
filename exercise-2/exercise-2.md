@@ -32,7 +32,7 @@ Do końca warsztatu wdrożymy całą architekturę Medallion:
 
 # Zadanie 2.1 Różne sposoby pobierania danych z Lakehouse
 
-W tym zadaniu poznasz różne metody pobierania danych z Lakehouse do Notebooka, żeby je przeanalizować. Poniżej znajdziesz instrukcje krok po kroku, które wykonasz w swoim Notebooku.
+W tym zadaniu poznasz różne metody pobierania danych z Lakehouse do Notebooka na potrzeby analizy. Poniżej znajdziesz instrukcje krok po kroku, które wykonasz w swoim Notebooku.
 
 ## 2.1.1. Podstawy uruchamiania kodu
 Pamiętaj: żeby uruchomić kod w komórce, naciśnij CTRL + Enter w systemie Windows albo ⌘ + Enter w systemie MacOS. Możesz też kliknąć ikonę `Run` (▶️) obok komórki z kodem.
@@ -188,7 +188,7 @@ Zanim w pełni zajmiemy się pracą z obszaru Data Engineering w Notebooku, zost
 
 # Zadanie 2.6 Wykonaj Notebook krok po kroku
 
-W tym zadaniu idź za Notebookiem i zawartym w nim kodem oraz za wszystkimi instrukcjami zapisanymi w kodzie. **Uruchom tam wszystkie komórki z kodem i wykonaj wszystkie kroki.** 
+W tym zadaniu postępuj zgodnie z Notebookiem, zawartym w nim kodem i wszystkimi instrukcjami zapisanymi w kodzie. **Uruchom tam wszystkie komórki z kodem i wykonaj wszystkie kroki.** 
 
 > [!IMPORTANT]
 > Fabric Spark ogranicza i kolejkuje Spark joby na podstawie liczby rdzeni. Użytkownicy mogą przesyłać joby w granicach zakupionego SKU Fabric capacity. Kolejka działa według prostej zasady FIFO: sprawdza, czy są wolne miejsca na joby, i automatycznie ponawia je, gdy capacity się zwolni. Może się zdarzyć, że prześlesz job z Notebooka lub Lakehouse, np. Load to Table, gdy capacity jest w pełni wykorzystane, bo równolegle działające joby zajmują wszystkie Spark Vcores dostępne w zakupionym SKU Fabric capacity. Wtedy job zostanie wstrzymany z komunikatem **HTTP Response code 430: Unable to submit this request because all the available capacity is currently being used. The suggested solutions are to cancel a currently running job, increase the available capacity, or try again later.** 
@@ -198,7 +198,7 @@ Zadanie 2.6 w Notebooku zakończysz, gdy dojdziesz do ostatniej komórki z kodem
 > [!TIP]  
 > Jeśli masz już za sobą Notebook 2.6 i szukasz trudniejszych wyzwań, przejrzyj Notebook i wypisz wszystkie ulepszenia, które proponujesz. Celowo zostawiliśmy kilka miejsc, które można poprawić. Gdy je znajdziesz, porozmawiaj o nich z prowadzącymi.
 > 
-> **Powtórz ćwiczenie z [Zadanie 1.4 Zarządzanie Spark session](./../exercise-1/exercise-1.md#zadanie-14-zarządzanie-spark-session) i sprawdź, czy masz jeszcze inne trwające, aktywne Spark session. Jeśli tak, anuluj je.**
+> **Powtórz ćwiczenie z [Zadania 1.4 Zarządzanie Spark session](./../exercise-1/exercise-1.md#zadanie-14-zarządzanie-spark-session) i sprawdź, czy masz jeszcze inne trwające, aktywne Spark session. Jeśli tak, anuluj je.**
 
 ---
 
@@ -237,7 +237,7 @@ Nadaj nazwę elementowi `ForEach`.
 ![Krok](../screenshots/2/new/28.jpg)
 
 ## 2.7.5. **Zmienne Pipeline**
-Najpierw kliknij tło obszaru roboczego (pierwszy krok na zrzucie ekranu, w różowym prostokącie), żeby zobaczyć kartę z parametrami i zmiennymi.
+Najpierw kliknij tło kanwy Pipeline (pierwszy krok na zrzucie ekranu, w różowym prostokącie), żeby zobaczyć kartę z parametrami i zmiennymi.
 
 Na karcie ustawień Pipeline przejdź do `Variables`. Utwórz tam nową zmienną o nazwie `table_name`, ustaw jej typ na `Array` i przypisz wartość domyślną `["green201501", "green202301"]`. **Wykonaj dokładnie kroki pokazane na zrzucie ekranu.**
 
@@ -276,7 +276,7 @@ Zapisz ustawienia i uruchom Pipeline przyciskiem `Run`.
 ![Krok](../screenshots/2/new/36.jpg)
 
 ## 2.7.12. **Obserwacja i optymalizacja**
-Zwróć uwagę, że dwa Notebooki wykonują się jeden po drugim, zwykle po około dwie minuty każdy. Te Notebooki nie zależą jednak od siebie. Rozważ więc zmianę Pipeline tak, żeby dla większej wydajności uruchamiał Notebooki równolegle.
+Zwróć uwagę, że dwa Notebooki wykonują się jeden po drugim, a każdy trwa zwykle około dwóch minut. Te Notebooki nie zależą jednak od siebie. Rozważ więc taką zmianę Pipeline, żeby dla większej wydajności uruchamiał Notebooki równolegle.
 
 ![Krok](../screenshots/2/new/37.jpg)
 

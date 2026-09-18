@@ -22,9 +22,9 @@ To warstwa podstawowa. Trafiają do niej dane surowe prosto z różnych źróde�
 ## Warstwa silver (zarządzanie danymi oczyszczonymi)
 Nazwa Lakehouse: `silvercleansed`
 
-W tej warstwie pośredniej dane są czyszczone, standaryzowane i wzbogacane. Usuwa to niespójności i przygotowuje dane do bardziej szczegółowej analizy. Obejmuje to rozwiązywanie problemów z jakością danych, ujednolicanie formatów oraz wzbogacanie danych o taksówkach i FHV o dodatkowy kontekst, na przykład warunki pogodowe lub dane o ruchu drogowym. Celem jest wiarygodny zbiór danych zoptymalizowany pod zapytania, który usprawnia analizę i raportowanie.
+W tej warstwie pośredniej dane są czyszczone, standaryzowane i wzbogacane. Usuwa to niespójności i przygotowuje dane do bardziej szczegółowej analizy. Obejmuje to rozwiązywanie problemów z jakością danych, ujednolicanie formatów oraz wzbogacanie danych o taksówkach i FHV o dodatkowy kontekst, na przykład warunki pogodowe lub dane o ruchu drogowym. Celem jest wiarygodny zbiór danych zoptymalizowany pod kątem zapytań, który usprawnia analizę i raportowanie.
 
 ## Warstwa gold (zarządzanie danymi gotowymi do raportowania)
 Nazwa Lakehouse: `goldcurated`
 
-To najwyższa warstwa Lakehouse. Dane są tu dalej transformowane, modelowane i podsumowywane, aby wspierać zaawansowaną analitykę i business intelligence. Ta warstwa ma dostarczać wnioski, na podstawie których można działać, i wspierać decyzje na wysokim szczeblu. Może to oznaczać agregowanie danych w użyteczne metryki, opracowanie KPI dla efektywności transportu miejskiego albo budowanie modeli uczenia maszynowego, które na podstawie wzorców historycznych przewidują przyszłe trendy.
+To najwyższa warstwa Lakehouse. Dane są tu dalej transformowane, modelowane i podsumowywane, aby wspierać zaawansowaną analitykę i business intelligence. Ta warstwa ma dostarczać wnioski, na podstawie których można działać, i wspierać decyzje na wysokim szczeblu. Może to oznaczać agregowanie danych w użyteczne metryki, opracowanie KPI efektywności transportu miejskiego albo budowanie modeli uczenia maszynowego, które na podstawie wzorców historycznych przewidują przyszłe trendy.
