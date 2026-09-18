@@ -44,7 +44,9 @@ Na tym warsztacie zbudujesz od zera małe, kompletne rozwiązanie analityczne. Z
 - Dane układamy w trzech warstwach: surowe (bronze), oczyszczone (silver) i gotowe do raportowania (gold).
 - Na końcu powstaje semantic model i raport Power BI w trybie Direct Lake.
 
-![Architektura rozwiązania budowanego na warsztacie](screenshots/start/diagram.png)
+![Architektura rozwiązania budowanego na warsztacie](assets/architecture/architektura.png)
+
+Na początku każdego ćwiczenia zobaczysz ten sam diagram z podświetlonym fragmentem, nad którym właśnie pracujesz.
 
 # Dla kogo
 

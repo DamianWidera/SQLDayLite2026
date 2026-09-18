@@ -1,5 +1,7 @@
 # Ćwiczenie 5 - Nowości w Fabric i Data Wrangler
 
+![Architektura warsztatu, podświetlony fragment: Ćwiczenie 5](../assets/architecture/architektura-cw5.png)
+
 > [!NOTE]
 > Czas: 40 minut
 > 

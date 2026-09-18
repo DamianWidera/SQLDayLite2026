@@ -1,5 +1,7 @@
 # Ćwiczenia dodatkowe
 
+![Architektura warsztatu, podświetlony fragment: Ćwiczenia dodatkowe](../assets/architecture/architektura-cw6.png)
+
 > [!NOTE]
 > 
 > Powrót do [agendy](./../README.md#agenda) | [Start i konfiguracja](../exercise-0-setup/start.md) | [Ćwiczenie 1](./../exercise-1/exercise-1.md) | [Ćwiczenie 2](./../exercise-2/exercise-2.md) | [Ćwiczenie 3](./../exercise-3/exercise-3.md) | [Ćwiczenie 4](./../exercise-4/exercise-4.md) | [Ćwiczenie 5](./../exercise-5/exercise-5.md)

@@ -1,5 +1,7 @@
 # Ćwiczenie 3 - SQL analytics endpoint, SSMS, udostępnianie i uprawnienia
 
+![Architektura warsztatu, podświetlony fragment: Ćwiczenie 3](../assets/architecture/architektura-cw3.png)
+
 > [!NOTE]
 > Czas: 30 minut
 > 

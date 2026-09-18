@@ -1,5 +1,7 @@
 # Ćwiczenie 4 - Semantic model i raport Power BI
 
+![Architektura warsztatu, podświetlony fragment: Ćwiczenie 4](../assets/architecture/architektura-cw4.png)
+
 > [!NOTE]
 > Czas: 60 minut
 > 

@@ -1,5 +1,7 @@
 # Ćwiczenie 1 - Ładowanie danych: Pipeline i Shortcut
 
+![Architektura warsztatu, podświetlony fragment: Ćwiczenie 1](../assets/architecture/architektura-cw1.png)
+
 > [!NOTE]
 > Czas: 60 minut
 > 

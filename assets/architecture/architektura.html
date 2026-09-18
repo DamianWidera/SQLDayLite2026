@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Architektura warsztatu - SQLDay Lite 2026</title>
+<!-- Źródło diagramu architektury. PNG generuje render.py. Parametr ?focus=1..5 podświetla jedno ćwiczenie. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg0:#070b1f; --bg1:#0d1433; --ink:#f4f6ff; --mute:#9aa6cf; --line:rgba(255,255,255,.13);
+    --glass:rgba(255,255,255,.055); --glass2:rgba(255,255,255,.09);
+    --orange:#ff7a1a; --orange2:#ffb347; --blue:#4da3ff; --teal:#35e0c2; --violet:#a78bfa;
+    --bronze:#e08a4a; --silver:#cfd8ea; --gold:#ffd24a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1600px;height:900px;background:transparent}
+  body{font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .stage{position:relative;width:1600px;height:900px;border-radius:28px;overflow:hidden;
+    background:
+      radial-gradient(900px 520px at 88% -8%, rgba(255,122,26,.30), transparent 62%),
+      radial-gradient(760px 520px at 8% 108%, rgba(77,163,255,.22), transparent 60%),
+      radial-gradient(620px 420px at 56% 52%, rgba(167,139,250,.10), transparent 70%),
+      linear-gradient(160deg,var(--bg1),var(--bg0) 70%);}
+  .dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.4px);background-size:26px 26px;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.25));mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.25))}
+  .abs{position:absolute}
+
+  /* header */
+  .kicker{left:44px;top:34px;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange2);font-weight:700}
+  h1{left:44px;top:56px;font-size:40px;line-height:1.05;font-weight:800;letter-spacing:-.02em}
+  h1 span{background:linear-gradient(90deg,#fff 0%,#ffd9b0 55%,var(--orange) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{left:46px;top:106px;font-size:16px;color:var(--mute);font-weight:500}
+  .here{right:44px;top:40px;padding:10px 18px 10px 14px;border-radius:999px;font-size:15px;font-weight:700;color:#1a0d00;
+    background:linear-gradient(90deg,var(--orange2),var(--orange));display:none;align-items:center;gap:10px}
+  .here i{width:10px;height:10px;border-radius:50%;background:#1a0d00;display:inline-block}
+  .brand{right:46px;top:44px;text-align:right;font-size:14px;color:var(--mute);font-weight:600;line-height:1.5}
+  .brand b{color:var(--ink);font-weight:800;font-size:16px}
+  body.focus .here{display:flex} body.focus .brand{top:92px}
+
+  /* column labels */
+  .col{top:154px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--mute)}
+
+  /* cards */
+  .card{position:absolute;border-radius:18px;background:linear-gradient(180deg,var(--glass2),var(--glass));border:1px solid var(--line);
+    padding:16px 16px 14px 16px;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(6px)}
+  .card .row{display:flex;align-items:center;gap:12px}
+  .ico{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+  .ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .t{font-size:16.5px;font-weight:700;letter-spacing:-.01em;line-height:1.15}
+  .d{font-size:12.5px;color:var(--mute);line-height:1.35;font-weight:500}
+  .mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:11.5px;color:#dfe6ff;font-weight:500}
+  .pill{position:absolute;top:-11px;right:14px;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:999px;color:#1a0d00;
+    background:linear-gradient(90deg,var(--orange2),var(--orange));letter-spacing:.02em;white-space:nowrap}
+  .c-blue{color:var(--blue)} .c-teal{color:var(--teal)} .c-orange{color:var(--orange2)} .c-violet{color:var(--violet)} .c-gold{color:var(--gold)}
+
+  /* OneLake */
+  .lake{position:absolute;left:630px;top:140px;width:660px;height:520px;border-radius:26px;
+    background:linear-gradient(180deg,rgba(77,163,255,.10),rgba(77,163,255,.03));border:1.5px solid rgba(77,163,255,.38)}
+  .lake-h{position:absolute;left:24px;top:16px;display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+  .lake-h small{font-weight:600;color:var(--mute);font-size:13px}
+  .lh{position:absolute;top:64px;width:196px;height:340px;border-radius:18px;padding:14px 12px;border:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.03))}
+  .lh .cap{height:5px;border-radius:5px;margin-bottom:12px}
+  .lh .layer{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:800}
+  .lh .name{font-family:"JetBrains Mono",monospace;font-size:14px;font-weight:600;margin:3px 0 2px}
+  .lh .what{font-size:12px;color:var(--mute);font-weight:500;margin-bottom:10px}
+  .sec{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:700;margin:10px 0 6px}
+  .obj{display:flex;gap:7px;align-items:flex-start;padding:6px 8px;border-radius:9px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.07);margin-bottom:6px}
+  .obj svg{flex:none;width:13px;height:13px;margin-top:2px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+  .obj span{font-family:"JetBrains Mono",monospace;font-size:10.6px;line-height:1.3;color:#e6ebff}
+  .b .cap{background:linear-gradient(90deg,#8a4b1f,var(--bronze))} .b .layer{color:var(--bronze)}
+  .s .cap{background:linear-gradient(90deg,#7e8aa6,var(--silver))} .s .layer{color:var(--silver)}
+  .g .cap{background:linear-gradient(90deg,#b8860b,var(--gold))} .g .layer{color:var(--gold)}
+  .hop{position:absolute;width:150px;text-align:center;transform:translateX(-50%);padding:8px 8px;border-radius:12px;font-size:11.5px;font-weight:700;line-height:1.25;
+    background:#121a3f;border:1px solid rgba(255,179,71,.55);color:#ffe2bf}
+  .hop em{display:block;font-style:normal;color:var(--orange2);font-size:10.5px;font-weight:800;letter-spacing:.06em;margin-top:2px}
+
+  /* strips */
+  .strip{position:absolute;left:360px;top:724px;width:1200px;height:74px;border-radius:18px;border:1px solid var(--line);
+    background:linear-gradient(180deg,var(--glass2),var(--glass));display:flex;align-items:stretch}
+  .strip > div{flex:1;padding:13px 18px;display:flex;flex-direction:column;justify-content:center;gap:3px;border-right:1px solid var(--line);position:relative}
+  .strip > div:last-child{border-right:0}
+  .strip .t{font-size:14.5px} .strip .d{font-size:12px}
+  .strip .pill{top:-11px;right:12px}
+  .base{position:absolute;left:40px;top:822px;width:1520px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:34px;
+    background:linear-gradient(90deg,rgba(255,122,26,.20),rgba(77,163,255,.18));border:1px solid rgba(255,255,255,.16);font-size:13.5px;font-weight:600;color:#dfe6ff}
+  .base b{color:#fff;font-weight:800}
+  .base i{width:5px;height:5px;border-radius:50%;background:var(--orange2);display:inline-block}
+  .side{position:absolute;left:40px;top:724px;width:250px;height:74px;border-radius:18px;border:1px dashed rgba(255,255,255,.22);padding:12px 16px;display:flex;flex-direction:column;justify-content:center;gap:3px}
+
+  /* focus mode */
+  body.focus [data-ex]{opacity:.22;filter:saturate(.5)}
+  body.focus [data-ex].on{opacity:1;filter:none}
+  body.focus .card.on, body.focus .lh.on, body.focus .strip > div.on{border-color:rgba(255,179,71,.8);box-shadow:0 0 0 1px rgba(255,179,71,.35), 0 12px 34px rgba(255,122,26,.18)}
+  svg.wires{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none}
+  .w{fill:none;stroke-width:2.4;stroke-linecap:round}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="dots"></div>
+
+  <div class="abs kicker">SQLDay Lite 2026 · warsztat</div>
+  <h1 class="abs"><span>Architektura rozwiązania</span></h1>
+  <div class="abs sub">Kupiłeś Fabric. I co teraz? Od plików źródłowych do raportu Power BI, w jednym workspace.</div>
+  <div class="abs here"><i></i><span id="hereText">Jesteś tutaj</span></div>
+  <div class="abs brand"><b>Damian Widera · dr Estera Kot</b><br>Gdańsk, 24 września 2026</div>
+
+  <div class="abs col" style="left:40px">Źródła danych</div>
+  <div class="abs col" style="left:360px">Ładowanie</div>
+  <div class="abs col" style="left:1340px">Konsumpcja</div>
+
+  <!-- wires -->
+  <svg class="wires" viewBox="0 0 1600 900">
+    <defs>
+      <linearGradient id="gw" gradientUnits="userSpaceOnUse" x1="280" y1="0" x2="1200" y2="0"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ff7a1a"/></linearGradient>
+      <linearGradient id="gb" gradientUnits="userSpaceOnUse" x1="1280" y1="0" x2="1340" y2="0"><stop offset="0" stop-color="#4da3ff"/><stop offset="1" stop-color="#35e0c2"/></linearGradient>
+      <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#ff7a1a"/></marker>
+      <marker id="ab" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#35e0c2"/></marker>
+    </defs>
+    <!-- sources -> ingest -->
+    <path class="w" data-ex="1" stroke="url(#gw)" marker-end="url(#ah)" d="M292 240 H356"/>
+    <path class="w" data-ex="1" stroke="url(#gw)" marker-end="url(#ah)" stroke-dasharray="7 7" d="M292 400 H356"/>
+    <path class="w" data-ex="2" stroke="url(#gw)" marker-end="url(#ah)" d="M292 560 H356"/>
+    <!-- ingest -> bronze -->
+    <path class="w" data-ex="1" stroke="url(#gw)" marker-end="url(#ah)" d="M580 240 C612 240 612 330 648 330"/>
+    <path class="w" data-ex="1" stroke="url(#gw)" marker-end="url(#ah)" stroke-dasharray="7 7" d="M580 400 C612 400 612 425 648 425"/>
+    <path class="w" data-ex="2" stroke="url(#gw)" marker-end="url(#ah)" d="M580 560 C616 560 610 468 648 468"/>
+    <!-- transformation rail under the Lakehouses -->
+    <path class="w" data-ex="2" stroke="url(#gw)" marker-end="url(#ah)" stroke-linejoin="round" d="M750 546 V596 Q750 604 758 604 H937 Q945 604 945 596 V551"/>
+    <path class="w" data-ex="4" stroke="url(#gw)" marker-end="url(#ah)" stroke-linejoin="round" d="M975 546 V596 Q975 604 983 604 H1162 Q1170 604 1170 596 V551"/>
+    <!-- lake -> consume -->
+    <path class="w" data-ex="3" stroke="url(#gb)" marker-end="url(#ab)" d="M1292 240 H1336"/>
+    <path class="w" data-ex="4" stroke="url(#gb)" marker-end="url(#ab)" d="M1292 400 H1336"/>
+    <path class="w" data-ex="3" stroke="url(#gb)" marker-end="url(#ab)" d="M1292 560 H1336"/>
+  </svg>
+
+  <!-- SOURCES -->
+  <div class="card" data-ex="1" style="left:40px;top:186px;width:250px;height:108px">
+    <div class="row"><div class="ico c-blue"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+      <div><div class="t">Azure Blob Storage</div><div class="d">NYC Taxi Green · Parquet</div></div></div>
+    <div class="mono">2022-01 … 2023-01</div>
+  </div>
+  <div class="card" data-ex="1" style="left:40px;top:346px;width:250px;height:108px">
+    <div class="row"><div class="ico c-teal"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg></div>
+      <div><div class="t">ADLS Gen2</div><div class="d">NYC Taxi Green · Parquet</div></div></div>
+    <div class="mono">2023-01 · dane zostają u źródła</div>
+  </div>
+  <div class="card" data-ex="2" style="left:40px;top:506px;width:250px;height:108px">
+    <div class="row"><div class="ico c-orange"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg></div>
+      <div><div class="t">Plik CSV z dysku</div><div class="d">rabaty na każdy dzień</div></div></div>
+    <div class="mono">NYC-Taxi-Discounts-Per-Day.csv</div>
+  </div>
+
+  <!-- INGEST -->
+  <div class="card" data-ex="1" style="left:360px;top:186px;width:220px;height:108px">
+    <span class="pill">Ćw. 1 · Zadanie 1.1</span>
+    <div class="row"><div class="ico c-orange"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M7.2 12H11c2 0 2-6 5.8-6M11 12c2 0 2 6 5.8 6"/></svg></div>
+      <div><div class="t">Pipeline</div><div class="d">Copy activity</div></div></div>
+    <div class="d">Kopiuje dane do tabeli Delta.</div>
+  </div>
+  <div class="card" data-ex="1" style="left:360px;top:346px;width:220px;height:108px">
+    <span class="pill">Ćw. 1 · Zadanie 1.3</span>
+    <div class="row"><div class="ico c-teal"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></div>
+      <div><div class="t">Shortcut</div><div class="d">zero kopiowania</div></div></div>
+    <div class="d">Potem Load to Tables.</div>
+  </div>
+  <div class="card" data-ex="2" style="left:360px;top:506px;width:220px;height:108px">
+    <span class="pill">Ćw. 2 · Zadanie 2.2</span>
+    <div class="row"><div class="ico c-blue"><svg viewBox="0 0 24 24"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></div>
+      <div><div class="t">Upload</div><div class="d">plik z dysku</div></div></div>
+    <div class="d">Plik trafia do sekcji Files.</div>
+  </div>
+
+  <!-- ONELAKE -->
+  <div class="lake">
+    <div class="lake-h"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4da3ff" stroke-width="1.9" stroke-linecap="round"><path d="M3 9c3-3 6 3 9 0s6 3 9 0"/><path d="M3 14c3-3 6 3 9 0s6 3 9 0"/><path d="M3 19c3-3 6 3 9 0s6 3 9 0"/></svg>OneLake <small>jeden data lake, trzy Lakehouse, format Delta</small></div>
+
+    <div class="lh b" data-ex="1 2" style="left:22px">
+      <div class="cap"></div><div class="layer">bronze</div><div class="name">bronzerawdata</div><div class="what">dane surowe</div>
+      <div class="sec">Tables</div>
+      <div class="obj c-orange"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>green_202201_202301</span></div>
+      <div class="obj c-teal"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>green202301</span></div>
+      <div class="sec">Files</div>
+      <div class="obj c-teal"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>2023/ (Shortcut)</span></div>
+      <div class="obj c-blue"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg><span>NYC-Taxi-<wbr>Discounts-<wbr>Per-Day.csv</span></div>
+    </div>
+
+    <div class="lh s" data-ex="2 3" style="left:232px">
+      <div class="cap"></div><div class="layer">silver</div><div class="name">silvercleansed</div><div class="what">dane oczyszczone</div>
+      <div class="sec">Tables</div>
+      <div class="obj"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>…_cleansed</span></div>
+      <div class="obj"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>…_discounts</span></div>
+      <div class="obj"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>…_avg_fare_per_month</span></div>
+      <div class="obj"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>dim_vendor, dim_trip_type, dim_payment_type</span></div>
+    </div>
+
+    <div class="lh g" data-ex="4" style="left:442px">
+      <div class="cap"></div><div class="layer">gold</div><div class="name">goldcurated</div><div class="what">dane gotowe do raportowania</div>
+      <div class="sec">Tables</div>
+      <div class="obj c-gold"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>greentaxi_predicted</span></div>
+      <div class="sec">Model ML</div>
+      <div class="obj c-violet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg><span>predykcja czasu przejazdu</span></div>
+    </div>
+
+    <div class="hop" data-ex="2" style="left:218px;top:442px">Notebook Spark<em>ĆW. 2</em></div>
+    <div class="hop" data-ex="4" style="left:442px;top:442px">Notebook Data Science<em>ĆW. 4 · ZADANIE 4.1</em></div>
+  </div>
+
+  <!-- CONSUME -->
+  <div class="card" data-ex="3" style="left:1340px;top:186px;width:220px;height:108px">
+    <span class="pill">Ćw. 3</span>
+    <div class="row"><div class="ico c-teal"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/><path d="M17 15l3 3-3 3"/></svg></div>
+      <div><div class="t" style="font-size:15px">SQL analytics endpoint</div><div class="d">T-SQL, tylko odczyt</div></div></div>
+    <div class="d">Zapytania z SSMS.</div>
+  </div>
+  <div class="card" data-ex="4" style="left:1340px;top:346px;width:220px;height:108px">
+    <span class="pill">Ćw. 4 · Zadanie 4.2</span>
+    <div class="row"><div class="ico c-gold"><svg viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></div>
+      <div><div class="t">Power BI</div><div class="d">semantic model</div></div></div>
+    <div class="d">Direct Lake: raport czyta pliki Delta.</div>
+  </div>
+  <div class="card" data-ex="3" style="left:1340px;top:506px;width:220px;height:108px">
+    <span class="pill">Ćw. 3 · Zadania 3.4 i 3.5</span>
+    <div class="row"><div class="ico c-violet"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 8v6M14 11h6"/></svg></div>
+      <div><div class="t">Udostępnianie</div><div class="d">Share i uprawnienia</div></div></div>
+    <div class="d">Lakehouse i Notebook.</div>
+  </div>
+
+  <!-- STRIPS -->
+  <div class="side" data-ex="0">
+    <div class="t" style="font-size:14.5px">Start i konfiguracja</div>
+    <div class="d">workspace · pool · Runtime 1.3</div>
+  </div>
+  <div class="strip">
+    <div data-ex="2"><span class="pill">Ćw. 2 · Zadanie 2.7</span><div class="t">Pipeline: orkiestracja</div><div class="d">ForEach uruchamia Notebook dla każdej tabeli</div></div>
+    <div data-ex="1 2"><div class="t">Monitoring hub</div><div class="d">status, błędy, aktywne Spark session</div></div>
+    <div data-ex="5"><span class="pill">Ćw. 5</span><div class="t">Nowości w Fabric</div><div class="d">runtime · Python UDTF · Data Wrangler · VS Code</div></div>
+    <div data-ex="6"><span class="pill">Dodatkowe</span><div class="t">Dla szybszych</div><div class="d">Copilot · Lineage · V-Order · MERGE · harmonogram</div></div>
+  </div>
+  <div class="base"><span><b>Microsoft Fabric</b></span><i></i><span>capacity</span><i></i><span>workspace</span><i></i><span>Spark: Starter pool</span><i></i><span>Medallion architecture: bronze → silver → gold</span></div>
+</div>
+
+<script>
+  const f = new URLSearchParams(location.search).get("focus");
+  const names = {0:"Start i konfiguracja",1:"Ćwiczenie 1 · ładowanie danych",2:"Ćwiczenie 2 · transformacja danych",3:"Ćwiczenie 3 · SQL i udostępnianie",4:"Ćwiczenie 4 · Power BI i Data Science",5:"Ćwiczenie 5 · nowości w Fabric",6:"Ćwiczenia dodatkowe"};
+  if (f !== null && names[f]) {
+    document.body.classList.add("focus");
+    document.getElementById("hereText").textContent = "Jesteś tutaj: " + names[f];
+    document.querySelectorAll("[data-ex]").forEach(el => { if (el.dataset.ex.split(" ").includes(f)) el.classList.add("on"); });
+  }
+</script>
+</body>
+</html>

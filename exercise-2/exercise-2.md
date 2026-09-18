@@ -1,5 +1,7 @@
 # Ćwiczenie 2 - Transformacja danych w Notebookach i na klastrach Spark
 
+![Architektura warsztatu, podświetlony fragment: Ćwiczenie 2](../assets/architecture/architektura-cw2.png)
+
 > [!NOTE]
 > Czas: 75 minut
 > 

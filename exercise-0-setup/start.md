@@ -1,4 +1,6 @@
 # Start i konfiguracja
+
+![Architektura warsztatu, podświetlony fragment: Start i konfiguracja](../assets/architecture/architektura-cw0.png)
 > [!NOTE]
 > Czas: 30 minut | [Powrót do agendy](./../README.md#agenda) | [Dalej: Ćwiczenie 1](./../exercise-1/exercise-1.md)
    
