@@ -89,6 +89,13 @@ Dziś odbywa się równolegle kilka warsztatów. Aby wszystkie przebiegały pły
    - Potwierdź i zapisz zmiany w ustawieniach domyślnego Spark pool.
 ![Jeden węzeł](../screenshots/extra/new/onenode3.jpg)
 
+4. **Ustaw Runtime 1.3**:
+   - W tym samym oknie Spark settings otwórz kartę `Environment`.
+   - Z listy `Runtime version` wybierz `1.3 (Spark 3.5, Delta 3.2)` i kliknij `Save`.
+
+> [!IMPORTANT]
+> Notebooki tego warsztatu są przygotowane dla Runtime 1.3. Microsoft zapowiedział, że pod koniec września 2026 roku domyślną wersją w nowych workspace zostanie Runtime 2.0 (Spark 4.1). Dlatego ustaw wersję ręcznie i nie polegaj na wartości domyślnej.
+
 
 ## 14. Pobierz pliki do ćwiczeń
  

@@ -36,15 +36,15 @@ Sprawdź, czy jesteś w sekcji Fabric i w workspace utworzonym w poprzednim ćwi
 ![Krok](../screenshots/1/new/1.jpg)
 
 ## 1.1.2. **Utwórz nowy Pipeline** 
-Kliknij `New item`, a następnie `Data pipeline`.
+Kliknij `New item`, a następnie `Pipeline`. W starszych wersjach interfejsu ten element nazywał się `Data pipeline` i tak wygląda na części zrzutów ekranu.
 
 > [!IMPORTANT]  
-> Okno konfiguracji Data pipeline może pojawić się z krótkim opóźnieniem. Poczekaj kilka sekund, aż okno załaduje się w całości. W tym oknie podasz nazwę Data pipeline. Nie klikaj w tym czasie kilka razy, bo możesz przypadkiem utworzyć kilka Data pipeline.
+> Okno konfiguracji Pipeline może pojawić się z krótkim opóźnieniem. Poczekaj kilka sekund, aż okno załaduje się w całości. W tym oknie podasz nazwę Pipeline. Nie klikaj w tym czasie kilka razy, bo możesz przypadkiem utworzyć kilka Data pipeline.
 
 ![Krok](../screenshots/1/new/2.jpg)
 
 ## 1.1.3. **Nazwij Pipeline**
-Nadaj nazwę Data pipeline. Zalecamy `LoadRawTaxiData`. 
+Nadaj nazwę Pipeline. Zalecamy `LoadRawTaxiData`. 
 
 ![Krok](../screenshots/1/new/3.jpg)
 
@@ -112,6 +112,9 @@ Przejdź na kartę `Destination`, wybierz połączenie (`Select`) i kliknij `Bro
 ## 1.1.16. **Utwórz i nazwij Lakehouse**
 W sekcji `New Fabric item` wybierz `Lakehouse`, aby utworzyć nowy Lakehouse. Jako workspace wybierz swój bieżący workspace. Nazwę ustal zgodnie z [podaną konwencją nazw](../exercise-0-setup/naming-convention.md), wpisz ją i kliknij `Create and connect`.
 ![Krok](../screenshots/1/new/16.jpg)
+
+> [!IMPORTANT]
+> Zanim utworzysz Lakehouse, odznacz pole `Lakehouse schemas`. Pole jest domyślnie zaznaczone. Kod w Notebookach tego warsztatu używa nazw dwuczłonowych, np. `silvercleansed.nazwa_tabeli`. W Lakehouse z włączonym schema taka nazwa oznacza `schema.tabela`, więc zapis trafi w złe miejsce albo zakończy się błędem. Na zrzucie ekranu tego pola może jeszcze nie być.
 
 ## 1.1.17. **Sprawdź Lakehouse**
 Sprawdź, czy nowo utworzony Lakehouse jest widoczny na odpowiedniej karcie.
@@ -219,7 +222,7 @@ W sekcji `Tables` w Lakehouse kliknij trzy kropki obok nazwy tabeli i wybierz `P
 ![Krok](../screenshots/1/new/29.jpg)
 
 ## 1.2.3. **Format danych i zarządzanie**
-Zwróć uwagę, że format danych tabeli to `Managed`, czyli tabela jest zarządzana. Tabela została też zoptymalizowana przez Z-Order. Szczegóły znajdziesz w sekcji dodatkowej.
+Zwróć uwagę, że format danych tabeli to `Managed`, czyli tabela jest zarządzana. Sprawdź też, czy tabela została zapisana z optymalizacją V-Order. Szczegóły znajdziesz w sekcji dodatkowej.
 ![Krok](../screenshots/1/new/30.jpg)
 
 > [!TIP]
@@ -235,7 +238,7 @@ Wróć do głównego widoku Lakehouse, po raz ostatni rozwiń opcje tabeli i wyb
 ![Krok](../screenshots/1/new/33.jpg)
 
 ## 1.2.6. **Opcje konserwacji i optymalizacja**
-Znajdziesz tu opcje optymalizacji rozmiaru plików oraz VACUUM, czyli usuwania plików, które nie są już potrzebne. Oba procesy można zautomatyzować. W tej sekcji zobaczysz też, jak do twoich danych stosowana jest optymalizacja V-Order. Najedź kursorem na ikonę informacji, aby zobaczyć szczegóły.
+Znajdziesz tu opcje optymalizacji rozmiaru plików oraz VACUUM, czyli usuwania plików, które nie są już potrzebne. Oba procesy można zautomatyzować. W tej sekcji zobaczysz też, jak do twoich danych stosowana jest optymalizacja V-Order. Najedź kursorem na ikonę informacji, aby zobaczyć szczegóły. W workspace utworzonych od kwietnia 2025 roku V-Order jest domyślnie wyłączony dla zapisów Spark (profil `writeHeavy`). Włączysz go ustawieniem `spark.sql.parquet.vorder.default` albo profilem `readHeavyForPBI`.
 ![Krok](../screenshots/1/new/34.jpg)
 
 ## 1.2.7. **Zakończenie zadania**
@@ -269,7 +272,7 @@ Rozwiń opcje sekcji plików: kliknij trzy kropki przy `Files`. Następnie wybie
 ![Krok](../screenshots/1/new/35.jpg)
 
 ## 1.3.2. Opcje Shortcut
-Masz do wyboru wiele źródeł, z których możesz korzystać bezpośrednio, bez kopiowania danych. Obecnie Shortcut obsługuje dane z OneLake, Amazon S3, Azure Blob Storage, Azure Data Lake Storage Gen2, Dataverse i Google Cloud Storage. Wybierz `Azure Data Lake Storage Gen2`.
+Masz do wyboru wiele źródeł, z których możesz korzystać bezpośrednio, bez kopiowania danych. Obecnie Shortcut obsługuje dane z OneLake, Azure Data Lake Storage Gen2, Azure Blob Storage, Amazon S3, magazynów zgodnych z S3, Google Cloud Storage, Dataverse oraz OneDrive i SharePoint. Do źródeł on-premises połączysz się przez gateway. Shortcut może też wskazywać tabele Iceberg. Wybierz `Azure Data Lake Storage Gen2`.
 ![Krok](../screenshots/1/new/36.jpg)
 
 ## 1.3.3. Skonfiguruj nowy Shortcut
@@ -332,6 +335,9 @@ Aby uruchomić zapytanie, kliknij przycisk odtwarzania po lewej stronie komórki
 
 > [!IMPORTANT]
 > Fabric Spark stosuje throttling i kolejkowanie oparte na liczbie rdzeni. Użytkownicy mogą przesyłać Spark job w ramach zakupionego SKU Fabric capacity. Kolejka działa w prostym modelu FIFO: sprawdza dostępne sloty i automatycznie ponawia Spark job, gdy capacity się zwolni. Jeśli prześlesz Spark job z Notebooka lub Lakehouse, np. Load to Table, gdy capacity jest maksymalnie obciążone, bo równolegle działające Spark job zajmują wszystkie Spark Vcores dostępne w zakupionym SKU Fabric capacity, zobaczysz komunikat **HTTP Response code 430: Unable to submit this request because all the available capacity is currently being used. The suggested solutions are to cancel a currently running job, increase the available capacity, or try again later.**.
+
+> [!NOTE]
+> Stan na wrzesień 2026 roku: aktualny komunikat brzmi `[TooManyRequestsForCapacity] HTTP Response code 430: This Spark job can't be run because you have hit a Spark compute or API rate limit.` Kolejka obejmuje tylko joby uruchamiane z Pipeline, z harmonogramu i ze Spark Job Definition. Interaktywne joby z Notebooka nie trafiają do kolejki, tylko od razu dostają błąd 430. Na Fabric trial capacity kolejkowanie nie działa wcale.
 
 
 ![Krok](../screenshots/1/new/50.jpg)

@@ -22,7 +22,7 @@ Poznaj najnowsze funkcje Fabric.
 * **Zgłaszaj swoje pomysły**: W Fabric twój głos się liczy. Jeśli chcesz, żebyśmy coś poprawili albo dodali, opisz swój pomysł na [Fabric Ideas](https://ideas.fabric.microsoft.com/). Przypisz propozycję do konkretnego obciążenia, żeby była jasna. Słuchamy uważnie i jesteśmy gotowi dopasować plany półroczne do twoich potrzeb. Dzięki temu przestajesz tylko reagować na zmiany i zaczynasz wpływać na kierunek rozwoju Fabric. Dobrym przykładem są eksperymentalne wersje runtime, które wprowadziliśmy po opiniach użytkowników. Na co więc czekać? Podziel się swoimi uwagami i współtwórz rozwój Fabric.
 
 > [!IMPORTANT]
-> To także dobra okazja, żeby przypomnieć: zawsze używaj najnowszej wersji runtime ze statusem GA. Eksperymentuj z wersją Preview, ale w obciążeniach produkcyjnych używaj wersji GA. Wkrótce opublikujemy też cykl życia wersji runtime. Chcemy wydawać nową wersję co sześć miesięcy. Naturalną konsekwencją dla Spark jest to, że będziemy musieli wycofywać przestarzałe, nieobsługiwane wersje runtime. Przenieś obciążenia produkcyjne przed datą wycofania. Po wycofaniu wersji runtime nie utworzysz już nowych Spark pool, a twoje Spark job zostaną wyłączone w ciągu 90 dni od wycofania.
+> To także dobra okazja, żeby przypomnieć: zawsze używaj najnowszej wersji runtime ze statusem GA. Eksperymentuj z wersją Preview, ale w obciążeniach produkcyjnych używaj wersji GA. Cykl życia wersji runtime znajdziesz w [dokumentacji](https://learn.microsoft.com/fabric/data-engineering/lifecycle). Spark wydaje nowe wersje co sześć do dziewięciu miesięcy, więc przestarzałe wersje runtime są regularnie wycofywane. Przenieś obciążenia produkcyjne przed datą końca wsparcia. Po tej dacie wersja runtime znika z ustawień workspace i z Environment, a Spark job, które jej używają, przestają działać.
 
 ---
 
@@ -40,24 +40,26 @@ Najważniejsze komponenty Fabric Runtime:
 
 W tabeli poniżej znajdziesz szczegółowe porównanie wersji Apache Spark i obsługiwanych konfiguracji w poszczególnych wersjach runtime:
 
-| Składnik             | Runtime 1.1 | Runtime 1.2 | Runtime 1.3 |
-|----------------------|-----------------------------|--------------------------------|-------------------------------|
-| **Apache Spark**     | 3.3.1                       | 3.4.1                          | 3.5.0                         |
-| **System operacyjny** | Ubuntu 18.04                | Mariner 2.0                    | Mariner 2.0                   |
-| **Java**             | 8                           | 11                             | 11                            |
-| **Scala**            | 2.12.15                     | 2.12.17                        | 2.12.17                       |
-| **Python**           | 3.10                        | 3.10                           | 3.10                          |
-| **Delta Lake**       | 2.2.0                       | 2.4.0                          | 3.2                           |
-| **R**                | 4.2.2                       | 4.2.2                          | 	4.4.1                     |
+| Składnik | Runtime 1.3 | Runtime 2.0 |
+|---|---|---|
+| **Etap cyklu życia** | koniec wsparcia ogłoszony na 30 września 2026 roku, potem LTS do marca 2027 roku | GA |
+| **Apache Spark** | 3.5.5 | 4.1 |
+| **System operacyjny** | Mariner 2.0 | Mariner 3.0 |
+| **Java** | 11 | 21 |
+| **Scala** | 2.12.17 | 2.13.16 |
+| **Python** | 3.11 | 3.13 |
+| **Delta Lake** | 3.2 | 4.2 |
+
+Runtime 1.1 i Runtime 1.2 nie są już obsługiwane. Runtime 1.2 stracił wsparcie 31 marca 2026 roku.
 
 > [!TIP] 
-> Poznaj najnowszą wersję runtime: [szczegóły Runtime 1.3](https://learn.microsoft.com/en-us/fabric/data-engineering/runtime-1-3).
+> Najnowsza wersja GA to [Runtime 2.0](https://learn.microsoft.com/fabric/data-engineering/runtime-2-0). Microsoft zapowiedział, że pod koniec września 2026 roku stanie się ona domyślna w nowych workspace. Na tym warsztacie pracujemy na [Runtime 1.3](https://learn.microsoft.com/fabric/data-engineering/runtime-1-3), bo na nim przygotowaliśmy Notebooki.
 
-Celem tego zadania jest poznanie najnowszej wersji runtime, a konkretnie użycie Python User-defined Table Functions (UDTFs), które pojawiły się w Spark 3.5. UDTFs świetnie sprawdzają się w transformacji danych, zwłaszcza gdy jeden wiersz trzeba rozwinąć w wiele wierszy. Więcej o Python UDTFs przeczytasz [tutaj](https://spark.apache.org/docs/latest/api/python/user_guide/sql/python_udtf.html).
+Celem tego zadania jest użycie Python User-defined Table Functions (UDTFs), które pojawiły się w Spark 3.5. UDTFs świetnie sprawdzają się w transformacji danych, zwłaszcza gdy jeden wiersz trzeba rozwinąć w wiele wierszy. Więcej o Python UDTFs przeczytasz [tutaj](https://spark.apache.org/docs/latest/api/python/user_guide/sql/python_udtf.html).
 
 ## 1. Ustaw Runtime 1.3
 
-Upewnij się, że używasz Runtime w wersji 1.3, żeby korzystać z nowych funkcji:
+Upewnij się, że używasz Runtime w wersji 1.3. Tę wersję ustawia [krok 13 konfiguracji startowej](../exercise-0-setup/start.md#13-ustaw-maksymalnie-2-węzły-w-domyślnym-spark-pool). Teraz tylko to sprawdź:
 
 1. Przejdź do 'Workspace settings' w swoim workspace w Fabric.
 2. Otwórz kartę 'Data Engineering/Science' i wybierz 'Spark Settings'.
@@ -124,7 +126,7 @@ Teraz wykorzystaj tę wiedzę i oblicz pełne koszty w szerszym zakresie niż w 
 Managed virtual networks to sieci wirtualne, które Microsoft Fabric tworzy i którymi zarządza osobno dla każdego workspace w Fabric. Zapewniają izolację sieciową obciążeń Fabric Spark: klastry obliczeniowe są wdrażane w dedykowanej sieci i nie należą już do współdzielonej sieci wirtualnej. Managed virtual networks umożliwiają też korzystanie z funkcji bezpieczeństwa sieci, takich jak Managed Private Endpoints i Private Link, dla elementów Data Engineering i Data Science w Microsoft Fabric, które używają Apache Spark.
 
 > [!IMPORTANT]
-> Managed Private Endpoints (oraz Workspace identity) są dostępne tylko dla workspace przypisanych do Fabric capacity z SKU F64 lub większym. 
+> Managed Private Endpoints działają na każdej Fabric capacity z SKU F oraz na Fabric trial capacity. Nie działają na capacity z SKU P.
 
 ![MPE-OVERVIEW](https://learn.microsoft.com/en-us/fabric/security/media/security-managed-vnets-fabric-overview/managed-vnets-overview.gif)
 
@@ -136,7 +138,10 @@ Managed Private Endpoints to połączenia, które administratorzy workspace twor
 
 Microsoft Fabric tworzy Managed Private Endpoints i zarządza nimi na podstawie danych podanych przez administratora workspace. Administrator konfiguruje je w ustawieniach workspace: podaje identyfikator zasobu źródła danych, wskazuje docelowy zasób podrzędny i uzasadnia żądanie private endpoint. Managed Private Endpoints obsługują różne źródła danych, m.in. Azure Storage i Azure SQL Database.
 
-Obejrzyj GIF, który pokazuje pełne demo tworzenia Managed Private Endpoint, i wykonaj te same kroki.
+Obejrzyj GIF, który pokazuje pełne demo tworzenia Managed Private Endpoint.
+
+> [!WARNING]
+> To jest tylko demo. Nie twórz Managed Private Endpoint w swoim workspace warsztatowym. Gdy workspace dostaje managed virtual network, Fabric wyłącza w nim Starter pool. Każda Spark session startuje wtedy od 3 do 5 minut, do końca warsztatu.
 
 ![mpe](../screenshots/5/managed_private_endpoint_velocity.gif)
 
@@ -172,7 +177,10 @@ Kliknij [tutaj](https://learn.microsoft.com/en-us/fabric/security/security-manag
 # Autotune Query Tuning
 Gdy mówimy o wersjach runtime Spark, zawsze dochodzimy do wydajności, czyli tematu ważnego dla nas wszystkich. Dlatego opracowaliśmy Autotune. Ta funkcja optymalizuje ustawienia Spark dla twoich Spark job, żeby działały wydajniej i skuteczniej.
 
-Autotune włączysz w konfiguracji Spark w Environment. Utwórz nowe Environment albo w istniejącym Environment ustaw właściwość Spark 'spark.ms.autotune.enabled = true'.
+> [!WARNING]
+> Stan na wrzesień 2026 roku: Autotune działa tylko z Runtime 1.2, a ta wersja straciła wsparcie 31 marca 2026 roku. W Runtime 1.3 i 2.0 nie da się go włączyć. Autotune nie działa też z High concurrency mode ani z private endpoints. Traktuj tę sekcję jako opis mechanizmu, a nie ćwiczenie do wykonania.
+
+Autotune włączało się w konfiguracji Spark w Environment, właściwością Spark 'spark.ms.autotune.enabled = true'.
 
 * [Obejrzyj ekskluzywne demo](https://1drv.ms/v/s!ApCaji7rcQaQ3rNv8g7pBnLdrwQBfQ?e=R7GiEq)
 

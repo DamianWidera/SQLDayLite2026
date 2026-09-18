@@ -14,11 +14,11 @@
 
 **SQL analytics endpoint** w Lakehouse Fabric pozwala analizować dane w tabelach Delta w Lakehouse za pomocą języka T-SQL. Możesz w nim zapisywać funkcje, tworzyć widoki i stosować zabezpieczenia SQL.
 
-Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Read. Obejmuje ono sam Lakehouse, powiązany SQL endpoint i domyślny semantic model. Oprócz tego standardowego dostępu użytkownicy mogą dostać także:
+Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Read. Obejmuje ono sam Lakehouse i powiązany SQL analytics endpoint. Od 5 września 2025 roku Fabric nie tworzy już domyślnego semantic model. Semantic model tworzysz samodzielnie, tak jak w Ćwiczeniu 4. Oprócz tego standardowego dostępu użytkownicy mogą dostać także:
 
 -   uprawnienie **ReadData** do SQL endpoint, które daje dostęp do danych bez wymuszania zasad SQL,
 -   uprawnienie **ReadAll** do Lakehouse, które daje pełny dostęp do danych przez Apache Spark,
--   uprawnienie **Build** do domyślnego semantic model, które pozwala tworzyć raporty Power BI na podstawie tego modelu.
+-   uprawnienie **Build** do semantic model, który samodzielnie utworzysz na tym Lakehouse. Pozwala ono tworzyć raporty Power BI na tym modelu.
   
 ---
 
@@ -38,7 +38,7 @@ Cel: pobrać ciąg połączenia SQL dla SQL analytics endpoint twojego Lakehouse
 
 3. **Użyj ciągu połączenia**:
    - Ciąg połączenia jest już w schowku, więc możesz połączyć się z SQL analytics endpoint swojego Lakehouse.
-   - Otwórz wybrane narzędzie do baz danych, na przykład SQL Server Management Studio (SSMS) lub Azure Data Studio.
+   - Otwórz wybrane narzędzie do baz danych, na przykład SQL Server Management Studio (SSMS) albo rozszerzenie MSSQL dla VS Code. Azure Data Studio zostało wycofane 28 lutego 2026 roku.
    - Otwórz okno nowego połączenia, wklej ciąg połączenia w odpowiednie pole i postępuj zgodnie z instrukcjami, aby nawiązać połączenie.
 
 Chroń ciąg połączenia, bo daje on dostęp do twoich danych w Lakehouse. Nie udostępniaj go publicznie i nie przechowuj w niezabezpieczonych miejscach. Jeśli masz problem ze skopiowaniem lub użyciem ciągu połączenia, sprawdź ustawienia i uprawnienia w workspace z Lakehouse albo zajrzyj do dokumentacji.
@@ -47,9 +47,9 @@ Chroń ciąg połączenia, bo daje on dostęp do twoich danych w Lakehouse. Nie 
 
 # Zadanie 3.2 Połącz się z Fabric SQL Endpoint w SQL Server Management Studio (SSMS)
 > [!TIP]
-> Jeśli interesuje cię lineage i połączenie przez Azure Data Studio, [przejdź do tego dodatkowego ćwiczenia](../exercise-extra/extra.md#lineage).
+> Jeśli interesuje cię lineage i połączenie z narzędzi zewnętrznych, [przejdź do tego dodatkowego ćwiczenia](../exercise-extra/extra.md#lineage).
  
-Cel tego zadania: połączyć się z Fabric SQL Endpoint w SQL Server Management Studio (SSMS), aby uruchamiać zapytania i zarządzać danymi bezpośrednio z SSMS. [Pobierz najnowszą ogólnie dostępną (GA) wersję SQL Server Management Studio (SSMS) 20.0 (485 MB)](https://aka.ms/ssmsfullsetup)
+Cel tego zadania: połączyć się z Fabric SQL Endpoint w SQL Server Management Studio (SSMS), aby uruchamiać zapytania i zarządzać danymi bezpośrednio z SSMS. [Pobierz najnowszą ogólnie dostępną (GA) wersję SQL Server Management Studio (SSMS)](https://aka.ms/ssmsfullsetup). Link pobiera aktualne wydanie, obecnie SSMS 22.
 
 1. **Otwórz SQL Server Management Studio**:
    - Uruchom SSMS na swoim komputerze. Po otwarciu aplikacji powinno automatycznie pojawić się okno `Connect to Server`. Jeśli SSMS jest już otwarty, ale nie masz połączenia, przejdź do Object Explorer, kliknij `Connect`, a potem wybierz `Database Engine`.
@@ -58,7 +58,7 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint w SQL Server Management
    - W polu `Server name` w oknie połączenia wklej skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać twojemu Fabric SQL Endpoint.
 
 3. **Uwierzytelnianie**:
-   - Jako metodę uwierzytelniania wybierz z listy `Microsoft Entra Password`. Zapewnia to bezpieczne połączenie oparte na nowoczesnych metodach uwierzytelniania.
+   - Jako metodę uwierzytelniania wybierz z listy `Microsoft Entra Password`. W SSMS 22 zalecana opcja nazywa się `Microsoft Entra MFA`. Zapewnia to bezpieczne połączenie oparte na nowoczesnych metodach uwierzytelniania.
 
     ![hasło](../screenshots/3/pwd.jpg)
 
@@ -147,7 +147,7 @@ Dowiedz się, jak udostępnić Lakehouse członkom zespołu lub interesariuszom 
 
 2. **Skonfiguruj ustawienia udostępniania**:
    - W oknie udostępniania wpisz imię i nazwisko lub adres e-mail osób, którym chcesz udostępnić Lakehouse.
-   - Nadaj właściwe uprawnienia, zaznaczając odpowiednie pola. Domyślnie udostępnienie Lakehouse daje dostęp do Lakehouse, powiązanego SQL endpoint i domyślnego semantic model.
+   - Nadaj właściwe uprawnienia, zaznaczając odpowiednie pola. Domyślnie udostępnienie Lakehouse daje dostęp do Lakehouse i powiązanego SQL analytics endpoint. Dodatkowe pola w aktualnym oknie to `Read all with SQL analytics endpoint` i `Read all with Apache Spark`.
    
    ![Okno udostępniania Lakehouse](../screenshots/3/new/4.png)
 

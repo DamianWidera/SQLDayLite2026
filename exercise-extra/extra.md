@@ -33,6 +33,10 @@ Copilot dla Data Science i Data Engineering to asystent AI, z którym rozmawiasz
 
 Przyjrzyj się tabeli `green201501` w swoim Lakehouse i poszukaj ciekawych obserwacji na temat tego zbioru danych. Zapytaj też, jak obliczyć średnią długość przejazdu i średnią opłatę dla każdego typu płatności.
 
+> [!IMPORTANT]
+> Stan na wrzesień 2026 roku: Copilot w Notebooku nie wymaga już instalacji ani uruchamiania komórki startowej. Przycisk `Get started` i komórka instalacyjna z kroków poniżej mogą się nie pojawić. W takim przypadku otwórz panel Copilot i od razu zacznij rozmowę.
+> Copilot wymaga płatnej capacity F2 lub większej i nie działa na Fabric trial capacity. Administrator tenanta musi też włączyć Copilot w Admin portal.
+
 ## Otwórz panel Copilot
 Otwórz istniejący Notebook (np. ***Just exploration***) w swoim workspace albo utwórz nowy Notebook. Kliknij ikonę `Copilot` na wstążce Notebooka. Otworzy się panel czatu Copilot. Gdy klikniesz `Get started`, na górze Notebooka pojawi się nowa komórka. Uwaga: ta komórka inicjuje Spark session w Notebooku Fabric. Musisz ją uruchomić, żeby Copilot działał poprawnie. W przyszłych wersjach mogą pojawić się inne sposoby inicjalizacji i ten krok może przestać być potrzebny.
 ![Krok](../screenshots/extra/CopilotStart.png)
@@ -69,11 +73,11 @@ Ta krótka demonstracja pokazuje, jak łatwo sięgnąć po Copilot przy analizie
 
 **SQL Analytics Endpoint** w Fabric Lakehouse pozwala analizować dane w tabelach Delta w Lakehouse za pomocą języka T-SQL. Możesz w nim zapisywać funkcje, tworzyć widoki i stosować zabezpieczenia SQL.
 
-Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Read. Obejmuje ono sam Lakehouse, powiązany SQL endpoint i domyślny semantic model. Oprócz tego standardowego dostępu możesz nadać użytkownikom:
+Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Read. Obejmuje ono sam Lakehouse i powiązany SQL analytics endpoint. Od 5 września 2025 roku Fabric nie tworzy już domyślnego semantic model. Semantic model tworzysz samodzielnie, tak jak w Ćwiczeniu 4. Oprócz tego standardowego dostępu możesz nadać użytkownikom:
 
 -   uprawnienie **ReadData** do SQL endpoint, które daje dostęp do danych bez wymuszania zasad SQL.
 -   uprawnienie **ReadAll** do Lakehouse, które daje pełny dostęp do danych przez Apache Spark.
--   uprawnienie **Build** do domyślnego semantic model, które pozwala tworzyć raporty Power BI na tym modelu.
+-   uprawnienie **Build** do semantic model, który samodzielnie utworzysz na tym Lakehouse. Pozwala ono tworzyć raporty Power BI na tym modelu.
 
 Cel tego ćwiczenia: zdobyć ciąg połączenia SQL do SQL analytics endpoint twojego Lakehouse. Bez niego nie połączysz się z danymi i nie odpytasz ich z narzędzi opartych na SQL.
 
@@ -88,7 +92,7 @@ Cel tego ćwiczenia: zdobyć ciąg połączenia SQL do SQL analytics endpoint tw
 
 3. **Użyj ciągu połączenia**:
    - Ciąg połączenia jest w schowku, więc możesz połączyć się z SQL analytics endpoint swojego Lakehouse.
-   - Otwórz wybrane narzędzie bazodanowe, na przykład SQL Server Management Studio (SSMS) albo Azure Data Studio.
+   - Otwórz wybrane narzędzie bazodanowe, na przykład SQL Server Management Studio (SSMS) albo rozszerzenie MSSQL dla VS Code. Azure Data Studio zostało wycofane 28 lutego 2026 roku.
    - Otwórz okno nowego połączenia, wklej ciąg połączenia w odpowiednie pole i postępuj zgodnie z instrukcjami na ekranie, żeby nawiązać połączenie.
 
 Przechowuj ciąg połączenia bezpiecznie, bo daje on dostęp do twoich danych w Lakehouse. Nie udostępniaj go publicznie i nie zapisuj w niezabezpieczonych miejscach. Jeśli kopiowanie albo użycie ciągu połączenia sprawia problem, sprawdź ustawienia i uprawnienia w workspace swojego Lakehouse albo zajrzyj do dokumentacji.
@@ -97,9 +101,9 @@ Przechowuj ciąg połączenia bezpiecznie, bo daje on dostęp do twoich danych w
 
 # Połącz się z Fabric SQL Endpoint za pomocą SQL Server Management Studio (SSMS)
 > [!TIP]
-> Jeśli interesuje cię Lineage i połączenie przez Azure Data Studio, [przejdź do tego dodatkowego ćwiczenia](../exercise-extra/extra.md#lineage).
+> Jeśli interesuje cię Lineage i połączenie z narzędzi zewnętrznych, [przejdź do tego dodatkowego ćwiczenia](../exercise-extra/extra.md#lineage).
  
-Cel tego zadania: połączyć się z Fabric SQL Endpoint z poziomu SQL Server Management Studio (SSMS), żeby odpytywać dane i zarządzać nimi bezpośrednio w SSMS. [Pobierz najnowszą ogólnie dostępną (GA) wersję SQL Server Management Studio (SSMS) 20.0 (485 MB)](https://aka.ms/ssmsfullsetup)
+Cel tego zadania: połączyć się z Fabric SQL Endpoint z poziomu SQL Server Management Studio (SSMS), żeby odpytywać dane i zarządzać nimi bezpośrednio w SSMS. [Pobierz najnowszą ogólnie dostępną (GA) wersję SQL Server Management Studio (SSMS)](https://aka.ms/ssmsfullsetup). Link pobiera aktualne wydanie, obecnie SSMS 22.
 
 1. **Otwórz SQL Server Management Studio**:
    - Uruchom SSMS na swoim komputerze. Po otwarciu aplikacji okno `Connect to Server` powinno pojawić się automatycznie. Jeśli SSMS jest już otwarty, ale bez połączenia, przejdź do Object Explorer, kliknij `Connect` i wybierz `Database Engine`.
@@ -108,7 +112,7 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint z poziomu SQL Server Ma
    - W oknie połączenia wklej w pole `Server name` skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać twojemu Fabric SQL Endpoint.
 
 3. **Uwierzytelnianie**:
-   - Jako metodę uwierzytelniania wybierz `Microsoft Entra Password`. Dzięki temu połączenie jest bezpieczne i korzysta z nowoczesnych metod uwierzytelniania.
+   - Jako metodę uwierzytelniania wybierz `Microsoft Entra Password`. W SSMS 22 zalecana opcja nazywa się `Microsoft Entra MFA`. Dzięki temu połączenie jest bezpieczne i korzysta z nowoczesnych metod uwierzytelniania.
 
     ![hasło](../screenshots/3/pwd.jpg)
 
@@ -197,7 +201,7 @@ Dowiesz się, jak udostępnić Lakehouse członkom zespołu albo interesariuszom
 
 2. **Skonfiguruj udostępnianie**:
    - W oknie udostępniania wpisz nazwę albo adres e-mail osób, którym chcesz udostępnić Lakehouse.
-   - Nadaj odpowiednie uprawnienia, zaznaczając właściwe pola wyboru. Domyślnie udostępnienie Lakehouse daje dostęp do samego Lakehouse, powiązanego SQL endpoint i domyślnego semantic model.
+   - Nadaj odpowiednie uprawnienia, zaznaczając właściwe pola wyboru. Domyślnie udostępnienie Lakehouse daje dostęp do Lakehouse i powiązanego SQL analytics endpoint. Dodatkowe pola w aktualnym oknie to `Read all with SQL analytics endpoint` i `Read all with Apache Spark`.
    
    ![Okno udostępniania Lakehouse](../screenshots/extra/SharingLakehouse02.png)
 
@@ -288,7 +292,7 @@ Poznaj zależności i przepływ danych w swoim workspace Fabric w widoku Lineage
      ![Lineage wybranego elementu](../screenshots/extra/new/linage2.jpg)
 
 4. **Poznaj integrację z narzędziami zewnętrznymi**:
-   - Zwróć uwagę na rolę narzędzi zewnętrznych, takich jak Azure Visual Studio Code albo SQL Server Management Studio (SSMS), w zarządzaniu bazami danych i w ich rozwijaniu na różnych platformach.
+   - Zwróć uwagę na rolę narzędzi zewnętrznych, takich jak VS Code z rozszerzeniem MSSQL albo SQL Server Management Studio (SSMS), w zarządzaniu bazami danych i w ich rozwijaniu na różnych platformach.
    
      ![Połączenie z Azure Visual Studio Code](../screenshots/extra/new/linage3.jpg)
 
@@ -481,7 +485,7 @@ W tym ćwiczeniu rozwiążesz problem braku dynamicznego wykonywania jobów: utw
 
 4. **Skonfiguruj nowy Spark pool**:
    - Nadaj nowemu Spark pool czytelną nazwę.
-   - Wybierz rozmiar węzła dla swojego Spark pool. Maszyny z GPU mogą być dostępne, ale na razie wybierz "Memory Optimized" i na przykład rozmiar węzła "Small".
+   - Wybierz rozmiar węzła dla swojego Spark pool. Fabric udostępnia tylko rodzinę węzłów "Memory Optimized". Wybierz ją i na przykład rozmiar węzła "Small".
    - Włącz autoskalowanie, żeby Spark pool automatycznie dopasowywał się do obciążenia.
    - Włącz "Dynamic Allocation for Executors", żeby lepiej wykorzystać zasoby podczas wykonywania jobów.
    - Zawsze pamiętaj, żeby po konfiguracji zapisać zmiany.
@@ -509,6 +513,9 @@ Nowy Spark pool z dynamiczną alokacją i autoskalowaniem może znacznie poprawi
 V-Order to optymalizacja plików Parquet stosowana w czasie zapisu. Przyspiesza odczyt w silnikach obliczeniowych Microsoft Fabric, takich jak Power BI, SQL i Spark. Stosuje sortowanie, kompresję i inne optymalizacje, co obniża koszty i poprawia wydajność.
 
 W tym ćwiczeniu sprawdzisz, czy tabela została zapisana z optymalizacją V-Order, czy bez niej. 
+
+> [!NOTE]
+> Stan na wrzesień 2026 roku: w nowych workspace V-Order jest domyślnie wyłączony (`spark.sql.parquet.vorder.default=false`, profil `writeHeavy`). Do włączania i wyłączania używaj właściwości `spark.sql.parquet.vorder.default`. Starsze ustawienie `spark.sql.parquet.vorder.enable`, widoczne na zrzucie ekranu, zostało usunięte w Runtime 1.3.
 
 1. **Przygotuj środowisko**:
    - Utwórz nowy Notebook w swoim workspace.
@@ -539,7 +546,7 @@ Przeczytaj [dokumentację Microsoft o optymalizacji Delta i V-Order](https://lea
 
 Polecenie MERGE w Delta Lake pozwala aktualizować tabelę Delta z użyciem zaawansowanych warunków. Poleceniem MERGE zaktualizujesz tabelę docelową danymi z tabeli źródłowej, widoku albo DataFrame. Obecny algorytm nie jest jednak w pełni zoptymalizowany pod kątem wierszy niezmodyfikowanych. Zespół Microsoft Spark Delta wdrożył własną optymalizację Low Shuffle Merge. Wyklucza ona niezmodyfikowane wiersze z kosztownej operacji shuffle, która jest potrzebna do aktualizacji dopasowanych wierszy.
 
-Optymalizacją steruje konfiguracja [spark.microsoft.delta.merge.lowShuffle.enabled](https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/low-shuffle-merge-for-apache-spark), domyślnie włączona w runtime. Nie wymaga zmian w kodzie i jest w pełni zgodna z dystrybucją open source Delta Lake. Więcej o scenariuszach użycia Low Shuffle Merge przeczytasz w artykule Low Shuffle Merge optimization on Delta tables.
+Optymalizacją steruje konfiguracja [spark.microsoft.delta.merge.lowShuffle.enabled](https://learn.microsoft.com/fabric/data-engineering/low-shuffle-merge), domyślnie włączona w runtime. Nie wymaga zmian w kodzie i jest w pełni zgodna z dystrybucją open source Delta Lake. Więcej o scenariuszach użycia Low Shuffle Merge przeczytasz w artykule Low Shuffle Merge optimization on Delta tables.
 
 ## Zarządzanie danymi NYC Green Taxi za pomocą operacji Merge
 

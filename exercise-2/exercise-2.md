@@ -181,6 +181,9 @@ Zanim w pełni zajmiemy się pracą z obszaru Data Engineering w Notebooku, zost
 ## 2.5.2. Wpisz nazwę Lakehouse zgodną z konwencją nazw. Sugerowana nazwa to `silvercleansed`.
 ![Krok](../screenshots/2/new/22.jpg)
 
+> [!IMPORTANT]
+> Zanim utworzysz Lakehouse, odznacz pole `Lakehouse schemas`. Pole jest domyślnie zaznaczone. Kod w Notebookach tego warsztatu używa nazw dwuczłonowych, np. `silvercleansed.nazwa_tabeli`. W Lakehouse z włączonym schema taka nazwa oznacza `schema.tabela`, więc zapis trafi w złe miejsce albo zakończy się błędem. Na zrzucie ekranu tego pola może jeszcze nie być.
+
 ## 2.5.3. Sprawdź, czy twój Notebook jest teraz połączony z dwoma Lakehouse: domyślnym (bronze) i nowo dodanym (silver). Gdy to potwierdzisz, możemy zacząć pracę z obszaru Data Engineering.
 ![Krok](../screenshots/2/new/23.jpg)
 
@@ -191,7 +194,10 @@ Zanim w pełni zajmiemy się pracą z obszaru Data Engineering w Notebooku, zost
 W tym zadaniu postępuj zgodnie z Notebookiem, zawartym w nim kodem i wszystkimi instrukcjami zapisanymi w kodzie. **Uruchom tam wszystkie komórki z kodem i wykonaj wszystkie kroki.** 
 
 > [!IMPORTANT]
-> Fabric Spark stosuje throttling i kolejkuje Spark joby na podstawie liczby rdzeni. Użytkownicy mogą przesyłać joby w granicach zakupionego SKU Fabric capacity. Kolejka działa według prostej zasady FIFO: sprawdza, czy są wolne miejsca na joby, i automatycznie ponawia je, gdy capacity się zwolni. Może się zdarzyć, że prześlesz job z Notebooka lub Lakehouse, np. Load to Table, gdy capacity jest w pełni wykorzystane, bo równolegle działające joby zajmują wszystkie Spark Vcores dostępne w zakupionym SKU Fabric capacity. Wtedy zadziała throttling i zobaczysz komunikat **HTTP Response code 430: Unable to submit this request because all the available capacity is currently being used. The suggested solutions are to cancel a currently running job, increase the available capacity, or try again later.** 
+> Fabric Spark stosuje throttling i kolejkuje Spark joby na podstawie liczby rdzeni. Użytkownicy mogą przesyłać joby w granicach zakupionego SKU Fabric capacity. Kolejka działa według prostej zasady FIFO: sprawdza, czy są wolne miejsca na joby, i automatycznie ponawia je, gdy capacity się zwolni. Może się zdarzyć, że prześlesz job z Notebooka lub Lakehouse, np. Load to Table, gdy capacity jest w pełni wykorzystane, bo równolegle działające joby zajmują wszystkie Spark Vcores dostępne w zakupionym SKU Fabric capacity. Wtedy zadziała throttling i zobaczysz komunikat **HTTP Response code 430: Unable to submit this request because all the available capacity is currently being used. The suggested solutions are to cancel a currently running job, increase the available capacity, or try again later.**
+
+> [!NOTE]
+> Stan na wrzesień 2026 roku: aktualny komunikat brzmi `[TooManyRequestsForCapacity] HTTP Response code 430: This Spark job can't be run because you have hit a Spark compute or API rate limit.` Kolejka obejmuje tylko joby uruchamiane z Pipeline, z harmonogramu i ze Spark Job Definition. Interaktywne joby z Notebooka nie trafiają do kolejki, tylko od razu dostają błąd 430. Na Fabric trial capacity kolejkowanie nie działa wcale.
 
 Zadanie 2.6 w Notebooku zakończysz, gdy dojdziesz do ostatniej komórki z kodem. Odeśle cię ona z powrotem tutaj, do Zadania 2.7. 
 
@@ -283,8 +289,10 @@ Zwróć uwagę, że dwa Notebooki wykonują się jeden po drugim, a każdy trwa 
 > [!TIP]
 > (1) Zamiast iterować po Notebookach w pętli ForEach, możesz przekazać różne wartości do jednego uruchomienia Notebooka. Uzupełnieniem mogą być pętle zakodowane w samym Notebooku. 
 > 
-> (2) Użyj metody `mssparkutils.notebook.runMultiple()`, żeby uruchomić wiele Notebooków równolegle. Zyskasz wydajność i oszczędzisz czas. Ta metoda przydaje się szczególnie wtedy, gdy nie musisz czekać na zakończenie jednego Notebooka, żeby uruchomić następny. Wprowadzenie i szczegóły użycia zobaczysz po uruchomieniu `mssparkutils.notebook.help("runMultiple")`. Przykład: 
-> `mssparkutils.notebook.runMultiple(["NotebookA", "NotebookB"])`
+> (2) Użyj metody `notebookutils.notebook.runMultiple()`, żeby uruchomić wiele Notebooków równolegle. Zyskasz wydajność i oszczędzisz czas. Ta metoda przydaje się szczególnie wtedy, gdy nie musisz czekać na zakończenie jednego Notebooka, żeby uruchomić następny. Wprowadzenie i szczegóły użycia zobaczysz po uruchomieniu `notebookutils.notebook.help("runMultiple")`. Przykład: 
+> `notebookutils.notebook.runMultiple(["NotebookA", "NotebookB"])`
+> 
+> Dawna nazwa `mssparkutils` nadal działa, ale zostanie wycofana. Szczegóły znajdziesz w [dokumentacji NotebookUtils](https://learn.microsoft.com/fabric/data-engineering/notebook-utilities).
 > 
 > Więcej o tej funkcji przeczytasz [w dokumentacji](https://learn.microsoft.com/en-us/fabric/data-engineering/microsoft-spark-utilities#reference-run-multiple-notebooks-in-parallel).
 
@@ -333,6 +341,9 @@ Wykonaj te kroki:
 
 ## 2.9.3. Wpisz nazwę Lakehouse zgodną z konwencją nazw. Sugerowana nazwa to `goldcurated`.
 ![Krok](../screenshots/2/new/40.jpg)
+
+> [!IMPORTANT]
+> Zanim utworzysz Lakehouse, odznacz pole `Lakehouse schemas`. Pole jest domyślnie zaznaczone. Kod w Notebookach tego warsztatu używa nazw dwuczłonowych, np. `silvercleansed.nazwa_tabeli`. W Lakehouse z włączonym schema taka nazwa oznacza `schema.tabela`, więc zapis trafi w złe miejsce albo zakończy się błędem. Na zrzucie ekranu tego pola może jeszcze nie być.
 
 ## 2.9.4. Sprawdź, czy twój Lakehouse gold został utworzony.
 ![Krok](../screenshots/2/new/41.jpg)
