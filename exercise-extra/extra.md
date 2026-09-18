@@ -31,7 +31,7 @@ Copilot dla Data Science i Data Engineering to asystent AI, z którym rozmawiasz
 * buduje modele uczenia maszynowego
 
 
-Przyjrzyj się tabeli `green201501` w swoim Lakehouse i poszukaj ciekawych obserwacji na temat tego zbioru danych. Zapytaj też, jak obliczyć średnią długość przejazdu i średnią opłatę dla każdego typu płatności.
+Przyjrzyj się tabeli `green_202201_202301` w swoim Lakehouse i poszukaj ciekawych obserwacji na temat tego zbioru danych. Zapytaj też, jak obliczyć średnią długość przejazdu i średnią opłatę dla każdego typu płatności.
 
 > [!IMPORTANT]
 > Stan na wrzesień 2026 roku: Copilot w Notebooku nie wymaga już instalacji ani uruchamiania komórki startowej. Przycisk `Get started` i komórka instalacyjna z kroków poniżej mogą się nie pojawić. W takim przypadku otwórz panel Copilot i od razu zacznij rozmowę.
@@ -58,7 +58,7 @@ Teraz wypróbuj różne prompty dotyczące twoich danych. Poproś o fragmenty ko
 
 > [!TIP]
 > Zadawaj asystentowi Copilot dowolne pytania, żeby lepiej poznać zbiór danych i więcej wynieść z warsztatu.
-> Przykład: `Analyze my table named green201501 and provide insights about the data`. 
+> Przykład: `Analyze my table named green_202201_202301 and provide insights about the data`. 
 
 ![Krok](../screenshots/extra/InteractCopilot.png)
 
@@ -132,10 +132,10 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint z poziomu SQL Server Ma
 Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skupiamy się na analizie tabeli NYC Taxi z bazy danych `silvercleansed`. Na tych zapytaniach poznasz agregację danych, tworzenie widoków i podstawowe operacje SQL w środowisku Lakehouse.
 
 1. **Policz wiersze w tabeli NYC Taxi**:
-   - Uruchom poniższe zapytanie SQL, żeby poznać łączną liczbę wierszy w tabeli `green201501_cleansed`:
+   - Uruchom poniższe zapytanie SQL, żeby poznać łączną liczbę wierszy w tabeli `green_202201_202301_cleansed`:
      ```sql
      SELECT COUNT(*)
-     FROM [silvercleansed].[dbo].[green201501_cleansed];
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed];
      ```
 
 2. **Oblicz średnią opłatę i średni napiwek**:
@@ -143,7 +143,7 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skupiamy się na an
      ```sql
      SELECT ROUND(AVG([fare_amount]),2) AS [Average Fare], 
      ROUND(AVG([tip_amount]),2) AS [Average Tip] 
-     FROM [silvercleansed].[dbo].[green201501_cleansed];
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed];
      ```
 
 3. **Zagreguj opłaty według liczby pasażerów**:
@@ -152,7 +152,7 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skupiamy się na an
      SELECT DISTINCT [passenger_count], 
      ROUND(SUM([fare_amount]),0) as TotalFares,
      ROUND(AVG([fare_amount]),0) as AvgFares
-     FROM [silvercleansed].[dbo].[green201501_cleansed]
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
      GROUP BY [passenger_count]
      ORDER BY AvgFares DESC;
      ```
@@ -162,8 +162,8 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skupiamy się na an
      ```sql
      SELECT tipped, COUNT(*) AS tip_freq FROM (
        SELECT CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped, tip_amount
-       FROM [silvercleansed].[dbo].[green201501_cleansed]
-       WHERE [lpep_pickup_datetime] BETWEEN '20150101' AND '20151231') tc
+       FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
+       WHERE [lpep_pickup_datetime] BETWEEN '20220101' AND '20230131') tc
      GROUP BY tipped;
      ```
 
@@ -175,7 +175,7 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skupiamy się na an
      SELECT DISTINCT [passenger_count], 
      ROUND(SUM([fare_amount]),0) as TotalFares,
      ROUND(AVG([fare_amount]),0) as AvgFares
-     FROM [silvercleansed].[dbo].[green201501_cleansed]
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
      GROUP BY [passenger_count];
      ```
 
@@ -394,7 +394,7 @@ W tym przykładzie najpierw odczytujemy dane z Lakehouse bronze metodą spark.re
 Nasz rzeczywisty przypadek, jeszcze raz:
 
 ```python
-table_name  = "green201501"
+table_name  = "green_202201_202301"
 
 data_collection = table_name[:-6]  # Wyodrębnia wszystkie znaki oprócz ostatnich sześciu (zakłada, że nie są to cyfry)
 extracted_year = table_name[-6:-2]  # Wyodrębnia cztery cyfry oznaczające rok

@@ -78,10 +78,10 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint w SQL Server Management
 Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skup się na analizie danych z tabeli NYC Taxi w bazie danych `silvercleansed`. Te zapytania pomogą ci zrozumieć agregację danych, tworzenie widoków i podstawowe operacje SQL w środowisku Lakehouse.
 
 1. **Policz wiersze w tabeli NYC Taxi**:
-   - Uruchom poniższe zapytanie SQL, aby poznać łączną liczbę wierszy w tabeli `green201501_cleansed`:
+   - Uruchom poniższe zapytanie SQL, aby poznać łączną liczbę wierszy w tabeli `green_202201_202301_cleansed`:
      ```sql
      SELECT COUNT(*)
-     FROM [silvercleansed].[dbo].[green201501_cleansed];
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed];
      ```
 
 2. **Oblicz średnią opłatę za przejazd i średni napiwek**:
@@ -89,7 +89,7 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skup się na analiz
      ```sql
      SELECT ROUND(AVG([fare_amount]),2) AS [Average Fare], 
      ROUND(AVG([tip_amount]),2) AS [Average Tip] 
-     FROM [silvercleansed].[dbo].[green201501_cleansed];
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed];
      ```
 
 3. **Zagreguj opłaty według liczby pasażerów**:
@@ -98,7 +98,7 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skup się na analiz
      SELECT DISTINCT [passenger_count], 
      ROUND(SUM([fare_amount]),0) as TotalFares,
      ROUND(AVG([fare_amount]),0) as AvgFares
-     FROM [silvercleansed].[dbo].[green201501_cleansed]
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
      GROUP BY [passenger_count]
      ORDER BY AvgFares DESC;
      ```
@@ -108,8 +108,8 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skup się na analiz
      ```sql
      SELECT tipped, COUNT(*) AS tip_freq FROM (
        SELECT CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped, tip_amount
-       FROM [silvercleansed].[dbo].[green201501_cleansed]
-       WHERE [lpep_pickup_datetime] BETWEEN '20150101' AND '20151231') tc
+       FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
+       WHERE [lpep_pickup_datetime] BETWEEN '20220101' AND '20230131') tc
      GROUP BY tipped;
      ```
 
@@ -121,7 +121,7 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skup się na analiz
      SELECT DISTINCT [passenger_count], 
      ROUND(SUM([fare_amount]),0) as TotalFares,
      ROUND(AVG([fare_amount]),0) as AvgFares
-     FROM [silvercleansed].[dbo].[green201501_cleansed]
+     FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
      GROUP BY [passenger_count];
      ```
 

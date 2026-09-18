@@ -37,7 +37,7 @@ Tryb Direct Lake usuwa konieczność importu, bo ładuje pliki danych bezpośred
 
 # Zadanie 4.1 Przewidź czas przejazdu za pomocą Data Science w Fabric Lakehouse
 
-W tym ćwiczeniu wcielisz się w rolę data scientist, który ma zbadać, oczyścić i przekształcić zbiór danych o przejazdach taksówek. Zbudujesz model uczenia maszynowego, który przewiduje czas trwania przejazdów taksówek. Użyjesz zbioru danych greencab o nowojorskich taksówkach z 2015 roku, który zawiera m.in. czas rozpoczęcia i zakończenia przejazdu, lokalizacje, opłaty i liczbę pasażerów. Potem zastosujesz model, aby wygenerować predykcje dla danych greencab z 2023 roku, i zapiszesz je w Lakehouse.
+W tym ćwiczeniu wcielisz się w rolę data scientist, który ma zbadać, oczyścić i przekształcić zbiór danych o przejazdach taksówek. Zbudujesz model uczenia maszynowego, który przewiduje czas trwania przejazdów taksówek. Użyjesz zbioru danych greencab o nowojorskich taksówkach z okresu od stycznia 2022 do stycznia 2023 roku, który zawiera m.in. czas rozpoczęcia i zakończenia przejazdu, lokalizacje, opłaty i liczbę pasażerów. Potem zastosujesz model, aby wygenerować predykcje dla danych greencab z 2023 roku, i zapiszesz je w Lakehouse.
 
 1. **Pobierz Notebook z ćwiczeniem**:
    - Pobierz na swój komputer przygotowany Notebook Jupyter, [Exercise 4 - Consume Data using Data Science](Exercise%204%20-%20Consume%20Data%20using%20Data%20Science.ipynb). Ten Notebook zawiera kroki, które wykonasz w tym zadaniu. [Na tym zrzucie ekranu widać, jak to zrobić](../screenshots/extra/new/download-notebook-2.jpg).

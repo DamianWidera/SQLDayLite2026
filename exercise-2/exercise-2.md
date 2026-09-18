@@ -222,7 +222,7 @@ Zanim zaczniesz automatyzację, sprawdź, czy:
 * Lakehouse `bronzerawdata` zawiera dwie tabele: `green_202201_202301` i `green202301`.
 * Lakehouse `bronzerawdata` ma w sekcji Files jeden folder o nazwie `2023`, utworzony przez Shortcut.
 * Lakehouse `bronzerawdata` ma w sekcji Files jeden plik: `NYC-Taxi-Discounts-Per-Day.csv`.
-* Lakehouse `silvercleansed` zawiera trzy tabele: `green2015_avg_fare_per_month`, `green201501_cleansed` i `green201501_discounts`.
+* Lakehouse `silvercleansed` zawiera trzy tabele: `green_202201_202301_avg_fare_per_month`, `green_202201_202301_cleansed_in_notebook` i `green_202201_202301_discounts`.
 
 Gdy wszystko się zgadza, przejdź do automatyzacji.
 
@@ -245,7 +245,7 @@ Nadaj nazwę elementowi `ForEach`.
 ## 2.7.5. **Zmienne Pipeline**
 Najpierw kliknij tło kanwy Pipeline (pierwszy krok na zrzucie ekranu, w różowym prostokącie), żeby zobaczyć kartę z parametrami i zmiennymi.
 
-Na karcie ustawień Pipeline przejdź do `Variables`. Utwórz tam nową zmienną o nazwie `table_name`, ustaw jej typ na `Array` i przypisz wartość domyślną `["green201501", "green202301"]`. **Wykonaj dokładnie kroki pokazane na zrzucie ekranu.**
+Na karcie ustawień Pipeline przejdź do `Variables`. Utwórz tam nową zmienną o nazwie `table_name`, ustaw jej typ na `Array` i przypisz wartość domyślną `["green_202201_202301", "green202301"]`. **Wykonaj dokładnie kroki pokazane na zrzucie ekranu.**
 
 ![Krok](../screenshots/2/new/29.jpg)
 
@@ -307,7 +307,7 @@ Zwróć uwagę, że dwa Notebooki wykonują się jeden po drugim, a każdy trwa 
 Po ukończeniu Ćwiczeń 1 i 2 koniecznie sprawdź w swoich Lakehouse poniższe wyniki:
 
 ## Potwierdzenie dla Lakehouse `bronzerawdata`:
-1. **Tabele**: Sprawdź, czy są dwie tabele: `green201501` i `green202301`.
+1. **Tabele**: Sprawdź, czy są dwie tabele: `green_202201_202301` i `green202301`.
 2. **Sekcja Files**: Sprawdź, czy jest jeden folder o nazwie `2023`, utworzony przez Shortcut.
 3. **Plik**: Sprawdź, czy w sekcji Files jest jeden plik: `NYC-Taxi-Discounts-Per-Day.csv`.
 
@@ -315,9 +315,9 @@ Po ukończeniu Ćwiczeń 1 i 2 koniecznie sprawdź w swoich Lakehouse poniższe 
 
 ## Potwierdzenie dla Lakehouse `silvercleansed`:
 1. **Tabele**: Sprawdź, czy jest sześć tabel:
-   - `green201501_avg_fare_per_month_2015_01`
-   - `green201501_cleansed`
-   - `green201501_discounts`
+   - `green_202201_202301_avg_fare_per_month`
+   - `green_202201_202301_cleansed`
+   - `green_202201_202301_discounts`
    - `green202301_avg_fare_per_month_2023_01`
    - `green202301_cleansed`
    - `green202301_discounts`.

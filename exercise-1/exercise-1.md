@@ -11,11 +11,11 @@
 > * [Zadanie 1.4 Zarządzanie Spark session](#zadanie-14-zarządzanie-spark-session)
 
 # Kontekst
-Zintegrujemy dwa źródła danych NYC Taxi: jedno z 2015 roku, drugie z 2023 roku. Tabela poniżej pokazuje metafory, których użyjemy przy integracji danych:
+Zintegrujemy dwa źródła danych NYC Taxi: jedno z okresu od stycznia 2022 do stycznia 2023 roku, drugie ze stycznia 2023 roku. Tabela poniżej pokazuje metafory, których użyjemy przy integracji danych:
 ![Przegląd danych](../screenshots/1/data-integration-one.png)
 
 Przegląd zadań:
-* Ładowanie danych: zacznij od załadowania danych historycznych z 2015 roku, czyli z czasów, gdy Azure Blob Storage było szczytowym osiągnięciem wśród rozwiązań do przechowywania danych. Ten krok symuluje przeniesienie starszych danych do nowoczesnego ekosystemu danych.
+* Ładowanie danych: zacznij od załadowania danych historycznych z okresu od stycznia 2022 do stycznia 2023 roku. Leżą one w Azure Blob Storage, czyli w usłudze, która kiedyś była szczytowym osiągnięciem wśród rozwiązań do przechowywania danych. Ten krok symuluje przeniesienie starszych danych do nowoczesnego ekosystemu danych.
 * Integracja i analiza danych: teraz zajmij się nowszymi danymi, ze stycznia 2023 roku. W tym czasie standardem przechowywania danych w Azure stało się Azure Data Lake Storage Gen 2 (ADLS Gen2). Zamiast tradycyjnie kopiować dane, użyjesz nowatorskiej funkcji `Shortcuts`, która upraszcza integrację w naszej architekturze Lakehouse.
 
 Do końca warsztatu ukończymy pierwszy etap Medallion architecture, czyli warstwę bronze:
@@ -129,7 +129,7 @@ Nazwij tabelę `green_202201_202301` zgodnie z [konwencją nazw](../exercise-0-s
 ![Krok](../screenshots/1/new/19.jpg)
 
 ## 1.1.20. **Opisz Copy activity**
-Nadaj Copy activity nazwę, która mówi, do czego służy, np. `Load NYC Taxi Green 2015 Jan`. Przejrzyj timeout i zasady ponawiania, a w razie potrzeby je zmień. Zajrzyj też do opcji zaawansowanych.
+Nadaj Copy activity nazwę, która mówi, do czego służy, np. `Load NYC Taxi Green 202201-202301`. Przejrzyj timeout i zasady ponawiania, a w razie potrzeby je zmień. Zajrzyj też do opcji zaawansowanych.
 ![Krok](../screenshots/1/new/20.jpg)
 
 ## 1.1.21. **Zweryfikuj i zapisz Pipeline**
