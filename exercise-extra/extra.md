@@ -619,3 +619,8 @@ Przećwicz obsługę danych w Fabric Spark: załaduj, zaktualizuj i wstaw dane N
 [//]: # (## Fabric Capacities)
 
 [//]: # (* ![Podstawy Fabric]&#40;https://microsoft.github.io/fabricnotes/images/notes/08-fabric-lingo-part-1.png&#41;)
+
+---
+
+> [!TIP]
+> Kończysz na dziś? Wypełnij krótką [ankietę o warsztacie](https://forms.cloud.microsoft/e/hXHYaB8pDb). Kod QR znajdziesz na końcu [strony głównej](./../README.md#twoja-opinia).

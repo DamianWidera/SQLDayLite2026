@@ -305,3 +305,8 @@ Notebook uruchomisz w VS Code for the Web przyciskiem **Run** w edytorze Noteboo
 ---
 > [!IMPORTANT]
 > Po zakończeniu przejdź do [agendy](./../README.md#agenda). Jeśli przed kolejnym ćwiczeniem zostanie czas, wykonaj [dodatkowe kroki](../exercise-extra/extra.md).
+
+---
+
+> [!TIP]
+> Kończysz na dziś? Wypełnij krótką [ankietę o warsztacie](https://forms.cloud.microsoft/e/hXHYaB8pDb). Kod QR znajdziesz na końcu [strony głównej](./../README.md#twoja-opinia).

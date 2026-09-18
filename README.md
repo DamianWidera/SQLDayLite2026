@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="assets/logosqldaylite.png" alt="Logo SQLDay Lite" height="120">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/logodc.png" alt="Logo Data Community" height="60">
+</p>
+
 # Kupiłeś Fabric. I co teraz? Praktyczny warsztat dla osób od Power BI, SQL i Excela
 
 Witamy na warsztacie [SQLDay Lite 2026](https://sqlday.pl/lite/). Warsztat odbywa się w czwartek, 24 września 2026, na Politechnice Gdańskiej (Wydział Elektroniki, Telekomunikacji i Informatyki, ul. Gabriela Narutowicza 11/12, Gdańsk). Konferencja odbywa się dzień później, 25 września.
@@ -92,7 +98,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 >
 > 15:35–16:35 (60 min) - [Ćwiczenie 5 - Nowości w Fabric i Data Wrangler](./exercise-5/exercise-5.md)
 >
-> 16:35–17:30 (55 min) - Najczęstsze błędy początkujących, pytania i odpowiedzi, [ćwiczenia dodatkowe](exercise-extra/extra.md)
+> 16:35–17:30 (55 min) - Najczęstsze błędy początkujących, pytania i odpowiedzi, [ankieta](#twoja-opinia), [ćwiczenia dodatkowe](exercise-extra/extra.md)
 
 # Najczęstsze błędy początkujących
 
@@ -104,3 +110,9 @@ Ten blok zamyka dzień. Omawiamy błędy, które widzimy w pierwszych projektach
 - brak konwencji nazw,
 - zbyt szerokie uprawnienia,
 - brak kontroli kosztów.
+
+# Twoja opinia
+
+Na koniec dnia wypełnij krótką ankietę o warsztacie. Zeskanuj kod QR albo otwórz [formularz](https://forms.cloud.microsoft/e/hXHYaB8pDb). Twoje odpowiedzi pomogą nam poprawić kolejną edycję.
+
+<img src="assets/qr-ankieta.png" alt="Kod QR do ankiety o warsztacie" width="280">
