@@ -75,14 +75,21 @@ Kliknij przycisk `View more` i wybierz `Azure Blobs` dla nowego połączenia.
    - Jako typ połączenia wybierz `Create a new connection`.
    - Zostaw automatycznie wygenerowaną nazwę połączenia albo zmień ją, jeśli trzeba.
    - Data gateway zostaw jako (none).
-   - Jako metodę uwierzytelniania wybierz `Account Keu`.
+   - Jako metodę uwierzytelniania wybierz `Shared Access Signature (SAS)`.
 
 ![Krok](../screenshots/1/new/8.jpg)
 
 ## 1.1.9. **Wpisz SAS token**
-Wklej Account Key z opisu. Ten token daje tymczasowy dostęp do Blob Storage i wygasa po określonym czasie.
+Wklej poniższy SAS token w pole `SAS token`. Token daje dostęp tylko do odczytu i wygasa w piątek 26 września 2026 wieczorem.
 
-Account Key `⟦TBC: klucz poda prowadzący podczas warsztatu⟧`
+SAS token:
+
+```
+?se=2026-09-26T22%3A00Z&sp=rl&spr=https&sv=2022-11-02&ss=b&srt=sco&sig=JjzHVUUzDm/kMYhgfnQCA5gGsGLfnvSWU%2BVBOFyHMDQ%3D
+```
+
+> [!TIP]
+> Skopiuj całą linię, razem ze znakiem `?` na początku. Jeśli kopiujesz z GitHuba, użyj ikony kopiowania przy bloku kodu, żeby nie zgubić żadnego znaku.
 ![Krok](../screenshots/1/new/9.jpg)
 
 ## 1.1.10. **Przetestuj połączenie**
@@ -90,7 +97,7 @@ Sprawdź, czy nazwa połączenia wyświetla się poprawnie, a potem przetestuj p
 ![Krok](../screenshots/1/new/10.jpg)
 
 ## 1.1.11. **Przejrzyj Blob Storage**
-Przejrzyj Blob Storage i wybierz folder `taxidata`.
+Przejrzyj Blob Storage: wejdź do kontenera `nyc` i wybierz folder `green_202201_202301`.
 
 > Root folder > nyc > green_202201_202301
 <!-- ![Krok](../screenshots/1/new/11.jpg) -->
@@ -278,10 +285,17 @@ Masz do wyboru wiele źródeł, z których możesz korzystać bezpośrednio, bez
 ![Krok](../screenshots/1/new/36.jpg)
 
 ## 1.3.3. Skonfiguruj nowy Shortcut
-Skopiuj adres URL z opisu zadania i wklej go. Następnie wybierz połączenie i w miarę możliwości zostaw automatycznie wygenerowaną nazwę. Jako metodę uwierzytelniania wybierz `Account key` i wklej podany token. Gdy uzupełnisz wszystkie dane, kliknij `Next`.
+Skopiuj adres URL z opisu zadania i wklej go. Następnie wybierz połączenie i w miarę możliwości zostaw automatycznie wygenerowaną nazwę. Jako metodę uwierzytelniania wybierz `Shared Access Signature (SAS)` i wklej podany token. Gdy uzupełnisz wszystkie dane, kliknij `Next`.
 
-* Adres URL konta Blob Storage `https://nyctaxiforfabric.dfs.core.windows.net/`
-* Account Key `⟦TBC: klucz poda prowadzący podczas warsztatu⟧`
+* Adres URL konta ADLS Gen2 `https://nyctaxiforfabric.dfs.core.windows.net/`
+* SAS token (tylko odczyt, ważny do piątku 26 września 2026 wieczorem):
+
+```
+?se=2026-09-26T22%3A00Z&sp=rl&spr=https&sv=2022-11-02&ss=b&srt=sco&sig=%2Bxt3nZ1WZvGDkepk3sSW1B86/bxWCTv6EE6FT4S1Z2M%3D
+```
+
+> [!TIP]
+> To inny token niż w kroku 1.1.9, bo to inne konto storage. Skopiuj całą linię razem ze znakiem `?`.
 
 
 ![Krok](../screenshots/1/new/37.jpg)
@@ -289,10 +303,12 @@ Skopiuj adres URL z opisu zadania i wklej go. Następnie wybierz połączenie i 
 **Jeśli zobaczysz komunikat o błędzie `The specified connection name already exists. Try choosing a different name`, upewnij się, że nazwa połączenia jest unikalna.**
 
 ## 1.3.4. Sprawdź dostęp do ADLS Gen2
-Sprawdź konfigurację: znajdź folder `2023`, a w nim plik Parquet. Zaznacz właściwy folder, tak jak na ekranie, i kliknij `Next`. Na stronie `Transform` kliknij `Skip`, a na koniec `Create`.
+Sprawdź konfigurację: w drzewie po lewej rozwiń kontener `nyc`, potem `green_all`, potem `year=2023` i zaznacz folder `month=01`. W środku jest jeden plik Parquet: `green_tripdata_2023-01.parquet`. Kliknij `Next`. Na stronie z podsumowaniem zmień nazwę Shortcutu na `2023` (kliknij ikonę edycji przy nazwie), a potem kliknij `Create`.
 
-> ![!IMPORTANT]
-> Tworzymy demo dla folderu o nazwie 2023. Wystarczy, że zobaczysz i potwierdzisz, że w tym folderze jest wymagany plik (tak jak na zrzucie ekranu). 
+> nyc > green_all > year=2023 > month=01
+
+> [!IMPORTANT]
+> Nazwa Shortcutu `2023` jest ważna, bo w Ćwiczeniu 2 sprawdzamy, czy w sekcji `Files` jest jeden folder o tej nazwie. Zrzuty ekranu poniżej pochodzą z innego konta storage, gdzie folder od razu nazywał się `2023`. U ciebie drzewo jest głębsze, ale plik jest ten sam.
 
 ![Krok](../screenshots/1/new/38.jpg)
 ![Krok](../screenshots/1/new/39.jpg)
