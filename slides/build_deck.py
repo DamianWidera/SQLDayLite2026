@@ -260,7 +260,7 @@ EXERCISES = [
         n_div="Pokaż na diagramie dwa źródła i dwie drogi do bronze. Pipeline kopiuje dane, Shortcut ich nie kopiuje. "
               "Uprzedź, że to ćwiczenie to głównie klikanie w interfejsie.",
         n_tasks="Zrób zadanie 1.1 razem z grupą, resztę uczestnicy robią sami. Przy 1.2 pokaż folder _delta_log. "
-                "Przy 1.4 pokaż Monitoring hub i anulowanie Spark session.",
+                "Przy 1.4 pokaż Monitor hub i anulowanie Spark session. Tokeny SAS do obu kont storage są w instrukcji, kroki 1.1.9 i 1.3.3, tylko odczyt, wygasają w sobotę. W 1.1.12 zaznaczamy cały folder, 13 plików.",
     ),
     dict(
         img="architektura-cw2.png", big="2", kicker="Ćwiczenie", dur="75 min", start="10:50",
@@ -268,11 +268,11 @@ EXERCISES = [
         sub="Transformacja danych w Notebookach i na klastrach Spark",
         goal="Przekształcić dane surowe w warstwę silver i zautomatyzować proces.",
         tasks=[("2.1", "Różne sposoby pobierania danych z Lakehouse"),
-               ("2.2", "Przesłanie pliku CSV z dysku i Load to Delta"),
+               ("2.2", "Przesłanie pliku CSV z dysku do sekcji Files"),
                ("2.3–2.6", "Gotowy Notebook: z bronze do silvercleansed"),
                ("2.7–2.8", "Automatyzacja w Pipeline i kontrola wyników"),
                ("2.9", "Lakehouse gold: goldcurated")],
-        outcome="trzy tabele w silvercleansed, Pipeline z ForEach i pusty goldcurated.",
+        outcome="sześć tabel w silvercleansed po Pipeline, Pipeline z ForEach i pusty goldcurated.",
         n_div="Pokaż na diagramie drogę z bronze do silver. Notebooki są gotowe, uruchamiasz je komórka po komórce. "
               "Uprzedź, że Spark session może dziś startować dłużej.",
         n_tasks="Pokaż import Notebooka i podłączenie dwóch Lakehouse. Przy 2.7 wyjaśnij ForEach i Base Parameters. "
@@ -300,8 +300,8 @@ EXERCISES = [
         sub="SQL analytics endpoint, SSMS, udostępnianie i uprawnienia",
         goal="Odpytać tabele Delta w T-SQL i bezpiecznie udostępnić dane.",
         tasks=[("3.1", "Pobierz ciąg połączenia dla SQL analytics endpoint"),
-               ("3.2", "Połącz się z endpointem w SSMS"),
-               ("3.3", "Uruchom zapytania T-SQL na tabelach Delta"),
+               ("3.2", "Połącz się z endpointem w SSMS (opcjonalnie, Windows)"),
+               ("3.3", "Zapytania T-SQL: SSMS albo edytor SQL w portalu"),
                ("3.4", "Udostępnij Lakehouse"),
                ("3.5", "Udostępnij Notebook do współpracy")],
         outcome="działające połączenie z SSMS i Lakehouse udostępniony tylko do odczytu.",
@@ -321,7 +321,7 @@ EXERCISES = [
         outcome="tabelę w goldcurated, semantic model w Direct Lake i własny raport.",
         n_div="Pokaż na diagramie warstwę gold i Power BI. Przypomnij, że Fabric nie tworzy już domyślnego semantic model. "
               "Ten raport każdy pokaże na koniec dnia.",
-        n_tasks="Uruchom Notebook z zadania 4.1 i pokaż tabelę w gold. Zbuduj semantic model na żywo i dodaj jedną wizualizację. "
+        n_tasks="Przed uruchomieniem Notebooka podłącz silvercleansed i goldcurated, krok 3 w instrukcji. Uruchom Notebook z zadania 4.1 wcześnie, trening trwa 10-20 minut, i pokaż tabelę w gold. Zbuduj semantic model na żywo i dodaj jedną wizualizację. "
                 "Wyjaśnij różnicę między Direct Lake, Import mode i DirectQuery.",
     ),
     dict(
@@ -346,7 +346,7 @@ EXERCISES = [
         sub="Dla szybszych, na przerwę i na później",
         goal="Pogłębić wybrane tematy we własnym tempie, także po warsztacie.",
         tasks=[("A", "Copilot w Notebooku"),
-               ("B", "Monitoring hub i Lineage"),
+               ("B", "Monitor hub i Lineage"),
                ("C", "High concurrency mode i własny Spark pool"),
                ("D", "Harmonogram Notebooka"),
                ("E", "V-Order i Merge")],
@@ -363,37 +363,43 @@ MISTAKES = [
          symptom="Raport czyta surowe tabele z bronze. Każdy czyści dane po swojemu, w swoim raporcie.",
          effect="Dwa raporty pokazują różne liczby. Nikt nie ufa danym.",
          fix="Czyść dane raz, w warstwie silver. Raporty buduj tylko na gold.",
+         onws="Na warsztacie: raport z ćwiczenia 4 czyta goldcurated.greentaxi_predicted, nie bronze.",
          note="Zapytaj, kto widział dwa raporty z różnymi liczbami. Opowiedz własną historię z projektu. "
               "Wróć do diagramu: raport czyta tylko gold."),
     dict(title="Mieszanie warstw",
          symptom="Surowe pliki, oczyszczone tabele i agregaty leżą w jednym Lakehouse.",
          effect="Nie wiadomo, której tabeli ufać. Każda zmiana może zepsuć raport.",
          fix="Osobny Lakehouse na każdą warstwę. Dane płyną tylko z bronze do silver i do gold.",
+         onws="Na warsztacie: bronzerawdata, silvercleansed, goldcurated. Bronze nikt nie zmienia.",
          note="Przypomnij trzy Lakehouse z warsztatu: bronzerawdata, silvercleansed, goldcurated. "
               "Opowiedz własną historię z projektu. Podkreśl, że bronze zostaje niezmienione."),
     dict(title="Nadmiar narzędzi w jednym rozwiązaniu",
          symptom="Tę samą logikę masz w Dataflow Gen2, w Notebooku i w Pipeline.",
          effect="Trudno znaleźć błąd. Nowa osoba długo uczy się rozwiązania.",
          fix="Wybierz jedno narzędzie do transformacji. Pipeline zostaw do orkiestracji.",
+         onws="Na warsztacie: ta sama transformacja w Notebooku (2) i w Dataflow Gen2 (2B). W projekcie wybierz jedną.",
          note="Nawiąż do slajdu „Dataflow Gen2 czy Notebook?”. Fabric daje wiele dróg do tego samego celu. "
               "Opowiedz własną historię z projektu."),
     dict(title="Brak konwencji nazw",
          symptom="W workspace leżą „Notebook 1”, „test2” i „final_v3”.",
          effect="Szukasz zamiast pracować. Łatwo nadpisać albo usunąć zły item.",
          fix="Ustal konwencję pierwszego dnia. Nazwa mówi, jaka to warstwa i jakie dane.",
+         onws="Na warsztacie: green_202201_202301 mówi, co to za dane i z jakiego okresu. Plik naming-convention.md.",
          note="Pokaż plik naming-convention.md z repozytorium. Na warsztacie nazwa Lakehouse mówi, jaka to warstwa. "
               "Opowiedz własną historię z projektu."),
     dict(title="Zbyt szerokie uprawnienia",
          symptom="Każdy dostaje rolę Admin albo Member w workspace, bo tak jest szybciej.",
          effect="Każdy może zmienić albo usunąć dowolny item w workspace.",
          fix="Udostępnij sam Lakehouse przyciskiem Share. Zaznacz „Read all with SQL analytics endpoint”.",
+         onws="Na warsztacie: zadanie 3.4, Lakehouse udostępniony osobie obok tylko do odczytu.",
          note="Nawiąż do zadania 3.4. Analityk, który tylko czyta dane, nie potrzebuje roli w workspace. "
               "Opowiedz własną historię z projektu."),
     dict(title="Brak kontroli kosztów",
          symptom="Spark session działają, choć nikt z nich nie korzysta. Capacity pracuje całą dobę.",
          effect="Capacity jest zajęta. Nowy Spark job dostaje błąd HTTP 430.",
-         fix="Zmniejsz Spark pool. Anuluj zbędne Spark session w Monitoring hub. Wstrzymuj capacity z SKU F.",
-         note="Nawiąż do zadania 1.4 i do kroku 13 z konfiguracji. Pokaż Monitoring hub. "
+         fix="Zmniejsz Spark pool. Anuluj zbędne Spark session w Monitor hub. Wstrzymuj capacity z SKU F.",
+         onws="Na warsztacie: 2 węzły na pool, sesja Spark wygasa po 20 minutach, dziesięć osób na jednej capacity.",
+         note="Nawiąż do zadania 1.4 i do kroku 13 z konfiguracji. Pokaż Monitor hub. "
               "Opowiedz własną historię z projektu."),
 ]
 
@@ -430,19 +436,20 @@ def build(output: Path = OUTPUT):
 
     # 3 -- speakers
     s = d.slide(L_TITLE_ONLY, "Prowadzący")
-    people = [("Damian Widera", "Data Solution Architect", "MVP Data Platform"),
-              ("dr Estera Kot", "CTO", "Clouds on Mars")]
-    for i, (name, role1, role2) in enumerate(people):
+    people = [("Damian Widera", "Data Solution Architect", "MVP Data Platform",
+               "Pytaj o T-SQL, SQL analytics endpoint, Warehouse i wydajność zapytań."),
+              ("dr Estera Kot", "CTO, Clouds on Mars", "wcześniej Principal PM Microsoft Fabric",
+               "Pytaj o Spark, Notebooki, architekturę Lakehouse i Fabric od środka.")]
+    for i, (name, role1, role2, ask) in enumerate(people):
         x = LEFT + i * 5.9
         box(s, x, 1.85, 5.6, 4.9, fill=MIST, radius=0.05)
-        tbc(s, x + 0.35, 2.2, 2.2, 2.75, "⟦TBC: zdjęcie⟧")
-        textbox(s, x + 2.75, 2.2, 2.8, 2.75, [
-            [(name, 32, NAVY, True)],
+        textbox(s, x + 0.35, 2.2, 4.9, 2.75, [
+            [(name, 34, NAVY, True)],
             [(role1, 22, NAVY, False)],
             [(role2, 22, GREY, False)],
         ], space_after=6)
         box(s, x + 0.35, 5.3, 0.7, 0.07, fill=ORANGE, shape=MSO_SHAPE.RECTANGLE)
-        tbc(s, x + 0.35, 5.6, 4.9, 0.8, "⟦TBC: jedno zdanie o prowadzącym⟧", size=16)
+        textbox(s, x + 0.35, 5.5, 4.9, 1.1, [[(ask, 20, NAVY, False)]], anchor=MSO_ANCHOR.TOP)
     notes(s, "Każdy prowadzący przedstawia się sam, w dwóch zdaniach. Powiedz, z czym można do kogo przyjść. "
              "Oboje pomagamy przy stolikach przez cały dzień.")
 
@@ -491,7 +498,7 @@ def build(output: Path = OUTPUT):
             [[("Godziny mogą się przesunąć. ", 20, NAVY, True),
               ("Dopasujemy je do tempa grupy i harmonogramu organizatora.", 20, NAVY, False)]])
     notes(s, "Przejdź agendę w minutę. Powiedz, że godziny dopasujemy do tempa grupy i do harmonogramu organizatora. "
-             "Przerwy są propozycją. Ćwiczenie 2B o Dataflow Gen2 zaczynamy o 12:05, zaraz po ćwiczeniu 2. ⟦TBC: godziny po publikacji harmonogramu SQLDay Lite⟧")
+             "Przerwy są propozycją. Ćwiczenie 2B o Dataflow Gen2 zaczynamy o 12:05, zaraz po ćwiczeniu 2. Dokładne godziny startu i lunchu potwierdź z organizatorem rano.")
 
     # 6 -- rules
     s = d.slide(L_DARK, "Zasady pracy")
@@ -506,7 +513,8 @@ def build(output: Path = OUTPUT):
         x = LEFT + (i % 3) * (cw + gap)
         y = 1.85 + (i // 3) * (ch + gap)
         card(s, x, y, cw, ch, h, b, dark=True, head_size=26, body_size=22, number=f"{i + 1}")
-    tbc(s, LEFT + 2 * (cw + gap), 1.85 + ch + gap, cw, ch, "⟦TBC: link do grupy uczestników⟧", dark=True, size=20)
+    card(s, LEFT + 2 * (cw + gap), 1.85 + ch + gap, cw, ch, "Instrukcje",
+         "github.com/DamianWidera/SQLDayLite2026", dark=True, head_size=26, body_size=20, number="6")
     notes(s, "Omów pięć zasad. Nazwy funkcji, przycisków i opcji zostają po angielsku, bo tak wyglądają na ekranie. "
              "Tryb incognito chroni przed logowaniem do firmowego tenanta. Konwencję nazw wystarczy przeczytać i stosować.")
 
@@ -585,6 +593,27 @@ def build(output: Path = OUTPUT):
         write(b.text_frame, [[("Po tym ćwiczeniu masz: ", 22, LORANGE, True), (ex["outcome"], 22, WHITE, False)]],
               align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.MIDDLE, margins=(0.3, 0.04, 0.3, 0.04))
         notes(s, ex["n_tasks"])
+
+        if ex["big"] == "1":
+            s = d.slide(L_DARK_BLUE, "Quiz po Ćwiczeniu 1")
+            drop_placeholder(s, 1)
+            steps = [("1", "Wejdź na kahoot.it na telefonie albo w drugiej karcie"),
+                     ("2", "Wpisz PIN z ekranu i swój login, np. sep007"),
+                     ("3", "18 pytań, 20-30 sekund na każde, jedna poprawna odpowiedź"),
+                     ("4", "Po każdym pytaniu krótkie „dlaczego” od prowadzących")]
+            for i, (n, label) in enumerate(steps):
+                y = 1.85 + i * 1.0
+                box(s, LEFT, y, WIDTH, 0.85, fill=NAVY, radius=0.12)
+                chip = box(s, LEFT, y, 0.85, 0.85, fill=ORANGE, radius=0.12)
+                write(chip.text_frame, [[(n, 30, NAVY, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE,
+                      margins=(0, 0, 0, 0))
+                textbox(s, LEFT + 1.05, y, WIDTH - 1.2, 0.85, [[(label, 24, WHITE, False)]], anchor=MSO_ANCHOR.MIDDLE)
+            textbox(s, LEFT, 6.0, WIDTH, 0.7,
+                    [[("Sprawdzamy zrozumienie, nie klikanie. ", 22, LORANGE, True),
+                      ("Shortcut, SAS, Delta, Files i Tables, sesje Spark.", 22, WHITE, False)]])
+            notes(s, "Uruchom Kahoot z pliku SQLDayLite2026-quiz-cwiczenie1-kahoot.xlsx. Osiem minut z omówieniem. "
+                     "Po każdym pytaniu jedno zdanie dlaczego, klucz odpowiedzi masz w pliku klucz.md. "
+                     "Pytania o folder 2023, zero data movement, Append, błąd 430 i drugi workspace kolegi otwierają dyskusję.")
 
     # 10 -- design decisions
     def compare(title, lh, lb, rh, rb, verdict, note):
@@ -688,8 +717,29 @@ def build(output: Path = OUTPUT):
             x = LEFT + j * (cw + gap)
             card(s, x, 1.85, cw, 3.75, h, b_, dark=True, head_size=30, body_size=24,
                  accent=LORANGE if good else ORANGE)
-        tbc(s, LEFT, 5.85, WIDTH, 0.9, "⟦TBC: historia z projektu⟧", size=20)
+        b = box(s, LEFT, 5.85, WIDTH, 0.9, fill=MIST, radius=0.1)
+        write(b.text_frame, [[(m["onws"], 20, NAVY, False)]], align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.MIDDLE,
+              margins=(0.3, 0.04, 0.3, 0.04))
         notes(s, m["note"])
+
+    # 12b -- end-of-day checklist
+    s = d.slide(L_TITLE_ONLY, "Co masz na koniec dnia")
+    checks = [("F1", "bronzerawdata: tabele green_202201_202301 i green202301"),
+              ("F2", "Files: Shortcut 2023 i plik NYC-Taxi-Discounts-Per-Day.csv"),
+              ("F3", "silvercleansed: sześć tabel i widok viGetAverageFares"),
+              ("F4", "discounts_dataflow z Dataflow Gen2"),
+              ("F5", "Pipeline z pętlą ForEach"),
+              ("F6", "goldcurated: tabela greentaxi_predicted i model ML"),
+              ("F7", "semantic model w Direct Lake i raport Power BI")]
+    for i, (fid, label) in enumerate(checks):
+        y = 1.8 + i * 0.7
+        box(s, LEFT, y, WIDTH, 0.6, fill=MIST, radius=0.12)
+        chip = box(s, LEFT, y, 0.95, 0.6, fill=NAVY, radius=0.12)
+        write(chip.text_frame, [[(fid, 20, WHITE, True)]], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE,
+              margins=(0, 0, 0, 0))
+        textbox(s, LEFT + 1.1, y, WIDTH - 1.3, 0.6, [[(label, 20, NAVY, False)]], anchor=MSO_ANCHOR.MIDDLE)
+    notes(s, "Przejdź listę F1 do F7 razem z grupą. To ten sam zestaw co w pliku zakonczenie.md. "
+             "Kto nie ma F6 albo F7, może dokończyć po warsztacie, repozytorium zostaje.")
 
     # 13 -- show your report
     s = d.slide(L_BLUE, "Pokaż swój raport")
@@ -739,10 +789,11 @@ def build(output: Path = OUTPUT):
     no_autofit(t.text_frame)
     box(s, 1.0, 3.62, 1.5, 0.08, fill=ORANGE, shape=MSO_SHAPE.RECTANGLE)
     drop_placeholder(s, 1)
-    for i, name in enumerate(("Damian Widera", "dr Estera Kot")):
+    for i, (name, contact) in enumerate((("Damian Widera", "datacommunity.pl · sqlday.pl"),
+                                         ("dr Estera Kot", "cloudsonmars.com · bit.ly/bookdrkot"))):
         x = LEFT + i * 4.6
         textbox(s, x, 3.95, 4.3, 0.6, [[(name, 28, NAVY, True)]])
-        tbc(s, x + 0.05, 4.65, 4.0, 0.7, "⟦TBC: kontakt⟧", size=18)
+        textbox(s, x, 4.6, 4.3, 0.6, [[(contact, 20, GREY, False)]])
     picture(s, LOGO_DC, x=9.9, y=6.05, w=2.5)
     notes(s, "Podziękuj za cały dzień pracy. Powiedz, gdzie można nas znaleźć i jak zadać pytanie po warsztacie. "
              "Przypomnij o ankiecie i o konferencji SQLDay Lite następnego dnia.")
