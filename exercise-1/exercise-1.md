@@ -80,7 +80,7 @@ Kliknij przycisk `View more` i wybierz `Azure Blobs` dla nowego połączenia.
 ![Krok](../screenshots/1/new/8.jpg)
 
 ## 1.1.9. **Wpisz SAS token**
-Wklej poniższy SAS token w pole `SAS token`. Token daje dostęp tylko do odczytu i wygasa w piątek 26 września 2026 wieczorem.
+Wklej poniższy SAS token w pole `SAS token`. Token daje dostęp tylko do odczytu i wygasa w sobotę 26 września 2026 wieczorem.
 
 SAS token:
 
@@ -102,12 +102,15 @@ Przejrzyj Blob Storage: wejdź do kontenera `nyc` i wybierz folder `green_202201
 > Root folder > nyc > green_202201_202301
 <!-- ![Krok](../screenshots/1/new/11.jpg) -->
 
-## 1.1.12. **Wybierz plik z danymi**
-Wybierz konkretny plik Parquet i kliknij `OK`.
+## 1.1.12. **Wybierz cały folder z danymi**
+Zaznacz **folder** `green_202201_202301`, nie pojedynczy plik, i kliknij `OK`. W folderze jest 13 plików Parquet, od `green_tripdata_2022-01.parquet` do `green_tripdata_2023-01.parquet`, wszystkie o tym samym schemacie. Wszystkie mają trafić do jednej tabeli. Jeśli zaznaczysz jeden plik, załadujesz tylko jeden miesiąc i Ćwiczenia 2 i 3 dadzą inne wyniki niż w instrukcji.
 ![Krok](../screenshots/1/new/12.jpg)
 
+> [!NOTE]
+> Zrzuty 12 i 13 pochodzą ze starszego konta storage (kontener `taxidata`, jeden plik z 2015 roku). U ciebie kontener nazywa się `nyc`, folder `green_202201_202301`, a w środku jest 13 plików. Układ okna jest ten sam, różnią się tylko nazwy.
+
 ## 1.1.13. **Ścieżka i format pliku**
-Zwróć uwagę na dodatkowe elementy w sekcji ścieżki pliku. Zmień format pliku na `Parquet` i kliknij `Preview Data`.
+Zwróć uwagę na dodatkowe elementy w sekcji ścieżki pliku. Wypełnione mają być tylko dwa pola: kontener `nyc` i folder `green_202201_202301`. Trzecie pole (nazwa pliku) zostaw puste, a opcję `Recursively` zostaw zaznaczoną. Zmień format pliku na `Parquet` i kliknij `Preview Data`.
 ![Krok](../screenshots/1/new/13.jpg)
 
 ## 1.1.14. **Podgląd danych zewnętrznych**
@@ -130,11 +133,11 @@ Sprawdź, czy nowo utworzony Lakehouse jest widoczny na odpowiedniej karcie.
 ![Krok](../screenshots/1/new/17.jpg)
 
 ## 1.1.18. **Skonfiguruj opcje**
-Wybierz akcję dla tabeli, np. `Append`. Wskaż tabelę, klikając `New`.
+Wybierz akcję dla tabeli. Na zrzucie widać `Append`, ale zalecamy `Overwrite`. Jeśli uruchomisz Pipeline drugi raz, np. po błędzie albo po poprawieniu ścieżki źródłowej, `Append` doda dane jeszcze raz i tabela będzie miała zdublowane wiersze. Wskaż tabelę, klikając `New`.
 ![Krok](../screenshots/1/new/18.jpg)
 
 ## 1.1.19. **Ustaw nazwę tabeli**
-Nazwij tabelę `green_202201_202301` zgodnie z [konwencją nazw](../exercise-0-setup/naming-convention.md), kliknij `Create`, a potem wróć na kartę `General`.
+Nazwij tabelę dokładnie `green_202201_202301` zgodnie z [konwencją nazw](../exercise-0-setup/naming-convention.md), kliknij `Create`, a potem wróć na kartę `General`. Na zrzutach 19 i 42 widać starszą nazwę `green201501`. Zignoruj ją, u ciebie ma być `green_202201_202301`.
 ![Krok](../screenshots/1/new/19.jpg)
 
 ## 1.1.20. **Opisz Copy activity**
@@ -288,7 +291,7 @@ Masz do wyboru wiele źródeł, z których możesz korzystać bezpośrednio, bez
 Skopiuj adres URL z opisu zadania i wklej go. Następnie wybierz połączenie i w miarę możliwości zostaw automatycznie wygenerowaną nazwę. Jako metodę uwierzytelniania wybierz `Shared Access Signature (SAS)` i wklej podany token. Gdy uzupełnisz wszystkie dane, kliknij `Next`.
 
 * Adres URL konta ADLS Gen2 `https://nyctaxiforfabric.dfs.core.windows.net/`
-* SAS token (tylko odczyt, ważny do piątku 26 września 2026 wieczorem):
+* SAS token (tylko odczyt, ważny do soboty 26 września 2026 wieczorem):
 
 ```
 ?se=2026-09-26T22%3A00Z&sp=rl&spr=https&sv=2022-11-02&ss=b&srt=sco&sig=%2Bxt3nZ1WZvGDkepk3sSW1B86/bxWCTv6EE6FT4S1Z2M%3D
@@ -303,7 +306,7 @@ Skopiuj adres URL z opisu zadania i wklej go. Następnie wybierz połączenie i 
 **Jeśli zobaczysz komunikat o błędzie `The specified connection name already exists. Try choosing a different name`, upewnij się, że nazwa połączenia jest unikalna.**
 
 ## 1.3.4. Sprawdź dostęp do ADLS Gen2
-Sprawdź konfigurację: w drzewie po lewej rozwiń kontener `nyc`, potem `green_all`, potem `year=2023` i zaznacz folder `month=01`. W środku jest jeden plik Parquet: `green_tripdata_2023-01.parquet`. Kliknij `Next`. Na stronie z podsumowaniem zmień nazwę Shortcutu na `2023` (kliknij ikonę edycji przy nazwie), a potem kliknij `Create`.
+Sprawdź konfigurację: w drzewie po lewej rozwiń kontener `nyc`, potem `green_all`, potem `year=2023` i zaznacz folder `month=01`. W środku jest jeden plik Parquet: `green_tripdata_2023-01.parquet`. Kliknij `Next`. Na kolejnej stronie `Transform (Optional)` Fabric zaproponuje konwersję do Delta. Kliknij `Skip`, nie klikaj kafelka `Delta table`, bo chcemy zwykły folder w sekcji `Files`. Dopiero na stronie z podsumowaniem zmień nazwę Shortcutu z `month=01` na `2023` (kliknij ikonę ołówka przy nazwie), a potem kliknij `Create`.
 
 > nyc > green_all > year=2023 > month=01
 
@@ -319,7 +322,7 @@ Masz już dostęp do danych przez Shortcut, bez ich kopiowania. Shortcut powinie
 ![Krok](../screenshots/1/new/41.jpg)
 
 ## 1.3.6. Załaduj dane Parquet do tabeli (Delta table)
-Aby przekształcić dane Parquet w Delta table, kliknij trzy kropki obok nazwy pliku, tak jak na ekranie. Następnie wybierz `Load to Tables` i opcję `New Table`, tak jak na ekranie.
+W sekcji `Files` kliknij folder `2023` utworzony przez Shortcut. W środku zobaczysz plik `green_tripdata_2023-01.parquet`. Aby przekształcić go w Delta table, kliknij trzy kropki obok nazwy pliku, tak jak na ekranie. Następnie wybierz `Load to Tables` i opcję `New table`.
 ![Krok](../screenshots/1/new/42.jpg)
 
 ## 1.3.7. Wybierz i nazwij nową tabelę
