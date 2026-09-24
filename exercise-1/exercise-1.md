@@ -4,6 +4,8 @@
 
 > [!NOTE]
 > Czas: 60 minut
+>
+> Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 > 
 > [Powrót do agendy](./../README.md#agenda) | [Wstecz: Start i konfiguracja](../exercise-0-setup/start.md) | [Dalej: Ćwiczenie 2](./../exercise-2/exercise-2.md)
 > #### Lista zadań:
@@ -174,6 +176,17 @@ W workspace powinien być widoczny Pipeline `LoadRawTaxiData` i Lakehouse `bronz
 
 ## 1.1.27. **Przejrzyj tabelę z danymi**
 W sekcji `Tables` znajdź nową tabelę i otwórz podgląd jej danych.
+
+Sprawdź, czy załadowały się wszystkie miesiące. Otwórz `SQL analytics endpoint` (przełącznik `Lakehouse` w prawym górnym rogu) i uruchom:
+
+```sql
+SELECT COUNT(*) AS rows_total,
+       MIN(lpep_pickup_datetime) AS first_trip,
+       MAX(lpep_pickup_datetime) AS last_trip
+FROM green_202201_202301;
+```
+
+Oczekiwany wynik: około 908 tys. wierszy, pierwszy przejazd w styczniu 2022, ostatni w styczniu 2023. Jeśli widzisz około 60-80 tys. wierszy, załadował się jeden plik. Wróć do kroku 1.1.12, zaznacz cały folder i uruchom Pipeline jeszcze raz z akcją `Overwrite`.
 
 ![Krok](../screenshots/1/new/27.jpg)
 

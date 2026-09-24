@@ -4,6 +4,8 @@
 
 > [!NOTE]
 > Czas: 40 minut
+>
+> Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 > 
 > [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 4](./../exercise-4/exercise-4.md) | [Dalej: ćwiczenia dodatkowe](../exercise-extra/extra.md)
 > #### Lista zadań:

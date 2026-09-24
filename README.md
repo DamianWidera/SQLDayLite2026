@@ -28,6 +28,8 @@ Na tym warsztacie zbudujesz od zera małe, kompletne rozwiązanie analityczne. Z
 
 > [!IMPORTANT]
 > Instrukcje do ćwiczeń są po polsku. Nazwy funkcji Fabric, przycisków i opcji zostawiamy po angielsku, tak jak na zrzutach ekranu i w interfejsie. Dzięki temu na ekranie znajdziesz dokładnie to, co widzisz w instrukcji.
+>
+> Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 
 ---
 

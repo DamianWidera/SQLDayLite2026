@@ -4,6 +4,8 @@
 
 > [!NOTE]
 > Czas: 75 minut
+>
+> Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 > 
 > [Powrót do agendy](./../README.md#agenda) | [Wstecz: Ćwiczenie 1](./../exercise-1/exercise-1.md) | [Dalej: Ćwiczenie 2B](./exercise-2b-dataflow-gen2.md)
 > #### Lista zadań:
