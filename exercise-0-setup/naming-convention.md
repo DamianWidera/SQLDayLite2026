@@ -4,7 +4,7 @@
 > Zapoznaj się z konwencją nazw, bo od niej zależy, czy wszystkie ćwiczenia przebiegną bez problemów. **Nie musisz nic robić, wystarczy, że przeczytasz konwencję nazw i przyjmiesz ją do wiadomości**.
 
 ## Nazwa workspace
-Nadaj nazwę: `urban-innovation-deNNN`, gdzie NNN to przydzielony ci numer. Na przykład `urban-innovation-de001` (workspace Estery).
+Workspace jest już utworzony i nazywa się `Fabric Workshop September NNN`, gdzie NNN to numer z twojego loginu. Nie zmieniaj tej nazwy i nie twórz nowych workspace.
 
 ## Nazwy tabel
 * Zadanie 1.1.18 - `green_202201_202301`

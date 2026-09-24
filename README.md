@@ -61,7 +61,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 # Co przygotować
 
 - Laptop z aktualną przeglądarką. Polecamy tryb incognito, żeby przeglądarka nie logowała cię do firmowego tenanta.
-- Konto do Fabric dostaniesz od nas na miejscu. Nie potrzebujesz własnej licencji ani własnej capacity.
+- Konto do Fabric dostaniesz od nas na miejscu. Twój workspace i capacity są już przygotowane. Nie potrzebujesz własnej licencji.
 - Opcjonalnie: SQL Server Management Studio (SSMS) do ćwiczenia 3 oraz Power BI Desktop.
 
 # Czego się nauczysz
@@ -88,7 +88,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 > [!IMPORTANT]
 > 08:30–09:15 (45 min) - Wprowadzenie, konfiguracja i przegląd platformy Fabric
 >
-> 1. Login i hasło do Fabric: https://docs.google.com/spreadsheets/d/12snhUR6lOkVuyQ0qdyYEApFNcoy_2FkITNCDWDo5m7M/edit?usp=sharing 
+> 1. Login i hasło do Fabric: [lista loginów](https://docs.google.com/spreadsheets/d/12snhUR6lOkVuyQ0qdyYEApFNcoy_2FkITNCDWDo5m7M/edit?usp=sharing). Login ma numer, ten sam numer ma twój workspace `Fabric Workshop September NNN`.
 > 2. [Start i konfiguracja](exercise-0-setup/start.md)
 > 3. Otwórz i miej pod ręką [konwencję nazw](./exercise-0-setup/naming-convention.md).
 >

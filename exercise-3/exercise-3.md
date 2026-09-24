@@ -148,7 +148,7 @@ Dowiedz się, jak udostępnić Lakehouse członkom zespołu lub interesariuszom 
      ![Udostępnianie Lakehouse](../screenshots/3/new/3.png)
 
 2. **Skonfiguruj ustawienia udostępniania**:
-   - W oknie udostępniania wpisz imię i nazwisko lub adres e-mail osób, którym chcesz udostępnić Lakehouse.
+   - W oknie udostępniania wpisz login osoby obok, np. `fabric.workshop.sep012@rocksonearth.onmicrosoft.com`. Umówcie się w parze: każde z was udostępnia swój Lakehouse drugiej osobie.
    - Nadaj właściwe uprawnienia, zaznaczając odpowiednie pola. Domyślnie udostępnienie Lakehouse daje dostęp do Lakehouse i powiązanego SQL analytics endpoint. Dodatkowe pola w aktualnym oknie to `Read all with SQL analytics endpoint` i `Read all with Apache Spark`.
    
    ![Okno udostępniania Lakehouse](../screenshots/3/new/4.png)

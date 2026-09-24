@@ -12,7 +12,7 @@
 Wejdź na stronę Microsoft Fabric: https://fabric.microsoft.com/.
 
 ## 2. Zaloguj się przydzielonymi danymi
-Użyj danych logowania z wizytówki, która leży na twoim stole.
+Użyj loginu i hasła, które dostajesz od prowadzących. Login ma postać `fabric.workshop.sepNNN@rocksonearth.onmicrosoft.com`. Numer `NNN` jest przypisany do ciebie na cały dzień.
 ![Logowanie](../screenshots/start/new/1.jpg)
 
 ## 3. Wpisz hasło i zaloguj się
@@ -23,7 +23,7 @@ Wpisz hasło we wskazanym polu i kliknij przycisk `Sign in`.
 Przy pierwszym logowaniu musisz zmienić hasło. Postępuj zgodnie z instrukcjami na ekranie.
 
 > [!TIP]  
-> **Zapisz nowe hasło na odwrocie wizytówki, obok danych logowania. Przyda się, jeśli po restarcie komputera nie będziesz pamiętać hasła.**
+> **Zapisz nowe hasło obok loginu. Przyda się, jeśli po restarcie komputera nie będziesz pamiętać hasła.**
 ![Logowanie](../screenshots/start/new/9.jpg)
 
 ## 5. Skonfiguruj uwierzytelnianie wieloskładnikowe (MFA)
@@ -46,30 +46,21 @@ Kliknij menu Help & Support w prawym górnym rogu i przejrzyj wszystkie dostępn
 Kliknij menu Settings w prawym górnym rogu i przejrzyj opcje. Części ustawień nie zmienisz z powodu ograniczeń dostępu, ale możesz je swobodnie przeglądać.
 ![Logowanie](../screenshots/start/new/8.jpg)
 
-## 10. Wróć i utwórz workspace
-Wróć do ekranu głównego i kliknij `New workspace`, aby zacząć tworzyć nowy workspace.
+## 10. Otwórz swój workspace
+Twój workspace już istnieje. Nazywa się `Fabric Workshop September NNN`, gdzie `NNN` to numer z twojego loginu. Login `fabric.workshop.sep007` ma workspace `Fabric Workshop September 007`.
+
+Kliknij `Workspaces` w lewym menu i wybierz swój workspace z listy. Jeśli lista jest pusta, poczekaj chwilę i odśwież stronę. Uprawnienia do workspace mogą pojawić się z opóźnieniem.
 ![Logowanie](../screenshots/start/new/11.jpg)
 
-<!-- ## 11. Otwórz Workspaces
-Kliknij ikonę `Workspaces` po lewej stronie ekranu.
-![Logowanie](../screenshots/start/12.jpg)
+## 11. Sprawdź capacity
+Każdy workspace jest przypisany do jednej z trzech capacity: `fabsep01`, `fabsep02` albo `fabsep03`. Około dziesięciu osób dzieli jedną capacity. Dlatego dwa kolejne kroki są ważne dla wszystkich przy twoim stole, nie tylko dla ciebie.
 
-## 12. Utwórz nowy workspace
-Pojawi się panel boczny z listą wszystkich dostępnych subskrypcji. Postępuj zgodnie z instrukcjami i kliknij `New Workspace.`
-![Logowanie](../screenshots/start/13.jpg) -->
+## 12. Nie twórz nowych workspace
+Wszystkie ćwiczenia robisz w swoim workspace. Nie twórz drugiego, bo każdy nowy workspace na wspólnej capacity zabiera zasoby innym.
 
-## 11. Nazwij swój workspace
-Nadaj nowemu workspace nazwę zgodną z podaną konwencją nazw. Sprawdź nazwę i kliknij `Apply.` Zastosuj konwencję nazw i nadaj nazwę: `urban-innovation-deNNN`, gdzie `NNN` to przydzielony ci numer. Na przykład `urban-innovation-de001` (workspace Estery).
-![Logowanie](../screenshots/start/new/14.jpg)
+## 13. Sprawdź Spark pool i Runtime
 
-## 12. Workspace utworzony
-Gratulacje, twój nowy workspace jest gotowy! W tej przestrzeni będziesz dziś budować i eksperymentować.
-![Logowanie](../screenshots/start/new/15.jpg)
-
-
-## 13. Ustaw maksymalnie 2 węzły w domyślnym Spark pool
-
-Dziś odbywa się równolegle kilka warsztatów. Aby wszystkie przebiegały płynnie, zmień domyślną konfigurację klastra obliczeniowego w swoim workspace Fabric i zmniejsz maksymalną liczbę węzłów do 2.
+Około dziesięciu osób dzieli z tobą jedną capacity. Aby wszystkim starczyło zasobów, domyślny Spark pool w twoim workspace ma mieć maksymalnie 2 węzły, a runtime ma być ustawiony na 1.3. Prowadzący ustawili to przed warsztatem. Sprawdź, czy ustawienia są na miejscu. Jeśli nie, ustaw je według kroków poniżej.
 
 > [!NOTE]  
 >  To zadanie jest kluczowe, bo pozwala rozsądnie gospodarować zasobami i zapewnia płynny przebieg warsztatów wszystkim uczestnikom. Gdy zmniejszasz maksymalną liczbę węzłów do 2, pomagasz ograniczyć obciążenie systemu i poprawiasz komfort pracy wszystkich.
@@ -80,23 +71,26 @@ Dziś odbywa się równolegle kilka warsztatów. Aby wszystkie przebiegały pły
    - Otwórz ustawienia workspace tak, jak wskazuje interfejs Fabric.
 ![Jeden węzeł](../screenshots/extra/new/onenode1.jpg)
 
-2. **Zmień konfigurację domyślnego Spark pool**:
+2. **Sprawdź konfigurację domyślnego Spark pool**:
    - W lewym panelu nawigacji Workspace settings przejdź do Data Engineering / Data Science, a potem kliknij Spark settings. 
    - Znajdź ustawienie "Default pool for workspace".
    - Kliknij ikonę ołówka, aby edytować ustawienia Spark pool.
 ![Jeden węzeł](../screenshots/extra/new/onenode2.jpg)
 
-3. **Zmień ustawienia autoscale i zapisz zmiany**:
-   - W konfiguracji domyślnego Spark pool zmień maksymalną wartość autoscale z 10 na 2. To ogranicza maksymalną liczbę węzłów do 2 i zapobiega nadmiernemu przydziałowi zasobów.
+3. **Sprawdź ustawienia autoscale**:
+   - W konfiguracji domyślnego Spark pool maksymalna wartość autoscale ma wynosić 2. Jeśli widzisz 10, zmień ją na 2. To ogranicza maksymalną liczbę węzłów do 2 i zapobiega nadmiernemu przydziałowi zasobów.
    - Potwierdź i zapisz zmiany w ustawieniach domyślnego Spark pool.
 ![Jeden węzeł](../screenshots/extra/new/onenode3.jpg)
 
-4. **Ustaw Runtime 1.3**:
+4. **Sprawdź Runtime 1.3**:
    - W tym samym oknie Spark settings otwórz kartę `Environment`.
-   - Z listy `Runtime version` wybierz `1.3 (Spark 3.5, Delta 3.2)` i kliknij `Save`.
+   - Na liście `Runtime version` ma być `1.3 (Spark 3.5, Delta 3.2)`. Jeśli jest inna wersja, wybierz 1.3 i kliknij `Save`.
+
+> [!NOTE]
+> Nie widzisz opcji Spark settings albo nie możesz ich zmienić? Znaczy to, że nie masz roli Admin w workspace. Zgłoś to prowadzącym.
 
 > [!IMPORTANT]
-> Notebooki tego warsztatu są przygotowane dla Runtime 1.3. Microsoft zapowiedział, że pod koniec września 2026 roku domyślną wersją w nowych workspace zostanie Runtime 2.0 (Spark 4.1). Dlatego ustaw wersję ręcznie i nie polegaj na wartości domyślnej.
+> Notebooki tego warsztatu są przygotowane dla Runtime 1.3. Microsoft zapowiedział, że pod koniec września 2026 roku domyślną wersją w nowych workspace zostanie Runtime 2.0 (Spark 4.1). Dlatego sprawdzamy wersję ręcznie i nie polegamy na wartości domyślnej.
 
 
 ## 14. Pobierz pliki do ćwiczeń

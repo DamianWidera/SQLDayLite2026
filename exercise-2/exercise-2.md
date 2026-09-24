@@ -142,7 +142,7 @@ Gdy rozpoczniesz przesyłanie, zobaczysz powiadomienie, że trwa import pliku. P
 ![Krok](../screenshots/2/new/15.jpg)
 
 ## 2.3.3. Otwórz zaimportowany Notebook
-Po zakończeniu importu znajdź nowo zaimportowany Notebook w `urban-innovation-de{NNN}`, gdzie NNN to przypisany ci numer. Kliknij trzy kropki przy Notebooku i wybierz `Open Notebook`. Dla wygody możesz otworzyć Notebook w tle. Wtedy jego ikona będzie stale dostępna na pionowym pasku bocznym po lewej stronie.
+Po zakończeniu importu znajdź nowo zaimportowany Notebook w swoim workspace `Fabric Workshop September NNN`. Kliknij trzy kropki przy Notebooku i wybierz `Open Notebook`. Dla wygody możesz otworzyć Notebook w tle. Wtedy jego ikona będzie stale dostępna na pionowym pasku bocznym po lewej stronie.
 ![Krok](../screenshots/2/new/16.jpg)
 
 

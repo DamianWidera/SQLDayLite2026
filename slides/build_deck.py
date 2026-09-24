@@ -234,18 +234,18 @@ EXERCISES = [
     dict(
         img="architektura-cw0.png", big="0", kicker="Start", dur="45 min", start="08:30",
         title="Start i konfiguracja",
-        sub="Logowanie, własny workspace, Spark pool i pliki do ćwiczeń",
-        goal="Zalogować się do Fabric i przygotować własny workspace.",
-        tasks=[("1", "Zaloguj się w trybie incognito danymi z wizytówki"),
+        sub="Logowanie, gotowy workspace, Spark pool i pliki do ćwiczeń",
+        goal="Zalogować się do Fabric i sprawdzić swój workspace.",
+        tasks=[("1", "Zaloguj się w trybie incognito loginem fabric.workshop.sepNNN"),
                ("2", "Poznaj przełącznik Fabric i Power BI oraz Settings"),
-               ("3", "Utwórz workspace urban-innovation-deNNN"),
-               ("4", "Ustaw maksymalnie 2 węzły w Spark pool i Runtime 1.3"),
+               ("3", "Otwórz swój workspace Fabric Workshop September NNN"),
+               ("4", "Sprawdź Spark pool: maksymalnie 2 węzły i Runtime 1.3"),
                ("5", "Pobierz pliki do ćwiczeń z repozytorium")],
-        outcome="własny workspace, mały Spark pool i pliki na dysku.",
-        n_div="Pokaż diagram i powiedz, że zaczynamy od lewego dolnego rogu. Każdy loguje się danymi z wizytówki na stole. "
+        outcome="otwarty workspace, mały Spark pool i pliki na dysku.",
+        n_div="Pokaż diagram i powiedz, że zaczynamy od lewego dolnego rogu. Każdy loguje się loginem z numerem, ten sam numer ma jego workspace. Trzy capacity, około dziesięć osób na każdej. "
               "Przypomnij o trybie incognito. Sprawdź, czy wszyscy widzą ekran powitalny Fabric.",
-        n_tasks="Przejdź kroki ze start.md na żywo. Zatrzymaj się przy kroku 13: maksymalnie 2 węzły i Runtime 1.3. "
-                "Wyjaśnij, że kilka warsztatów działa dziś na wspólnych zasobach. Poczekaj, aż każdy ma workspace.",
+        n_tasks="Przejdź kroki ze start.md na żywo. Zatrzymaj się przy kroku 13: sprawdzamy 2 węzły i Runtime 1.3, bo dziesięć osób dzieli capacity. "
+                "Nikt nie tworzy nowych workspace. Poczekaj, aż każdy widzi swój workspace.",
     ),
     dict(
         img="architektura-cw1.png", big="1", kicker="Ćwiczenie", dur="80 min", start="09:15",
