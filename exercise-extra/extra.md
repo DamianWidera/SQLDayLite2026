@@ -18,7 +18,7 @@
 > *  [Monitoruj uruchomienie Pipeline i sprawdź wynik](#monitoruj-uruchomienie-pipeline-i-sprawdź-wynik)
 > *  [Medallion architecture](#medallion-architecture)
 > *  [Zaplanuj uruchamianie Notebooka](#zaplanuj-uruchamianie-notebooka-kilka-razy-dziennie)
-> *  [Utwórz nowy Spark pool w ustawieniach na poziomie workspace]()
+> *  [Utwórz nowy Spark pool w ustawieniach workspace](#utwórz-nowy-spark-pool-w-ustawieniach-workspace)
 > *  [Zapisane z V-Order?](#sprawdź-v-order)
 > *  [Merge](#merge)
 
@@ -40,15 +40,15 @@ Przyjrzyj się tabeli `green_202201_202301` w swoim Lakehouse i poszukaj ciekawy
 > Copilot wymaga płatnej capacity F2 lub większej i nie działa na Fabric trial capacity. Administrator tenanta musi też włączyć Copilot w Admin portal.
 
 ## Otwórz panel Copilot
-Otwórz istniejący Notebook (np. ***Just exploration***) w swoim workspace albo utwórz nowy Notebook. Kliknij ikonę `Copilot` na wstążce Notebooka. Otworzy się panel czatu Copilot. Gdy klikniesz `Get started`, na górze Notebooka pojawi się nowa komórka. Uwaga: ta komórka inicjuje Spark session w Notebooku Fabric. Musisz ją uruchomić, żeby Copilot działał poprawnie. W przyszłych wersjach mogą pojawić się inne sposoby inicjalizacji i ten krok może przestać być potrzebny.
+Otwórz Notebook z Ćwiczenia 2 (np. `Data Exploration`) w swoim workspace albo utwórz nowy Notebook. Kliknij ikonę `Copilot` na wstążce Notebooka. Otworzy się panel czatu Copilot. Gdy klikniesz `Get started`, na górze Notebooka pojawi się nowa komórka. Uwaga: ta komórka inicjuje Spark session w Notebooku Fabric. Musisz ją uruchomić, żeby Copilot działał poprawnie. W przyszłych wersjach mogą pojawić się inne sposoby inicjalizacji i ten krok może przestać być potrzebny.
 ![Krok](../screenshots/extra/CopilotStart.png)
 
 ## Zacznij pracę z asystentem Copilot
-Gdy otworzy się panel Copilot, kliknij `Get Started`, żeby zacząć rozmowę z asystentem AI.
+Jeśli w panelu Copilot pojawi się przycisk `Get Started`, kliknij go. W nowszych wersjach panel czatu jest gotowy od razu i możesz od razu zadać pytanie. Nie widzisz ikony `Copilot`? Twoja capacity warsztatowa nie ma włączonego Copilot, wtedy to zadanie pokażą prowadzący.
 ![Krok](../screenshots/extra/CopilotGetStart.png)
 
 ## Instalacja bibliotek
-Copilot automatycznie wstawi nową komórkę ze skryptem, który instaluje potrzebne biblioteki. Uruchom tę komórkę przyciskiem `Play`, żeby zainstalować biblioteki wymagane przez funkcje Copilot.
+Starsze wersje wstawiały na górze Notebooka komórkę ze skryptem instalującym biblioteki. Jeśli taka komórka się pojawi, uruchom ją przyciskiem `Play` i poczekaj na start Spark session. Jeśli się nie pojawi, przejdź dalej.
 ![Krok](../screenshots/2/3.jpg)
 
 ## Prywatność i bezpieczeństwo danych
@@ -165,14 +165,16 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skupiamy się na an
      SELECT tipped, COUNT(*) AS tip_freq FROM (
        SELECT CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped, tip_amount
        FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
-       WHERE [lpep_pickup_datetime] BETWEEN '20220101' AND '20230131') tc
+       WHERE [lpep_pickup_datetime] >= '20220101' AND [lpep_pickup_datetime] < '20230201') tc
      GROUP BY tipped;
      ```
 
 5. **Utwórz widok ze średnią i sumą opłat według liczby pasażerów**:
    - Uruchom poniższe polecenie SQL, żeby utworzyć widok na podstawie zapytania z kroku 3:
+     Zanim uruchomisz to polecenie, upewnij się, że jesteś połączony z bazą `silvercleansed`. `CREATE VIEW` nie przyjmuje nazwy trzyczłonowej, więc widok powstaje w bazie aktywnego połączenia. `CREATE OR ALTER` pozwala uruchomić polecenie ponownie, nawet jeśli widok utworzyłeś już w Zadaniu 3.3.
+
      ```sql
-     CREATE VIEW [dbo].[viGetAverageFares]
+     CREATE OR ALTER VIEW [dbo].[viGetAverageFares]
      AS 
      SELECT DISTINCT [passenger_count], 
      ROUND(SUM([fare_amount]),0) as TotalFares,
@@ -302,7 +304,7 @@ Poznaj zależności i przepływ danych w swoim workspace Fabric w widoku Lineage
 
 Według Wikipedii Snappy (wcześniej Zippy) to szybka biblioteka do kompresji i dekompresji danych opracowana przez Google. Stawia na szybkość zamiast na maksymalną kompresję. Zysk na szybkości jest duży: 250 MB/s przy kompresji i 500 MB/s przy dekompresji na jednym rdzeniu procesora Core i7 2,26 GHz z okolic 2011 roku. Współczynnik kompresji jest jednak o 20–100% niższy niż w gzip. Więcej szczegółów znajdziesz w [artykule o Snappy w Wikipedii](https://en.wikipedia.org/wiki/Snappy_(compression)).
 
-Po tych informacjach możesz się zastanawiać, skąd decyzja o użyciu gzip zamiast Snappy i jak zmienić to ustawienie. Zrób to tak:
+Po tych informacjach możesz się zastanawiać, gdzie w Pipeline ustawia się typ kompresji i jakie masz opcje. Zobacz to tak:
 
 1. Przejdź do widoku workspace i otwórz pierwszy utworzony przez ciebie Pipeline, który ładuje dane surowe do Lakehouse bronze.
 2. W Pipeline przejdź do karty 'Source', a potem kliknij 'Settings'.
@@ -317,7 +319,7 @@ Typ kompresji zmienisz w menu ustawień na karcie Source:
 
 ![Ustawienia kompresji](../screenshots/extra/new/1.jpg)
 
-Według benchmarków gzip lepiej nadaje się do długoterminowego przechowywania danych statycznych, dlatego jest preferowany dla danych w warstwie gold. Dla danych używanych częściej (hot data) lepszy może być Snappy albo LZO:
+Według benchmarków gzip lepiej nadaje się do długoterminowego przechowywania rzadko czytanych danych, czyli raczej do archiwum i warstwy bronze. Warstwa gold jest czytana najczęściej (raporty Power BI w trybie Direct Lake), więc tam wybieraj Snappy, który szybciej się dekompresuje. Tabele Delta w Fabric i tak zapisują się domyślnie ze Snappy. Dla danych używanych częściej (hot data) lepszy jest Snappy albo LZO:
 
 ![Porównanie kompresji](https://i.stack.imgur.com/Cq3Jx.png)
 
@@ -332,7 +334,7 @@ Monitoring hub w Microsoft Fabric pozwala monitorować aktywności z jednego mie
 
 W tym ćwiczeniu sprawdzimy w Monitoring hub nasz Pipeline i nasze Notebooki.
 
-1. Żeby otworzyć Monitoring hub, wybierz "Monitoring" w okienku nawigacji. Hub pokazuje informacje w tabeli. Aktywności Fabric są ułożone według czasu rozpoczęcia, najnowsze na górze.
+1. Żeby otworzyć Monitor hub, wybierz `Monitor` w lewym pasku nawigacji. Hub pokazuje informacje w tabeli. Aktywności Fabric są ułożone według czasu rozpoczęcia, najnowsze na górze.
 
 2. Przyciskiem "Filter" zawęź wyniki w tabeli Monitoring hub, tak jak na zrzucie ekranu. Ułatwi to nawigację.
    ![Monitoring](../screenshots/extra/new/3.jpg)
@@ -467,9 +469,12 @@ Dopasuj harmonogram do celów przetwarzania danych i do godzin pracy. Uruchamian
 
 
 
-## Utwórz nowy Spark pool w ustawieniach workspace
+# Utwórz nowy Spark pool w ustawieniach workspace
 
-W tym ćwiczeniu rozwiążesz problem braku dynamicznego wykonywania jobów: utworzysz nowy Spark pool w ustawieniach workspace. 
+W tym ćwiczeniu rozwiążesz problem braku dynamicznego wykonywania jobów: utworzysz nowy Spark pool w ustawieniach workspace.
+
+> [!WARNING]
+> Dzielisz capacity z około dziesięcioma osobami. Jeśli robisz to ćwiczenie, ustaw w nowym poolu maksymalnie 2 węzły (autoscale max = 2) i nie ustawiaj go jako `Default pool for workspace`, inaczej cofniesz ustawienie z kroku 13 konfiguracji startowej i zabierzesz zasoby innym. Po skończonym ćwiczeniu zatrzymaj Spark session w Monitor hub, patrz [Zadanie 1.4](../exercise-1/exercise-1.md#zadanie-14-zarządzanie-spark-session).
 
 1. **Przejdź do Workspace settings**:
    - Przejdź do widoku workspace w swoim środowisku Microsoft Fabric.

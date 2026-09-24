@@ -3,7 +3,7 @@
 ![Architektura warsztatu, podświetlony fragment: Ćwiczenie 5](../assets/architecture/architektura-cw5.png)
 
 > [!NOTE]
-> Czas: 40 minut
+> Czas: 60 minut
 >
 > Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 > 
@@ -63,7 +63,7 @@ Celem tego zadania jest użycie Python User-defined Table Functions (UDTFs), kt�
 
 ## 1. Ustaw Runtime 1.3
 
-Upewnij się, że używasz Runtime w wersji 1.3. Tę wersję ustawia [krok 13 konfiguracji startowej](../exercise-0-setup/start.md#13-ustaw-maksymalnie-2-węzły-w-domyślnym-spark-pool). Teraz tylko to sprawdź:
+Upewnij się, że używasz Runtime w wersji 1.3. Tę wersję sprawdza [krok 13 konfiguracji startowej](../exercise-0-setup/start.md#13-sprawdź-spark-pool-i-runtime). Teraz tylko to sprawdź:
 
 1. Przejdź do 'Workspace settings' w swoim workspace w Fabric.
 2. Otwórz kartę 'Data Engineering/Science' i wybierz 'Spark Settings'.
@@ -75,7 +75,8 @@ Upewnij się, że używasz Runtime w wersji 1.3. Tę wersję ustawia [krok 13 ko
 Utwórz i skonfiguruj nowy Notebook:
 
 1. Rozpocznij nową sesję Notebooka w swoim workspace.
-2. Sprawdź wersję Spark: uruchom `sc.version` w Notebooku i potwierdź, że działa Spark 3.5.
+2. W panelu `Explorer` kliknij `Add data items` i podepnij Lakehouse `bronzerawdata`. Bez tego kroku Spark nie rozpozna nazwy `bronzerawdata.<tabela>` w zadaniu 3. Możesz też użyć zaimportowanego `notebook-2`, który ma już podpięty `bronzerawdata`.
+3. Sprawdź wersję Spark: uruchom `sc.version` w Notebooku i potwierdź, że działa Spark 3.5.
 
 ## 3. Poznaj UDTFs w Fabric
 Sprawdź, co UDTFs potrafią w złożonych transformacjach danych:
@@ -114,7 +115,7 @@ class TaxiFareUDTF:
 spark.udtf.register("calculate_individual_costs", TaxiFareUDTF)
 
 # Python UDTFs mogą też przyjmować TABLE jako argument wejściowy, także razem ze skalarnymi argumentami wejściowymi. Domyślnie dozwolony jest tylko jeden argument wejściowy TABLE, głównie ze względu na wydajność. Jeśli potrzebujesz więcej niż jednego argumentu wejściowego TABLE, ustaw konfigurację spark.sql.tvf.allowMultipleTableArguments.enabled na true.
-spark.sql("SELECT * FROM calculate_individual_costs(TABLE(SELECT fare_amount FROM bronzerawdata.<figure out the table name :) > LIMIT 20), 5)").show()
+spark.sql("SELECT * FROM calculate_individual_costs(TABLE(SELECT fare_amount FROM bronzerawdata.green_202201_202301 LIMIT 20), 5)").show()
 ```
 
 </details>
@@ -239,8 +240,18 @@ Poznaj dokładnie funkcje Data Wrangler w Fabric, ze szczególnym naciskiem na P
 
 
 ## Konfiguracja początkowa
-Otwórz swoje środowisko Fabric i przejdź do narzędzia Data Wrangler w Notebooku.
-Załaduj Pandas DataFrame, który chcesz przeanalizować. Jeśli nie masz pod ręką konkretnego zbioru danych, użyj przykładowego zbioru dostępnego na platformie.
+Otwórz `notebook-2` (ma już podpięty Lakehouse) i uruchom komórkę, która utworzy Pandas DataFrame:
+
+```python
+import pandas as pd
+wrangler_sample_df = pd.read_csv("https://aka.ms/wrangler/titanic.csv")
+display(wrangler_sample_df)
+```
+
+Następnie na karcie `Home` wstążki Notebooka rozwiń `Data Wrangler` i wybierz `wrangler_sample_df`. Data Wrangler nie otworzy się, dopóki trwa wykonanie komórki, poczekaj na `Session ready`.
+
+> [!TIP]
+> Chcesz popracować na danych z warsztatu? Użyj małej próbki, nie całej tabeli: `df = spark.read.table("bronzerawdata.green_202201_202301").limit(20000).toPandas()`. Pandas liczy w pamięci jednego węzła.
 
 ![Krok](../screenshots/5/new/dw1.jpg)
 ![Krok](../screenshots/5/new/dw2.jpg)

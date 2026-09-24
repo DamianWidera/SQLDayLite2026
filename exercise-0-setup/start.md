@@ -100,6 +100,16 @@ Około dziesięciu osób dzieli z tobą jedną capacity. Aby wszystkim starczył
 
 ![Pobierz lub sklonuj repozytorium](../screenshots/start/CloneDownloadRepo.png)
 
+Po rozpakowaniu będziesz potrzebować dokładnie trzech plików. Możesz je też pobrać pojedynczo:
+
+| Plik | Gdzie używany | Link bezpośredni |
+| :- | :- | :- |
+| `notebook-2.ipynb` | Zadanie 2.3 | https://raw.githubusercontent.com/DamianWidera/SQLDayLite2026/main/exercise-2/notebook-2.ipynb |
+| `Exercise 4 - Consume Data using Data Science.ipynb` | Zadanie 4.1 | https://raw.githubusercontent.com/DamianWidera/SQLDayLite2026/main/exercise-4/Exercise%204%20-%20Consume%20Data%20using%20Data%20Science.ipynb |
+| `NYC-Taxi-Discounts-Per-Day.csv` | Zadanie 2.2 | https://raw.githubusercontent.com/DamianWidera/SQLDayLite2026/main/exercise-2/NYC-Taxi-Discounts-Per-Day.csv |
+
+Pozostałych plików z folderu `exercise-2` (`notebook-2.1.ipynb`, `bronze2silver.ipynb`, `SilverDimsCreation.ipynb`, `Calendar.pqt`) nie importuj, to materiały prowadzących.
+
 ---
 
 > [!IMPORTANT]

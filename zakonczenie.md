@@ -21,8 +21,8 @@ Otwórz swój workspace i odhacz listę:
 | ID | Element | Gdzie to sprawdzisz |
 | :- | :- | :- |
 | F1 | Lakehouse `bronzerawdata` z tabelami `green_202201_202301` i `green202301` | Lakehouse explorer |
-| F2 | Shortcut `2023` w sekcji Files | Lakehouse `bronzerawdata` |
-| F3 | Lakehouse `silvercleansed` z tabelami oczyszczonymi | Lakehouse explorer |
+| F2 | Shortcut `2023` oraz plik `NYC-Taxi-Discounts-Per-Day.csv` w sekcji Files | Lakehouse `bronzerawdata` |
+| F3 | Lakehouse `silvercleansed` z sześcioma tabelami `green_202201_202301_{cleansed, avg_fare_per_month, discounts}` i `green202301_{...}` oraz widokiem `viGetAverageFares` | Lakehouse explorer, SQL analytics endpoint |
 | F4 | tabela `discounts_dataflow` z Dataflow Gen2 | Lakehouse `silvercleansed` |
 | F5 | Pipeline z pętlą `ForEach` | lista elementów w workspace |
 | F6 | Lakehouse `goldcurated` z tabelą `greentaxi_predicted` | Lakehouse explorer |

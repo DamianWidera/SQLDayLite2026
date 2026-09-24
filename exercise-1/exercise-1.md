@@ -3,7 +3,7 @@
 ![Architektura warsztatu, podświetlony fragment: Ćwiczenie 1](../assets/architecture/architektura-cw1.png)
 
 > [!NOTE]
-> Czas: 60 minut
+> Czas: 80 minut
 >
 > Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 > 

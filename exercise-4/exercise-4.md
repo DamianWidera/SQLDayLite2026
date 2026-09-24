@@ -3,7 +3,9 @@
 ![Architektura warsztatu, podświetlony fragment: Ćwiczenie 4](../assets/architecture/architektura-cw4.png)
 
 > [!NOTE]
-> Czas: 60 minut
+> Czas: 80 minut
+>
+> Samo trenowanie modelu w Zadaniu 4.1 może zająć 10-20 minut na współdzielonej capacity. Uruchom je wcześnie i w tym czasie przeczytaj kroki Zadania 4.2.
 >
 > Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 > 
@@ -15,15 +17,15 @@
 
 # Kontekst
 
-Dane z tabel w twoim Lakehouse wchodzą w skład zestawu danych, który definiuje relacyjny model tych danych. Możesz edytować ten zestaw danych: definiować własne miary, hierarchie, agregacje i inne elementy modelu danych. Potem możesz użyć zestawu danych jako źródła raportu Power BI, w którym zwizualizujesz i przeanalizujesz dane.
+Na tabelach w twoim Lakehouse zbudujesz semantic model: relacyjny model danych, w którym zdefiniujesz własne miary, hierarchie i agregacje. Fabric nie tworzy już domyślnego semantic model razem z Lakehouse, utworzysz go sam w Zadaniu 4.2 przyciskiem `New semantic model`. Potem użyjesz go jako źródła raportu Power BI, w którym zwizualizujesz i przeanalizujesz dane.
 
 Dzięki funkcji **Direct Lake** utworzysz zestawy danych Power BI bezpośrednio na danych przechowywanych w Lakehouse. Direct Lake przyspiesza zapytania na dużych wolumenach danych i dobrze współpracuje z obciążeniami Lakehouse, które odczytują i zapisują pliki Parquet. Gdy połączysz wizualizację danych w Power BI z centralnym magazynem danych i tabelarycznym schema, które daje Lakehouse, zbudujesz kompletne rozwiązanie analityczne na jednej platformie.
 
-**Fabric pozwala zwizualizować** wyniki pojedynczego zapytania albo cały Data Warehouse **bez opuszczania Data Warehouse**. Przydaje się to szczególnie wtedy, gdy eksplorujesz dane w trakcie pracy i chcesz sprawdzić, czy masz wszystkie dane i transformacje potrzebne do analizy.
+**Fabric pozwala zwizualizować dane bez opuszczania Lakehouse.** Przydaje się to szczególnie wtedy, gdy eksplorujesz dane w trakcie pracy i chcesz sprawdzić, czy masz wszystkie dane i transformacje potrzebne do analizy.
 
-Użyj **przycisku Visualize**, aby utworzyć nowy raport Power BI z wyników zapytania. Otworzy się wtedy okno Power BI.
+W SQL analytics endpoint Lakehouse użyj przycisku `Explore this data` (albo `Visualize results` przy wyniku zapytania), aby zobaczyć wyniki pojedynczego zapytania w Power BI.
 
-Możesz też użyć **przycisku New report**, aby utworzyć nowy raport Power BI z zawartości całego Data Warehouse. Przycisk New report otwiera usługę Power BI, w której zbudujesz i zapiszesz raport do użytku biznesowego.
+Aby zbudować pełny raport, użyj przycisku `New semantic model` na wstążce Lakehouse, a potem `New report` na utworzonym semantic model. Raport zbudujesz i zapiszesz w przeglądarce, bez Power BI Desktop.
 
 ---
 
@@ -50,8 +52,13 @@ W tym ćwiczeniu wcielisz się w rolę data scientist, który ma zbadać, oczyś
    - Przejdź do swojego workspace w Fabric, w sekcji Data Engineering albo Data Science.
    - Zaimportuj pobrany Notebook zgodnie z instrukcją w [Ćwiczeniu 2 - import Notebooków](../exercise-2/exercise-2.md#231-zaimportuj-notebook). W tym celu wybierz opcję importu istniejących Notebooków i wskaż pobrany plik .ipynb na swoim komputerze.
 
-3. **Wykonaj instrukcje z Notebooka**:
-   - Po zaimportowaniu Notebooka do workspace w Fabric otwórz go.
+3. **Podłącz oba Lakehouse do Notebooka**:
+   - Otwórz zaimportowany Notebook. W panelu po lewej kliknij `Add data items` i dodaj `silvercleansed` oraz `goldcurated` (utworzony w [Zadaniu 2.9](../exercise-2/exercise-2.md#zadanie-29-utwórz-lakehouse-gold-wymagany-w-ćwiczeniu-4)).
+   - Bez podłączonych obu Lakehouse pierwsza komórka z kodem zakończy się błędem `TABLE_OR_VIEW_NOT_FOUND`.
+     ![Podłącz Lakehouse](../screenshots/4/AttachLakehouses.png)
+
+4. **Wykonaj instrukcje z Notebooka**:
+   - Po podłączeniu Lakehouse wróć na górę Notebooka.
    - Wykonaj szczegółowe kroki opisane w Notebooku. Przeprowadzą cię przez:
      - Eksplorację i czyszczenie danych: poznaj strukturę zbioru danych, usuń niespójności i przygotuj dane do modelowania.
      - Inżynierię cech: utwórz nowe cechy z istniejących danych, aby poprawić moc predykcyjną modelu uczenia maszynowego.
@@ -88,19 +95,19 @@ W tym ćwiczeniu zbadasz i zwizualizujesz dane o przejazdach taksówek razem z p
 > [!IMPORTANT]  
 > Teraz możesz tworzyć dowolne wizualizacje według własnych potrzeb i szukać wniosków w zbiorze danych z predykcjami albo wykonać kroki opisane poniżej.
 
-#### Przykładowe wizualizacje do analizy predictedTripDuration.
+#### Przykładowe wizualizacje do analizy predictedtrip_duration
 
 1. Utwórz wizualizację Slicer dla pickupDate.
     - Wybierz opcję slicer w panelu Visualizations, zaznacz ***pickupDate*** w panelu Data i upuść je na pole utworzonej wizualizacji slicer, czyli suwaka dat.
 
-2. Zwizualizuj średnie tripDuration i predictedTripDuration według timeBins na clustered column chart.
-    - Dodaj clustered column chart, dodaj ***timeBins*** do X-axis, ***trip_duration*** i ***predictedtrip_duration* **do Y-axis i zmień metodę agregacji na Average.
+2. Zwizualizuj średnie trip_duration i predictedtrip_duration według timeBins na clustered column chart.
+    - Dodaj clustered column chart, dodaj ***timeBins*** do X-axis, ***trip_duration*** i ***predictedtrip_duration*** do Y-axis i zmień metodę agregacji na Average.
 
-3. Zwizualizuj średnie tripDuration i predictedTripDuration według weekDayName.
-    - Dodaj wizualizację area chart, dodaj ***weekDayName* **do X-axis, ***trip_duration*** do Y-axis i ***predictedTripDuration*** do secondary Y-axis. Przełącz metodę agregacji na Average dla obu osi Y.
+3. Zwizualizuj średnie trip_duration i predictedtrip_duration według weekDayName.
+    - Dodaj wizualizację area chart, dodaj ***weekDayName*** do X-axis, ***trip_duration*** do Y-axis i ***predictedtrip_duration*** do secondary Y-axis. Przełącz metodę agregacji na Average dla obu osi Y.
 
-4. Zwizualizuj średnie tripDuration i predictedTripDuration według pickupDate na line chart.
-    - Dodaj wizualizację line chart, dodaj ***pickupDate*** do X-axis, ***tripDuration*** i ***predictedTripDuration*** do Y-axis i przełącz metodę agregacji na Average dla obu pól.
+4. Zwizualizuj średnie trip_duration i predictedtrip_duration według pickupDate na line chart.
+    - Dodaj wizualizację line chart, dodaj ***pickupDate*** do X-axis, ***trip_duration*** i ***predictedtrip_duration*** do Y-axis i przełącz metodę agregacji na Average dla obu pól.
 
 5. Utwórz wizualizacje Card, aby zobaczyć kluczowe metryki w jednym miejscu.
    - Dodaj wizualizację Card, przeciągnij ***tip_amount*** do fields i przełącz metodę agregacji na median.
@@ -127,8 +134,10 @@ W tym zadaniu opublikujesz raport Power BI z poprzedniego zadania w swoim worksp
 1. **Zapisz raport i nadaj mu nazwę**:
    - W edytorze raportów Power BI przejdź do menu File i wybierz opcję Save albo Save As, aby otworzyć okno zapisu raportu.
    - Wpisz nazwę raportu, na przykład *NYC Taxi Trip Analysis*.
-   - Wybierz docelowy workspace w Power BI, w którym chcesz opublikować raport, i kliknij Save.
+   - W oknie zapisu wybierz swój workspace `Fabric Workshop September NNN` (ten sam numer co twój login). Nie twórz nowego workspace i nie zapisuj raportu w cudzym. Kliknij Save.
      ![Zapis raportu](../screenshots/4/new/SaveReport.png)
+
+> Na zrzucie w polu workspace widać workspace prowadzącego. U ciebie ma tam być `Fabric Workshop September NNN`. Na liście prowadzącego widać też model `nyctaxi_trip_duration_gbt`, którego ty nie będziesz mieć, to normalne.
 
 2. **Opublikuj raport**:
    - Po zapisaniu raport Power BI będzie dostępny jako artefakt w wybranym workspace, gotowy do udostępniania i używania.
@@ -143,6 +152,15 @@ W tym zadaniu opublikujesz raport Power BI z poprzedniego zadania w swoim worksp
 
 > [!TIP]
 > Przed udostępnieniem sprawdź, czy raport jest poprawnie sformatowany i zawiera wszystkie istotne wnioski. Gdy udostępniasz raporty, pamiętaj też o prywatności i bezpieczeństwie danych, zwłaszcza jeśli zawierają informacje wrażliwe. Więcej o opcjach udostępniania i dobrych praktykach znajdziesz w przewodniku Microsoft [Udostępnianie i współpraca](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-share-dashboards). To zadanie pokaże ci, jak skutecznie rozpowszechniać w organizacji informacje i wnioski z analizy danych.
+
+
+## Zanim przejdziesz dalej
+
+| ID | Sprawdź | Gdzie |
+| :- | :- | :- |
+| F6 | tabela `greentaxi_predicted` w Lakehouse `goldcurated` | Lakehouse explorer, sekcja Tables |
+| F6a | ML model `nyctaxi_trip_duration_lightgbm` i experiment `nyctaxi_trip_duration` | lista elementów w workspace |
+| F7 | semantic model w trybie Direct Lake i raport Power BI | lista elementów w workspace `Fabric Workshop September NNN` |
 
 ---
 

@@ -78,7 +78,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 | Co z uprawnieniami i udostępnianiem? | [Ćwiczenie 3](./exercise-3/exercise-3.md) |
 | Czy Power BI dalej działa tak samo? Semantic model, Direct Lake, raport. | [Ćwiczenie 4](./exercise-4/exercise-4.md) |
 | Jak zautomatyzować odświeżanie? | [Ćwiczenie 2, zadanie 2.7](./exercise-2/exercise-2.md), [ćwiczenia dodatkowe](./exercise-extra/extra.md) |
-| Co z kosztami i wydajnością? | [Ćwiczenie 5](./exercise-5/exercise-5.md) |
+| Co z kosztami i wydajnością? | [Zadanie 1.4](./exercise-1/exercise-1.md#zadanie-14-zarządzanie-spark-session), [Ćwiczenie 5](./exercise-5/exercise-5.md), [Finał, błąd B6](./zakonczenie.md#3-najczęstsze-błędy-początkujących-20-minut) |
 
 # Agenda
 
