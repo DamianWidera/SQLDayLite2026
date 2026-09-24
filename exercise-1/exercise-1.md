@@ -33,7 +33,7 @@ Dla osób, które skończą główne zadania przed czasem, przygotowaliśmy [dod
 # Zadanie 1.1 Utwórz Pipeline, który ładuje dane z zewnętrznego konta Azure Blob Storage i zapisuje je w Lakehouse (warstwa bronze)
 
 ## 1.1.1. **Sprawdź sekcję Fabric i workspace**
-Sprawdź, czy jesteś w sekcji Fabric i w workspace utworzonym w poprzednim ćwiczeniu. Wykonaj ponumerowane kroki ze zrzutu ekranu.
+Sprawdź, czy jesteś w sekcji Fabric i w swoim workspace `Fabric Workshop September NNN`. Wykonaj ponumerowane kroki ze zrzutu ekranu.
 
 ![Krok](../screenshots/1/new/1.jpg)
 
@@ -348,7 +348,7 @@ Jeśli wszystko poszło poprawnie, w sekcji `Tables` zobaczysz dwie tabele, a w 
 Utwórz zapytanie: przeciągnij nazwę tabeli i upuść ją w treści Notebooka.
 ![Krok](../screenshots/1/new/49.jpg)
 
-## 1.3.12. Wykonaj zapytanie
+## 1.3.13. Wykonaj zapytanie
 Aby uruchomić zapytanie, kliknij przycisk odtwarzania po lewej stronie komórki. Zapytanie powinno zakończyć się w kilka sekund. Widać tu płynną integrację i łatwość obsługi Fabric jako prawdziwego rozwiązania SaaS. Przejrzyj wyniki w tabeli.
 
 > [!IMPORTANT]
@@ -366,7 +366,7 @@ Aby uruchomić zapytanie, kliknij przycisk odtwarzania po lewej stronie komórki
 > 
 > ![Krok](../screenshots/1/warning.png) 
 
-## 1.3.13. Potwierdź domyślny Lakehouse
+## 1.3.14. Potwierdź domyślny Lakehouse
 Upewnij się, że Lakehouse `bronzerawdata` jest ustawiony jako domyślny dla Notebooka. Jeśli tak, zadanie jest ukończone. Gratulacje.
 ![Krok](../screenshots/1/new/51.jpg)
 

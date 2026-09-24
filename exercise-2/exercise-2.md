@@ -224,7 +224,7 @@ Zanim zaczniesz automatyzację, sprawdź, czy:
 * Lakehouse `bronzerawdata` zawiera dwie tabele: `green_202201_202301` i `green202301`.
 * Lakehouse `bronzerawdata` ma w sekcji Files jeden folder o nazwie `2023`, utworzony przez Shortcut.
 * Lakehouse `bronzerawdata` ma w sekcji Files jeden plik: `NYC-Taxi-Discounts-Per-Day.csv`.
-* Lakehouse `silvercleansed` zawiera trzy tabele: `green_202201_202301_avg_fare_per_month`, `green_202201_202301_cleansed_in_notebook` i `green_202201_202301_discounts`.
+* Lakehouse `silvercleansed` zawiera trzy tabele: `green_202201_202301_avg_fare_per_month`, `green_202201_202301_cleansed` i `green_202201_202301_discounts`.
 
 Gdy wszystko się zgadza, przejdź do automatyzacji.
 
@@ -320,7 +320,7 @@ Po ukończeniu Ćwiczeń 1 i 2 koniecznie sprawdź w swoich Lakehouse poniższe 
    - `green_202201_202301_avg_fare_per_month`
    - `green_202201_202301_cleansed`
    - `green_202201_202301_discounts`
-   - `green202301_avg_fare_per_month_2023_01`
+   - `green202301_avg_fare_per_month`
    - `green202301_cleansed`
    - `green202301_discounts`.
 

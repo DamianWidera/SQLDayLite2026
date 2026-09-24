@@ -50,7 +50,6 @@ Kliknij menu Settings w prawym górnym rogu i przejrzyj opcje. Części ustawie�
 Twój workspace już istnieje. Nazywa się `Fabric Workshop September NNN`, gdzie `NNN` to numer z twojego loginu. Login `fabric.workshop.sep007` ma workspace `Fabric Workshop September 007`.
 
 Kliknij `Workspaces` w lewym menu i wybierz swój workspace z listy. Jeśli lista jest pusta, poczekaj chwilę i odśwież stronę. Uprawnienia do workspace mogą pojawić się z opóźnieniem.
-![Logowanie](../screenshots/start/new/11.jpg)
 
 ## 11. Sprawdź capacity
 Każdy workspace jest przypisany do jednej z trzech capacity: `fabsep01`, `fabsep02` albo `fabsep03`. Około dziesięciu osób dzieli jedną capacity. Dlatego dwa kolejne kroki są ważne dla wszystkich przy twoim stole, nie tylko dla ciebie.

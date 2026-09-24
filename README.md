@@ -83,7 +83,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 > [!TIP]
 > Ćwiczenia możesz robić we własnym tempie. Przerwy są propozycją. Jeśli wolisz pracować dalej, pracuj dalej.
 
-**Godziny dopasujemy do tempa grupy i do harmonogramu organizatora.** ⟦TBC godziny startu, przerw i lunchu po publikacji harmonogramu SQLDay Lite⟧
+**Poniższe godziny to propozycja.** Dokładny start, przerwy i lunch zależą od harmonogramu organizatora i tempa grupy. O aktualne godziny pytaj prowadzących na sali.
 
 > [!IMPORTANT]
 > 08:30–09:15 (45 min) - Wprowadzenie, konfiguracja i przegląd platformy Fabric

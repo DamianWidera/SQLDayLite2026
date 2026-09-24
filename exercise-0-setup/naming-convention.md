@@ -7,7 +7,7 @@
 Workspace jest już utworzony i nazywa się `Fabric Workshop September NNN`, gdzie NNN to numer z twojego loginu. Nie zmieniaj tej nazwy i nie twórz nowych workspace.
 
 ## Nazwy tabel
-* Zadanie 1.1.18 - `green_202201_202301`
+* Zadanie 1.1.19 - `green_202201_202301`
 * Zadanie 1.3.7 - `green202301`
 
 
