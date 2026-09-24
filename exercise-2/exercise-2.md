@@ -42,7 +42,7 @@ W tym zadaniu poznasz różne metody pobierania danych z Lakehouse do Notebooka 
 Pamiętaj: żeby uruchomić kod w komórce, naciśnij CTRL + Enter w systemie Windows albo ⌘ + Enter w systemie macOS. Możesz też kliknąć ikonę `Run` (▶️) obok komórki z kodem.
 
 ## 2.1.2. Pobieranie danych za pomocą PySpark
-Wpisz poniższy kod PySpark w nowej komórce swojego Notebooka w Fabric. Skrypt pobierze dane ze wskazanej tabeli w Lakehouse. Jeśli twój Lakehouse i twoja tabela nazywają się inaczej, zastąp `bronzerawdata` i green202301 swoimi nazwami.
+Wpisz poniższy kod PySpark w nowej komórce swojego Notebooka w Fabric. Skrypt pobierze dane ze wskazanej tabeli w Lakehouse. Jeśli twój Lakehouse i twoja tabela nazywają się inaczej, zastąp `bronzerawdata` i `green202301` swoimi nazwami.
 
 > [!TIP]
 > To powtórka z Ćwiczenia 1.3.11, ale z dodatkowym objaśnieniem. Pomiń ten krok, jeśli nie potrzebujesz objaśnienia kodu.
@@ -73,7 +73,7 @@ Teraz uruchomimy konkretne polecenie wyboru danych. Polecenie wybiera określone
 df.select("VendorID", "trip_distance", "fare_amount", "tip_amount").show(5)
 ```
 
-Kod `df.select("VendorID", "trip_distance", "fare_amount", "tip_amount").show(5)` wyświetla pierwsze pięć wierszy DataFrame o nazwie df i tylko kolumny o nazwach: `vendorID`, `tripDistance`, `fareAmount`, `tipAmount`. Ta funkcja przydaje się przy dużych zbiorach danych. Pozwala szybko obejrzeć dane i sprawdzić, czy załadowały się poprawnie.
+Kod `df.select("VendorID", "trip_distance", "fare_amount", "tip_amount").show(5)` wyświetla pierwsze pięć wierszy DataFrame o nazwie df i tylko kolumny o nazwach: `VendorID`, `trip_distance`, `fare_amount`, `tip_amount`. Ta funkcja przydaje się przy dużych zbiorach danych. Pozwala szybko obejrzeć dane i sprawdzić, czy załadowały się poprawnie.
 
 
 ## 2.1.4. Jak wygląda przepływ pracy z danymi
@@ -90,6 +90,9 @@ Chcemy rozszerzyć warstwę bronze o dodatkowe dane. Poniższa tabela pokazuje a
 
 
 Ta instrukcja przeprowadzi cię przez pobranie danych zewnętrznych i dołączenie ich do twojego Lakehouse, żeby analiza była pełna.
+
+> [!IMPORTANT]
+> Pliku CSV **nie** ładujemy przez `Load to Tables`. Zostaje w sekcji `Files`, a Notebook przeczyta go stamtąd bezpośrednio. W `bronzerawdata` mają być nadal tylko dwie tabele.
 
 ## 2.2.1. Pobierz dane
 Otwórz w nowej karcie [podany adres URL](https://raw.githubusercontent.com/DamianWidera/SQLDayLite2026/main/exercise-2/NYC-Taxi-Discounts-Per-Day.csv) i pobierz plik CSV z informacjami o zniżkach przyznanych użytkownikom w danym dniu. Te dane są niezbędne do pełnej analizy. Wygenerowaliśmy je dla twojej wygody. 
@@ -137,6 +140,9 @@ Jeśli nie masz pobranego repozytorium ([Krok 14. Pobierz pliki do ćwiczeń](..
 Przejdź do swojego workspace i wybierz `Import`. Znajdziesz tam opcję przesyłania Notebooków, oznaczoną ikoną Notebooka. 
 
 Kliknij tę ikonę, żeby otworzyć boczny panel przesyłania, znany ci z wcześniejszego przesyłania pliku. Wybierz w nim pobrany przed chwilą Notebook o nazwie [notebook-2.ipynb](https://github.com/DamianWidera/SQLDayLite2026/blob/main/exercise-2/notebook-2.ipynb) i rozpocznij przesyłanie.
+
+> [!IMPORTANT]
+> Zwróć uwagę na nazwę: importujesz dokładnie `notebook-2.ipynb`. Pliki `notebook-2.1.ipynb`, `bronze2silver.ipynb`, `SilverDimsCreation.ipynb` i `Calendar.pqt` w tym samym folderze to materiały prowadzących. Nie importuj ich, bo zapisują tabele silver w innym układzie kolumn i Ćwiczenie 4 nie zadziała.
 ![Krok](../screenshots/2/new/importnotebook.jpg)
 
 ## 2.3.2. Powiadomienie
@@ -189,6 +195,9 @@ Zanim w pełni zajmiemy się pracą z obszaru Data Engineering w Notebooku, zost
 > Zanim utworzysz Lakehouse, odznacz pole `Lakehouse schemas`. Pole jest domyślnie zaznaczone. Kod w Notebookach tego warsztatu używa nazw dwuczłonowych, np. `silvercleansed.nazwa_tabeli`. W Lakehouse z włączonym schema taka nazwa oznacza `schema.tabela`, więc zapis trafi w złe miejsce albo zakończy się błędem. Na zrzucie ekranu tego pola może jeszcze nie być.
 
 ## 2.5.3. Sprawdź, czy twój Notebook jest teraz połączony z dwoma Lakehouse: domyślnym (bronze) i nowo dodanym (silver). Gdy to potwierdzisz, możemy zacząć pracę z obszaru Data Engineering.
+
+## 2.5.4. Sprawdź, który Lakehouse jest domyślny
+W panelu `Explorer` pinezka (`Set as default lakehouse`) ma być przy `bronzerawdata`, nie przy `silvercleansed`. Notebook czyta dane ścieżkami względnymi (`Tables/...`, `Files/...`), które wskazują na Lakehouse domyślny. Jeśli pinezka jest przy `silvercleansed`, kliknij pinezkę przy `bronzerawdata`.
 ![Krok](../screenshots/2/new/23.jpg)
 
 ---
@@ -249,7 +258,7 @@ Nadaj nazwę elementowi `ForEach`.
 ## 2.7.5. **Zmienne Pipeline**
 Najpierw kliknij tło kanwy Pipeline (pierwszy krok na zrzucie ekranu, w różowym prostokącie), żeby zobaczyć kartę z parametrami i zmiennymi.
 
-Na karcie ustawień Pipeline przejdź do `Variables`. Utwórz tam nową zmienną o nazwie `table_name`, ustaw jej typ na `Array` i przypisz wartość domyślną `["green_202201_202301", "green202301"]`. **Wykonaj dokładnie kroki pokazane na zrzucie ekranu.**
+Na karcie ustawień Pipeline przejdź do `Variables`. Utwórz tam nową zmienną o nazwie `table_name`, ustaw jej typ na `Array` i przypisz wartość domyślną `["green_202201_202301", "green202301"]`. Wykonaj kroki pokazane na zrzucie ekranu, ale na zrzucie w polu `Default value` widać starszą nazwę `green201501`. Zignoruj ją, u ciebie wartość ma brzmieć dokładnie `["green_202201_202301", "green202301"]`. Tabela `green201501` nie istnieje w twoim Lakehouse i Pipeline zatrzymałby się na pierwszej iteracji.
 
 ![Krok](../screenshots/2/new/29.jpg)
 
@@ -277,6 +286,8 @@ Zaznacz activity Notebook i przejdź na kartę `Settings` Notebooka, tak jak na 
 Dodaj nowy parametr o nazwie `table_name`, typu `String`, z wartością `@item()`. `@item()` znów pochodzi z dynamic content (Pipeline expression builder).
 ![Krok](../screenshots/2/new/34.jpg)
 
+> Na zrzucie w polu `Workspace` widać workspace prowadzącego. U ciebie ma tam być `Fabric Workshop September NNN`.
+
 ## 2.7.10. **Walidacja**
 Po konfiguracji kliknij `Validate`, żeby sprawdzić, czy nie ma błędów.
 ![Krok](../screenshots/2/new/35.jpg)
@@ -286,7 +297,7 @@ Zapisz ustawienia i uruchom Pipeline przyciskiem `Run`.
 ![Krok](../screenshots/2/new/36.jpg)
 
 ## 2.7.12. **Obserwacja i optymalizacja**
-Zwróć uwagę, że dwa Notebooki wykonują się jeden po drugim, a każdy trwa zwykle około dwóch minut. Te Notebooki nie zależą jednak od siebie. Rozważ więc taką zmianę Pipeline, żeby dla większej wydajności uruchamiał Notebooki równolegle.
+Zwróć uwagę, że dwa Notebooki wykonują się jeden po drugim, a każdy trwa zwykle od dwóch do pięciu minut, a przy zajętej capacity dłużej, bo Pipeline czeka jeszcze na start sesji Spark. Te Notebooki nie zależą jednak od siebie. Rozważ więc taką zmianę Pipeline, żeby dla większej wydajności uruchamiał Notebooki równolegle.
 
 ![Krok](../screenshots/2/new/37.jpg)
 
@@ -317,6 +328,8 @@ Po ukończeniu Ćwiczeń 1 i 2 koniecznie sprawdź w swoich Lakehouse poniższe 
 
 ![Krok](../screenshots/2/52.jpg)
 
+> Na zrzucie widać starszą nazwę `green201501` (u ciebie `green_202201_202301`) i nie widać pliku CSV, bo zrzut powstał przed Zadaniem 2.2. U ciebie w `Files` mają być dwa elementy: folder `2023` i plik `NYC-Taxi-Discounts-Per-Day.csv`.
+
 ## Potwierdzenie dla Lakehouse `silvercleansed`:
 1. **Tabele**: Sprawdź, czy jest sześć tabel:
    - `green_202201_202301_avg_fare_per_month`
@@ -327,6 +340,8 @@ Po ukończeniu Ćwiczeń 1 i 2 koniecznie sprawdź w swoich Lakehouse poniższe 
    - `green202301_discounts`.
 
 ![Krok](../screenshots/2/51.jpg)
+
+> Na zrzucie trzy pierwsze tabele mają starszą nazwę `green201501_...`. U ciebie ten sam zestaw nazywa się `green_202201_202301_...`. Liczba tabel (sześć) się zgadza. Jeśli zrobisz Ćwiczenie 2B przed tym sprawdzeniem, zobaczysz też siódmą tabelę `discounts_dataflow`.
 
 Porównaj swoje Lakehouse ze zrzutami ekranu i potwierdź, że ich zawartość odpowiada oczekiwanej strukturze.
 

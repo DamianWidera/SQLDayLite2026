@@ -3,7 +3,7 @@
 ![Architektura warsztatu, podświetlony fragment: Ćwiczenie 3](../assets/architecture/architektura-cw3.png)
 
 > [!NOTE]
-> Czas: 30 minut
+> Czas: 40 minut
 >
 > Zrzuty ekranu to orientacyjna pomoc, nie wzorzec jeden do jednego. Interfejs Fabric zmienia się co kilka tygodni, więc przyciski mogą być w innym miejscu, nazwy lekko inne, a część zrzutów pochodzi z wcześniejszych edycji warsztatu. Kieruj się tekstem kroku i nazwami w `kodzie`.
 > 
@@ -21,7 +21,7 @@
 Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Read. Obejmuje ono sam Lakehouse i powiązany SQL analytics endpoint. Od 5 września 2025 roku Fabric nie tworzy już domyślnego semantic model. Semantic model tworzysz samodzielnie, tak jak w Ćwiczeniu 4. Oprócz tego standardowego dostępu użytkownicy mogą dostać także:
 
 -   uprawnienie **ReadData** do SQL endpoint, które daje dostęp do danych bez wymuszania zasad SQL,
--   uprawnienie **ReadAll** do Lakehouse, które daje pełny dostęp do danych przez Apache Spark,
+-   uprawnienie **ReadAll** do Lakehouse, które daje odczyt wszystkich danych przez Apache Spark i API OneLake (tylko odczyt, bez zapisu),
 -   uprawnienie **Build** do semantic model, który samodzielnie utworzysz na tym Lakehouse. Pozwala ono tworzyć raporty Power BI na tym modelu.
   
 ---
@@ -31,7 +31,7 @@ Gdy udostępniasz Lakehouse, użytkownicy automatycznie dostają uprawnienie Rea
 Cel: pobrać ciąg połączenia SQL dla SQL analytics endpoint twojego Lakehouse. Bez niego nie połączysz się z danymi i nie uruchomisz zapytań w narzędziach opartych na SQL.
 
 1. **Otwórz SQL analytics endpoint**:
-   - Przejdź do swojego workspace i znajdź SQL analytics endpoint swojego Lakehouse.
+   - Przejdź do swojego workspace `Fabric Workshop September NNN` i znajdź element typu SQL analytics endpoint o nazwie `silvercleansed` (ma tę samą nazwę co Lakehouse, ale inną ikonę). W tym ćwiczeniu pracujemy na warstwie silver.
    - Kliknij `More options` (zwykle ikona trzech kropek lub wielokropka) przy SQL analytics endpoint.
 
 2. **Skopiuj ciąg połączenia SQL**:
@@ -50,6 +50,9 @@ Chroń ciąg połączenia, bo daje on dostęp do twoich danych w Lakehouse. Nie 
 ---
 
 # Zadanie 3.2 Połącz się z Fabric SQL Endpoint w SQL Server Management Studio (SSMS)
+
+> [!NOTE]
+> **To zadanie jest opcjonalne.** SSMS działa tylko na Windows. Jeśli pracujesz na macOS albo Linux, pomiń Zadanie 3.2 i wykonaj Zadanie 3.3 w przeglądarce: otwórz w swoim workspace SQL analytics endpoint Lakehouse `silvercleansed` i użyj wbudowanego edytora `New SQL query`. Alternatywa międzyplatformowa to rozszerzenie MSSQL dla VS Code.
 > [!TIP]
 > Jeśli interesuje cię lineage i połączenie z narzędzi zewnętrznych, [przejdź do tego dodatkowego ćwiczenia](../exercise-extra/extra.md#lineage).
  
@@ -62,12 +65,13 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint w SQL Server Management
    - W polu `Server name` w oknie połączenia wklej skopiowany wcześniej ciąg połączenia SQL. Ten ciąg powinien odpowiadać twojemu Fabric SQL Endpoint.
 
 3. **Uwierzytelnianie**:
-   - Jako metodę uwierzytelniania wybierz z listy `Microsoft Entra Password`. W SSMS 22 zalecana opcja nazywa się `Microsoft Entra MFA`. Zapewnia to bezpieczne połączenie oparte na nowoczesnych metodach uwierzytelniania.
+   - Jako metodę uwierzytelniania wybierz z listy `Microsoft Entra MFA`. To jedyna opcja interaktywna, która obsługuje uwierzytelnianie wieloskładnikowe wymagane przez zasady tenanta. Nie wybieraj `Microsoft Entra Password`, ta metoda nie przejdzie przez MFA.
+   - W `Options >> Connection Properties` w polu `Connect to database` wpisz `silvercleansed`. Bez tego sesja nie ma kontekstu bazy i `CREATE VIEW` z Zadania 3.3 trafi w złe miejsce.
 
     ![hasło](../screenshots/3/pwd.jpg)
 
 4. **Wpisz dane logowania użytkownika**:
-   - W oknie uwierzytelniania, które się pojawi, wpisz adres e-mail swojego użytkownika warsztatowego lub swój firmowy adres e-mail. Postępuj zgodnie z instrukcjami, aby przejść uwierzytelnianie wieloskładnikowe.
+   - W oknie uwierzytelniania, które się pojawi, wpisz login warsztatowy w postaci `fabric.workshop.sepNNN@rocksonearth.onmicrosoft.com` i hasło ustawione przy pierwszym logowaniu. Nie używaj swojego firmowego konta, bo nie ma ono dostępu do tenanta warsztatowego. Postępuj zgodnie z instrukcjami, aby przejść uwierzytelnianie wieloskładnikowe.
 
 5. **Przejrzyj Lakehouse**:
    - Po połączeniu panel Object Explorer w SSMS pokaże połączony Lakehouse. Możesz rozwinąć węzeł serwera, aby zobaczyć bazy danych (Lakehouse) oraz przejść przez tabele, widoki i inne obiekty dostępne dla zapytań.
@@ -80,6 +84,11 @@ Cel tego zadania: połączyć się z Fabric SQL Endpoint w SQL Server Management
 # Zadanie 3.3 Uruchom zapytania T-SQL na tabelach Delta w Lakehouse
 
 Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skup się na analizie danych z tabeli NYC Taxi w bazie danych `silvercleansed`. Te zapytania pomogą ci zrozumieć agregację danych, tworzenie widoków i podstawowe operacje SQL w środowisku Lakehouse.
+
+Zapytania możesz uruchomić w SSMS (Zadanie 3.2) albo w edytorze `New SQL query` w portalu Fabric, w SQL analytics endpoint Lakehouse `silvercleansed`.
+
+> [!TIP]
+> Nie widzisz tabeli `green_202201_202301_cleansed`? SQL analytics endpoint synchronizuje metadane z Lakehouse z małym opóźnieniem. Kliknij `Refresh` w eksploratorze endpointu i odczekaj chwilę. Jeśli tabela nadal się nie pojawia, wróć do Lakehouse `silvercleansed` i sprawdź, czy Notebook z Ćwiczenia 2 faktycznie ją zapisał.
 
 1. **Policz wiersze w tabeli NYC Taxi**:
    - Uruchom poniższe zapytanie SQL, aby poznać łączną liczbę wierszy w tabeli `green_202201_202301_cleansed`:
@@ -113,14 +122,15 @@ Uruchom serię zapytań T-SQL na tabelach Delta w Lakehouse. Skup się na analiz
      SELECT tipped, COUNT(*) AS tip_freq FROM (
        SELECT CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped, tip_amount
        FROM [silvercleansed].[dbo].[green_202201_202301_cleansed]
-       WHERE [lpep_pickup_datetime] BETWEEN '20220101' AND '20230131') tc
+       WHERE [lpep_pickup_datetime] >= '20220101' AND [lpep_pickup_datetime] < '20230201') tc
      GROUP BY tipped;
      ```
 
 5. **Utwórz widok ze średnią i sumą opłat według liczby pasażerów**:
+   - Zanim uruchomisz to polecenie, upewnij się, że jesteś połączony z bazą `silvercleansed`. `CREATE VIEW` nie przyjmuje nazwy trzyczłonowej, więc widok powstaje w bazie, z którą masz aktywne połączenie. W SSMS wybierz `silvercleansed` z listy baz na pasku narzędzi. W portalu Fabric otwórz SQL analytics endpoint Lakehouse `silvercleansed`. `CREATE OR ALTER` pozwala uruchomić polecenie ponownie bez błędu, że widok już istnieje.
    - Uruchom poniższe polecenie SQL, aby utworzyć widok na podstawie zapytania SQL z kroku 3:
      ```sql
-     CREATE VIEW [dbo].[viGetAverageFares]
+     CREATE OR ALTER VIEW [dbo].[viGetAverageFares]
      AS 
      SELECT DISTINCT [passenger_count], 
      ROUND(SUM([fare_amount]),0) as TotalFares,
@@ -151,7 +161,7 @@ Dowiedz się, jak udostępnić Lakehouse członkom zespołu lub interesariuszom 
 
 2. **Skonfiguruj ustawienia udostępniania**:
    - W oknie udostępniania wpisz login osoby obok, np. `fabric.workshop.sep012@rocksonearth.onmicrosoft.com`. Umówcie się w parze: każde z was udostępnia swój Lakehouse drugiej osobie.
-   - Nadaj właściwe uprawnienia, zaznaczając odpowiednie pola. Domyślnie udostępnienie Lakehouse daje dostęp do Lakehouse i powiązanego SQL analytics endpoint. Dodatkowe pola w aktualnym oknie to `Read all with SQL analytics endpoint` i `Read all with Apache Spark`.
+   - Nadaj właściwe uprawnienia, zaznaczając odpowiednie pola. Domyślnie udostępnienie Lakehouse daje dostęp do Lakehouse i powiązanego SQL analytics endpoint. Dodatkowe pola w aktualnym oknie to `Read all with SQL analytics endpoint` i `Read all with Apache Spark`. Zobaczysz też pole `Subscribe to OneLake events`, to znane ograniczenie interfejsu, uprawnienie nadaje się razem z `Read all with Apache Spark`. Na warsztacie zaznacz `Read all with SQL analytics endpoint`, żeby osoba obok mogła odpytać twoje dane z SQL.
    
    ![Okno udostępniania Lakehouse](../screenshots/3/new/4.png)
 
@@ -177,13 +187,14 @@ Dowiedz się, jak udostępnić Notebook członkom zespołu w swoim workspace i u
    
      ![Przycisk Share](../screenshots/3/new/5.png)
 2. **Ustaw uprawnienia**:
-   - W ustawieniach udostępniania wybierz kategorię **people who can view this notebook**.
+   - W oknie **Grant people access** wpisz login osoby obok, np. `fabric.workshop.sep012@rocksonearth.onmicrosoft.com`.
+   - Zaznacz dodatkowe uprawnienia: **Share**, **Edit** albo **Run**. Od nich zależy, co odbiorca będzie mógł zrobić z Notebookiem. Samo udostępnienie zawsze daje uprawnienie Read.
    - Nadaj właściwe uprawnienia, wybierając spośród **Share**, **Edit** i **Run**. Od tego zależy, co odbiorcy będą mogli zrobić z Notebookiem.
 
      ![Ustawianie uprawnień](../screenshots/3/new/6.png)
 
 3. **Udostępnij Notebook**:
-   - Po ustawieniu uprawnień kliknij **Apply**.
+   - Po ustawieniu uprawnień kliknij **Grant**.
    - Potem możesz wysłać Notebook bezpośrednio do członków zespołu albo skopiować link i rozesłać go samodzielnie. Odbiorcy dostaną dostęp do Notebooka zgodnie z ustawionymi uprawnieniami.
 
      ![Opcje udostępniania](../screenshots/3/new/7.png)
