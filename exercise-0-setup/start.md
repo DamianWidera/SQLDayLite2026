@@ -51,7 +51,7 @@ Twój workspace już istnieje. Nazywa się `Fabric Workshop September NNN`, gdzi
 
 Kliknij `Workspaces` w lewym menu i wybierz swój workspace z listy. Jeśli lista jest pusta, poczekaj chwilę i odśwież stronę. Uprawnienia do workspace mogą pojawić się z opóźnieniem.
 
-## 11. Sprawdź capacity
+## 11. Dzielisz capacity z innymi
 Każdy workspace jest przypisany do jednej z trzech capacity: `fabsep01`, `fabsep02` albo `fabsep03`. Około dziesięciu osób dzieli jedną capacity. Dlatego dwa kolejne kroki są ważne dla wszystkich przy twoim stole, nie tylko dla ciebie.
 
 ## 12. Nie twórz nowych workspace
