@@ -10,10 +10,6 @@ Workspace jest już utworzony i nazywa się `Fabric Workshop September NNN`, gdz
 * Zadanie 1.1.19 - `green_202201_202301`
 * Zadanie 1.3.7 - `green202301`
 
-
-              "green_202201_202301",
-                    "green_from_202302"
-
 ## Warstwa bronze (zarządzanie danymi surowymi)
 Nazwa Lakehouse: `bronzerawdata`
 
