@@ -29,9 +29,6 @@ Na tym warsztacie zbudujesz od zera małe, kompletne rozwiązanie analityczne. Z
 > [!IMPORTANT]
 > Instrukcje do ćwiczeń są po polsku. Nazwy funkcji Fabric, przycisków i opcji zostawiamy po angielsku, tak jak na zrzutach ekranu i w interfejsie. Dzięki temu na ekranie znajdziesz dokładnie to, co widzisz w instrukcji.
 
-> [!IMPORTANT]
-> Grupa uczestników do pytań i linków: ⟦TBC link do grupy⟧
-
 ---
 
 **Cele warsztatu**
@@ -91,7 +88,7 @@ Nie musisz znać Sparka, Pythona, DevOps, Gita ani zaawansowanej architektury da
 > [!IMPORTANT]
 > 08:30–09:15 (45 min) - Wprowadzenie, konfiguracja i przegląd platformy Fabric
 >
-> 1. Login i hasło do Fabric: ⟦TBC lista loginów dla uczestników⟧
+> 1. Login i hasło do Fabric: https://docs.google.com/spreadsheets/d/12snhUR6lOkVuyQ0qdyYEApFNcoy_2FkITNCDWDo5m7M/edit?usp=sharing 
 > 2. [Start i konfiguracja](exercise-0-setup/start.md)
 > 3. Otwórz i miej pod ręką [konwencję nazw](./exercise-0-setup/naming-convention.md).
 >
